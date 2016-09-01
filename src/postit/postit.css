@@ -1,0 +1,30 @@
+video {
+    padding: 0px;
+    margin: 0px;
+    float: left;
+    cursor: pointer;
+}
+
+canvas, video {
+    border: 1px solid cornflowerblue;
+}
+
+.error {
+    background-color: lightcoral;
+    border: 3px solid gray;
+    border-radius: 1em;
+    padding: 1em
+}
+
+.hide {
+    display: none
+}
+
+.target {
+    display: inline-block;
+    height: 2em;
+    width: 6em;
+    background-color: black;
+    border: 2px solid gray;
+    vertical-align: middle;
+}

@@ -1,0 +1,171 @@
+body {
+    font-family: sans-serif;
+}
+
+h1 {
+    padding-bottom: 0.5em;
+}
+td {
+    vertical-align: top;
+}
+
+td.numeric {
+    text-align: right;
+}
+
+.missingField {
+    color:red;
+}
+
+.publishDate {
+    font-size: smaller;
+    font-style: italic;
+}
+
+.numComments {
+    font-size: smaller;
+}
+
+.commentForm, .comment {
+    background-color: white;
+    display: none;
+    padding: 1em;
+    border: 1px solid gray;
+
+
+}
+
+.comment {
+    font-size: small;
+    display: block;
+    margin: 1em;
+}
+
+
+.status {
+    position: fixed;
+    right: 1em;
+    top:0;
+    width: 10em;
+}
+
+.previewPane {
+    border: 1px solid gray;
+    background-color: #fffafa;
+    padding: 1em;
+    margin:1em;
+    max-height: 10em;
+    overflow-y: auto;
+}
+
+td {
+    vertical-align: top;
+}
+
+.email, .stacktrace {
+    font-family: monospace;
+    border: 1px solid #00008b;
+    padding: 1em;
+    box-shadow: 0 1px 3px rgba(39, 89, 114, 0.8);
+    -ms-transform:rotate(-0.2deg); /* IE 9 */
+    -moz-transform:rotate(-0.2deg); /* Firefox */
+    -webkit-transform:rotate(-0.2deg); /* Safari and Chrome */
+    -o-transform:rotate(-0.2deg); /* Opera */
+    transform:rotate(-0.2deg);
+    overflow: hidden;
+
+}
+.command {
+    font-family: monospace;
+    background-color: #eee;    
+}
+
+.mailheader p {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+textarea {
+    padding:1em;
+}
+
+.failwhale {
+    border: 3px solid #000000;;
+    padding: 1em;
+}
+.stacktrace {
+    background-color: #f08080;
+    overflow: auto;
+}
+
+.tip:before {
+    content: url('bitmaps/hint.png');
+        -ms-transform: scale(0.5);
+       -moz-transform: scale(0.5);
+         -o-transform: scale(0.5);
+    -webkit-transform: scale(0.5);
+            transform: scale(0.5);
+    display: inline-block;
+}
+.tip {
+       -moz-filter: blur(8px);
+         -o-filter: blur(8px);
+    -webkit-filter: blur(8px);
+            filter: blur(8px);
+}
+.tip:hover {
+       -moz-filter: blur(3px);
+         -o-filter: blur(3px);
+    -webkit-filter: blur(3px);
+            filter: blur(3px);
+       -moz-transition: 0.3s;
+         -o-transition: 0.3s;
+    -webkit-transition: 0.3s;
+            transition: 0.3s;
+}
+.tip:active {
+       -moz-filter: blur(0px);
+         -o-filter: blur(0px);
+    -webkit-filter: blur(0px);
+            filter: blur(0px);
+       -moz-transition: 0s;
+         -o-transition: 0s;
+    -webkit-transition: 0s;
+            transition: 0s;
+}
+table {
+    border-collapse: collapse;
+}
+thead th {
+    background-color: #eee;
+}
+th + th {
+    text-align: center;
+}
+th {
+    text-align: left;
+    font-weight: bold;
+}
+td.number {
+    text-align: right;
+    padding-left: 1em;
+}
+.datatable tr {
+    border-bottom: 1px solid #000000;
+}
+
+
+
+img.eirik {
+    max-width: 500px;
+    box-shadow: 5px 5px 5px #999;
+}
+
+img.kantega {
+    max-width: 200px;
+    -webkit-transform: rotate(-4.2deg); /* Safari and Chrome */
+
+
+
+
+}

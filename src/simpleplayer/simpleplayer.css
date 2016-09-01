@@ -1,0 +1,20 @@
+video {
+    padding: 0px;
+    margin: 0px;
+}
+
+.progress {
+    width: 320px;
+    height: 20px;
+    background-color: grey;
+}
+
+.elapsed {
+    width: 5px;
+    height: 100%;
+    background-color: lightcoral;
+}
+
+.controls img:hover {
+    /* Show the "pointer" cursor */
+}

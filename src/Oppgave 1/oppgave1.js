@@ -15,6 +15,11 @@ var festningenLokasjon = L.marker([63.8, 10.1]);
 // DOM
 var zoominnKantega = document.querySelector('#zoominnKantega');
 var zoominnFestningen = document.querySelector('#zoominnFestningen');
+var hentTunneler = document.querySelector('#hentTunneler');
+
+
+var urlTunneler = 'https://www.vegvesen.no/nvdb/api/v2/vegobjekter/581.json?inkluder=geometri&srid=wgs84';
+
 
 
 
@@ -37,7 +42,25 @@ zoominnFestningen.addEventListener('click', function() {
     mymap.setView([63.4357, 10.4161], 18);
 }, false)
 
+hentTunneler.addEventListener('click', function() {
 
+    fetch(urlTunneler)
+        .then(function(response) {
+            return response.json()
+        }).then(function(json) {
+            for (var i = 0; i < json.objekter.length; i++) {
+                var wkt = json.objekter[i].geometri.wkt;
+                var point = Terraformer.WKT.parse(wkt);
+                L.marker(point.coordinates).addTo(mymap);
+            }
+
+        }).catch(function(ex) {
+            console.log('parsing failed', ex)
+        })
+
+}, false)
+
+/*
 function onMapClick(e) {
     alert("You clicked the map at " + e.latlng);
 }
@@ -47,3 +70,5 @@ mymap.on('click', onMapClick);
 mymap.on('moveend', function() {
     console.log(mymap.getCenter());
 });
+
+*/

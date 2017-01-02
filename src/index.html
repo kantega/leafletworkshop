@@ -1,78 +1,385 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="no">
 <head>
-    <title>Tasks</title>
+
+    <meta name="viewport" content="width=device-width">
+    <meta charset="UTF-8">
+
+    <title>Leaflet Workshop</title>
+
+    <link rel="stylesheet" href="style.css" type="text/css">
+
 </head>
 <body>
-<h1>HTML5 Pixel Magic Tasks</h1>
 
-<h2>
-    1: Play a video
-</h2>
+<nav>
+    <ul>
+        <li><a href="#">Start</a></li>
+        <li><a href="#">Oppgave 1</a></li>
+        <li><a href="#">Oppgave 2</a></li>
+        <li><a href="#">Oppgave 3</a></li>
+        <li><a href="#">Oppgave 4</a></li>
+        <li><a href="#">Oppgave 5</a></li>
+    </ul>
+</nav>              
+
+<main>
+
+    <section>
+        <h1><span>Workshop </span>Visualisering av data på kart</h1>
+
+        <p>
+        I denne workshopen vil dere få en innføring i å visualisere informasjon på kart i nettleseren, 
+        ved hjelp av Javascript-biblioteket <a href="http://leafletjs.com/">Leaflet</a>.
+        </p>
+
+        <p>
+        Workshopen er bygd opp av en rekke praktiske oppgaver. Hver oppgave har en tilhørende HTML- og en javascript-fil, og javascript-filen inneholder flere feil som dere må rette opp i, for å få 
+        applikasjonen til å fungere som forventet.
+        </p>
+
+        <p>
+        Alle oppgavetekstene er samlet på denne siden, og filene knyttet til hver oppgave befinner seg i egne undermapper.
+        </p>
+
+        <h2>Kort om kart</h2>
+
+            <p>
+                Jordkloden vår kan modelleres som et flatt kart bestående av breddegrader (<em>latitude</em>) og lengdegrader (<em>longitude</em>). 
+            </p>
+
+            <p>
+                Det finnes flere ulike projeksjoner og koordinatsystemer for å plassere objekter nøyaktig på kart, men i denne workshopen vil vi utelukkende bruke lengde- og breddegrader, også kalt WGS84. 
+            </p>
+
+            <p>
+                <img src="http://www.hicksvillepublicschools.org/cms/lib2/NY01001760/Centricity/Domain/1236/latitude_longitude.gif" alt="">
+            </p>
+
+        <ul>
+            <li>https://www.vegvesen.no/nvdb/apidokumentasjon/</li>
+            <li>http://colorbrewer2.org/</li>
+            <li>https://github.github.io/fetch/</li>
+        </ul>
+
+
+    </section>
+
+
+    <section>
+        
+        <h2>Oppgave 1</h2>
+        
+        <div class="content">
+
+        <div class="description">
+
+            <p>
+                Et kart i Leaflet består av et 
+
+            Kart består av koordinater.
+            I dag bruker vi lengde- og breddegrad, WGS84. Akkurat som Google.
+            Eksempel: Et punkt (Hva er først?)
+            </p>
+
+            <p>
+            Et kart består av flere lag ovenfor hverandre. Helt nederst er et baselayer, som er selve bakgrunnskartet. kartografi som viser terreng, bebyggelse og veier. Ortofoto, flybilder. 
+            </p>
+
+            <p>
+            Tar utgangspunkt i http://leafletjs.com/examples/quick-start/Kort vise frem hva koden består av?
+            </p>
+
+            <h3>Utfordring</h3>
+
+            <p>
+            Vi har laget et fungerende leaflet-kart med et <a href="#">bakgrunnskart</a> fra mapbox. Vi vil lage en interaktiv guide som viser kjente steder i Bergen, men har tilsynelatende gjort noe feil. Kartet åpnes i Timbuktu, og knappene våre fungerer ikke.
+            </p>
+
+        </div>
+
+        <div class="tasks">
+
+            <h3>Oppgaver</h3>
+
+            <ol class="tasks__list">
+                <li>
+                    <input type="checkbox" id="task1-1"> 
+                    <label for="task1-1">
+                    Klikk på kart for å få tilbake koordinat i utviklerkonsoll. Få denne til å fungere.
+                    </label>
+                </li>
+                <li>
+                    <input type="checkbox" id="task1-2"> 
+                    <label for="task1-2">
+                        Endre startposisjonen til å vise et oversiktsbilde over Bergen.
+                    </label>
+                </li>
+                <li>
+                    <input type="checkbox" id="task1-3"> 
+                    <label for="task1-3">
+                    Få navigasjonen til å fungere.
+                    </label>
+                </li>
+                <li>
+                    <input type="checkbox" id="task1-4"> 
+                    <label for="task1-4">
+                    Øk animasjonshastigheten
+                    </label>
+                </li>
+                <li>
+                    <input type="checkbox" id="task1-5"> 
+                    <label for="task1-5">
+                    Legg til en markør på ditt favorittsted
+                    </label>
+                </li>
+            </ol>
+
+            <p><a href="oppgave1/oppgave1.html">Åpne oppgave</a></p>
+
+        </div>
+
+        </div>
+
+    </section>
+
+
+
+    <section>
+        <h2>Oppgave 2</h2>
+
+        <div class="content">
+
+        <div class="description">
 
 <p>
-    Learn how to <a href="simpleplayer/simpleplayer.html">create your own video player</a>
+Bakgrunnskart er gøy, men alt som kan legges på toppen av kartet er enda gøyere.
 </p>
-
-<h2>
-    2: Sad Panda
-</h2>
 <p>
-    Learn <a href="panda/panda.html">how to draw</a> using Javascript!
+Leaflet støtter flere typer geometrier.
 </p>
+<ul>
+<li>Point</li>
+<li>Polyline (og MultiPolyLine)</li>
+<li>Polygon (og MultiPolygon)</li>
+<li>Rectangel, circle, </li>
+</ul>
 
-
-<h2>
-    3: Mirror, mirror on your screen
-</h2>
-<p>
-    Learn <a href="mirror/mirror.html">how to draw content</a> from a &lt;video&gt; into a &lt;canvas&gt;
-</p>
-
-<h2>
-    4: Webcam selfies
-</h2>
+<h3>Utfordring</h3>
 
 <p>
-    Learn how to <a href="webcam/webcam.html">stream webcam video</a> into your &lt;video&gt;<a href=""></a>
+Vi vil utvide turistguiden vår ved å legge til en visuell avgrensning over hvor Bergen sentrum er. Nå kan kartet brukes til å besøke hele verden. Det er sikkert nok å kun vise Hordaland/Vestlandet.
 </p>
 
 
-<h2>
-    5: Kind of Blue
-</h2>
+        </div>
+
+        <div class="tasks">
+
+
+
+            <ol class="tasks__list">
+                <li>
+                    <input type="checkbox" id="task2-1"> 
+                    <label for="task2-1">
+                        Avgrens kartets ytre rammer
+                    </label>
+                </li>
+                <li>
+                    <input type="checkbox" id="task2-2"> 
+                    <label for="task2-2">
+                        Polygon for å vise akvariet. Farge: grønn.
+                    </label>
+                </li>
+                <li>
+                    <input type="checkbox" id="task2-3"> 
+                    <label for="task2-3">
+                        Marker for å vise bryggen
+                    </label>
+                </li>
+                <li>
+                    <input type="checkbox" id="task2-4"> 
+                    <label for="task2-4">
+                        Linje for å vise fløibanen. Farge: rød:
+                    </label>
+                </li>
+                <li>
+                    <input type="checkbox" id="task2-5"> 
+                    <label for="task2-5">
+                        Legg til popups for hvert sted som vise navn og bilde
+                    </label>
+                </li>
+                <li>
+                    <input type="checkbox" id="task2-6"> 
+                    <label for="task2-6">
+                        FlyTo layer i stedet for punkt.  
+                    </label>
+                </li>
+            </ol>
+
+            <p><a href="oppgave2/oppgave2.html">Åpne oppgave</a></p>
+
+        </div>
+
+        </div>
+
+    </section>
+
+    <section>
+        <h2>Oppgave 3</h2>
+
+
+        <div class="content">
+
+        <div class="description">
 
 <p>
-    Access each pixel in a video and <a href="color/color.html">learn how to change the color values</a>
+Kartet blir enda mer livlig, når du fyller det med nyttige data fra eksterne kilder. 
+I dag er den vanligste måten å gjøre dette ved REST API. 
 </p>
-
-<h2>
-    6: Post-It Magic
-</h2>
 
 <p>
-    Identify pixels of a target color, <a href="postit/postit.html">replace them with something else</a>
+Her bruker vi Javascript-biblioteket Fetch til å hente data. Fortsatt et relativt nytt API, så inkluderer er polyfill for utvidet nettleserstøtte. 
 </p>
-
-<h2>
-    7: King of pop
-</h2>
-<p>
-    <a href="kingofpop/kingofpop.html">King of pop</a>
-</p>
-
-<h2>
-    8: Already done!?
-</h2>
 
 <p>
-    Try some <a href="advanced.html">advanced, open-ended tasks</a>
+Datagrunnlag fra Statens vegvesen, Nasjonal vegdatabank. Inneholder alt langs veg. Data leveres ut på json-format, og inneholder koordinader på WKT-format (Don't worry, vi transformerer for dere). 
 </p>
-<div style="margin-top: 0.5em; color:gray;font-size: smaller;">
-    Made by <a href="http://kantega.no">Kantega</a>, a Norwegian IT consulting company 100% owned by employees.
 
-    We're always <a href="http://kantega.no/jobb">looking for talented developers</a>
+<p>
+I Leaflet kan lag grupperes. 
+</p>
 
-</div>
+        <h3>Utfordring</h3>
+
+<p>
+Mange turister kommer kjørende inn til Bergen med bil. Utvid applikasjonen med noen flere datasett.
+</p>
+
+
+        </div>
+
+        <div class="tasks">
+
+
+
+            <ol class="tasks__list">
+                <li>
+                    <input type="checkbox" id="task3-1"> 
+                    <label for="task3-1">
+                    Legg til bytte mellom bakgrunnskart og flyfoto (layerswitcher)
+                    </label>
+                </li>
+
+                <li>
+                    <input type="checkbox" id="task3-2"> 
+                    <label for="task3-2">
+                        Plasser gamle markers i en egen layergroup ++
+                    </label>
+                </li>
+                <li>
+                    <input type="checkbox" id="task3-3"> 
+                    <label for="task3-3">
+                        Hent bomstasjoner, og legg dem til bomstasjoner i en egen layergroup
+                    </label>
+                </li>
+                <li>
+                    <input type="checkbox" id="task3-4"> 
+                    <label for="task3-4">
+                        Legg til tunneler innenfor kartutsnittet, i en egen layergroup.
+                    </label>
+                </li>
+                <li>
+                    <input type="checkbox" id="task3-5"> 
+                    <label for="task3-5">
+                        Popup med egenskapsdata
+                    </label>
+                </li>
+            </ol>
+
+            <p><a href="oppgave3/oppgave3.html">Åpne oppgave</a></p>
+
+        </div>
+
+        </div>
+
+    </section>
+
+    <section>
+        <h2>Oppgave 4</h2>
+
+        <div class="content">
+
+        <div class="description">
+
+        <p>Starter med blanke ark. Visualisere trafikkulykker</p>
+
+        <p>Markercluster</p>
+
+
+        </div>
+
+        <div class="tasks">
+
+
+
+            <ol class="tasks__list">
+                <li>
+                    <input type="checkbox" id="task4-1"> 
+                    <label for="task4-1">
+                        Hent trafikkulykker innenfor kartutsnitt
+                    </label>
+                </li>
+
+                <li>
+                    <input type="checkbox" id="task4-2"> 
+                    <label for="task4-2">
+                        Hent trafikkulykker etter 2000
+                    </label>
+                </li>
+                <li>
+                    <input type="checkbox" id="task4-3"> 
+                    <label for="task4-3">
+                        Legg til markercluster
+                    </label>
+                </li>
+                <li>
+                    <input type="checkbox" id="task4-4"> 
+                    <label for="task4-4">
+                        Trykk på ulykke, og vis egenskapsdata til høyre
+                    </label>
+                </li>
+                <li>
+                    <input type="checkbox" id="task4-5"> 
+                    <label for="task4-5">
+                        Hent trafikkulykker når kartutsnittet endres. 
+                    </label>
+                </li>
+                <li>
+                    <input type="checkbox" id="task4-6"> 
+                    <label for="task4-6">
+                        Optimalisering: Kun legg til nye. Legg til ventetid på API-kall
+                    </label>
+                </li>
+            </ol>
+
+            <p><a href="oppgave4/oppgave4.html">Åpne oppgave</a></p>
+
+        </div>
+
+        </div>
+
+    </section>
+
+
+    <section>
+        <h2>Oppgave 5</h2>
+
+        <p>ChartJS</p>
+    </section>
+    
+
+</main>
+
 </body>
 </html>

@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css?family=Muli:300,400,400i,600,700');
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+
+body {
+  background: rgba(249, 249, 230, 1);
+  color: rgba(0, 0, 0, 0.8);
+  font-family: "Muli", sans-serif;
+  font-size: 1.8rem;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+a {
+  color: rgba(0, 113, 205, 1);
+}
+
+nav {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 30rem;
+  display: none;
+}
+
+main {
+  margin: 4rem auto;
+  max-width: 80rem;
+}
+
+section {
+  margin-bottom: 8rem;
+}
+
+.content {
+  align-items: flex-start;
+  display: flex;
+}
+
+.description {
+  width: 55%;
+}
+
+.tasks {
+  background: rgba(255, 255, 255, 1);
+  border-radius: 0.5rem;
+  box-shadow: 0 0.2rem 0 0 rgba(0, 0, 0, 0.1);
+  font-size: 1.6rem;
+  margin: 0 0 0 4rem;
+  padding: 2rem;
+  text-align: center;
+  width: calc(45% - 4rem);
+}
+
+.tasks__list {
+list-style: none;
+}
+
+.tasks__list li {
+  margin: 0 0 1.5rem 0;
+  padding: 0 0 1.5rem 0;
+  position: relative;
+}
+
+.tasks__list li::after {
+  background: rgba(255, 139, 139, 1);
+  bottom: 0;
+  content: "";
+  display: block;
+  height: 0.2rem;
+  left: calc(50% - 2rem);
+  position: absolute;
+  width: 4rem;
+}
+
+h1 {
+  font-size: 4.8rem;
+  font-weight: 300;
+  margin-bottom: 1rem;
+}
+
+h1 span {
+  color: rgba(255, 139, 139, 1);
+  display: block;
+  font-size: 3rem;
+  font-weight: 300;
+  margin-bottom: -1rem;
+  text-transform: uppercase;
+}
+
+h2 {
+  color: rgba(255, 139, 139, 1);
+  font-size: 3rem;
+  font-weight: 300;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+}
+
+h3 {
+  font-size: 2.2rem;
+  font-weight: 600;
+  margin: 4rem 0 2rem 0;
+}
+
+.tasks h3 {
+  font-size: 2rem;
+  margin: 0 0 1.5rem 0;
+}
+
+p {
+  margin-bottom: 2rem;
+}
+
+
+input[type="checkbox"] {
+  font-size: 2rem;
+  display: none;
+}
+
+input:checked ~ label {
+  color: rgba(0, 0, 0, 0.3);
+  font-style: italic;
+  text-decoration: line-through;
+}
+input ~ label:hover {
+  text-decoration: line-through;
+}

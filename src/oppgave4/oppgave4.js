@@ -9,11 +9,10 @@ var bakgrunnsLag = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}
 
 
 var mymap = L.map('mapid', {
-    center: [60.39, 5.33],
     maxBounds: [[55.86, -0.26], [64.89, 18.50]],
     minZoom: 6,
-    zoom: 15,
 });
+
 
 bakgrunnsLag.addTo(mymap);
 
@@ -31,8 +30,7 @@ mymap.addLayer(trafikkulykker);
 
 var vegobjekter = {};
 
-document.querySelector('.js-hentdata').addEventListener('click', function() {
-
+function hentData () {
     var kartutsnitt = mymap.getBounds().toBBoxString();
 
     var url = 'https://www.vegvesen.no/nvdb/api/v2/vegobjekter/570.json?inkluder=geometri&srid=wgs84&kartutsnitt=' + kartutsnitt;
@@ -42,23 +40,42 @@ document.querySelector('.js-hentdata').addEventListener('click', function() {
             return response.json()
         }).then(function(json) {
             for (var i = 0; i < json.objekter.length; i++) {
-                var wkt = json.objekter[i].geometri.wkt;
-                var point = Terraformer.WKT.parse(wkt);
 
-                vegobjekter[json.objekter[i].id] = L.marker(point.coordinates, {
-                    title: json.objekter[i].id
-                });
 
-                vegobjekter[json.objekter[i].id].on({
-                    click: highlightFeature
-                });
+                if (!vegobjekter.hasOwnProperty(json.objekter[i].id)) {
 
-                trafikkulykker.addLayer(vegobjekter[json.objekter[i].id]);
+                    var wkt = json.objekter[i].geometri.wkt;
+                    var point = Terraformer.WKT.parse(wkt);
+
+                    vegobjekter[json.objekter[i].id] = L.marker(point.coordinates, {
+                        title: json.objekter[i].id
+                    });
+
+                    vegobjekter[json.objekter[i].id].on({
+                        click: highlightFeature
+                    });
+
+                    trafikkulykker.addLayer(vegobjekter[json.objekter[i].id]);
+                }
 
             }
 
         }).catch(function(ex) {
             console.log('parsing failed', ex)
         })
+}
+
+
+document.querySelector('.js-hentdata').addEventListener('click', function() {
+    hentData();
 
 }, false)
+
+
+
+mymap.on('moveend', function () {
+    hentData();
+});
+
+mymap.setView([60.39, 5.33], 15);
+

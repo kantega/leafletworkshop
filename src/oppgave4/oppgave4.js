@@ -63,7 +63,7 @@ var vegobjekter = {};
 function hentData () {
     var kartutsnitt = mymap.getBounds().toBBoxString();
 
-    var url = 'https://www.vegvesen.no/nvdb/api/v2/vegobjekter/570.json?inkluder=geometri&srid=wgs84&kartutsnitt=' + kartutsnitt;
+    var url = 'https://www.vegvesen.no/nvdb/api/v2/vegobjekter/570.json?inkluder=geometri&srid=wgs84&antall=10000&kartutsnitt=' + kartutsnitt;
 
     document.querySelector('.loading').innerHTML = 'Laster ...';
 

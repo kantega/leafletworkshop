@@ -9,11 +9,17 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.0.0/dist/MarkerCluster.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.0.0/dist/MarkerCluster.Default.css">
+
 </head>
 <body>
 
     <div id="mapid" style="width: 600px; height: 600px"></div>
-    <button class="js-hentdata">Hent data</button>
+
+    <p class="loading" style="position: absolute; top: 0; right: 0;"></p>
+
+    <h1 class="trafikkulykke__id"></h1>
+
+    <dl class="trafikkulykke__egenskaper"></dl>
 
 
     <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>

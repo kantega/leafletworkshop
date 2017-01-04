@@ -18,7 +18,37 @@ bakgrunnsLag.addTo(mymap);
 
 
 function highlightFeature (e) {
-    console.log(e.target.options.title);
+    var id = e.target.options.title;
+
+    var url = 'https://www.vegvesen.no/nvdb/api/v2/vegobjekter/570/' + id + '.json';
+
+    fetch(url)
+        .then(function(response) {
+            return response.json()
+        }).then(function(json) {
+
+
+            document.querySelector('.trafikkulykke__id').innerHTML = json.id;
+            document.querySelector('.trafikkulykke__egenskaper').innerHTML = '';
+
+            for (var i = 0; i < json.egenskaper.length; i++) {
+                var tittel = document.createElement('dt');
+                var verdi = document.createElement('dd');
+
+                tittel.innerHTML = json.egenskaper[i].navn;
+                verdi.innerHTML = json.egenskaper[i].verdi;
+
+                document.querySelector('.trafikkulykke__egenskaper').appendChild(tittel);
+                document.querySelector('.trafikkulykke__egenskaper').appendChild(verdi);
+
+
+            }
+
+        }).catch(function(ex) {
+            console.log('parsing failed', ex)
+        })
+
+
 }
 
 
@@ -35,10 +65,15 @@ function hentData () {
 
     var url = 'https://www.vegvesen.no/nvdb/api/v2/vegobjekter/570.json?inkluder=geometri&srid=wgs84&kartutsnitt=' + kartutsnitt;
 
+    document.querySelector('.loading').innerHTML = 'Laster ...';
+
     fetch(url)
         .then(function(response) {
             return response.json()
         }).then(function(json) {
+
+            document.querySelector('.loading').innerHTML = '';
+
             for (var i = 0; i < json.objekter.length; i++) {
 
 
@@ -65,11 +100,6 @@ function hentData () {
         })
 }
 
-
-document.querySelector('.js-hentdata').addEventListener('click', function() {
-    hentData();
-
-}, false)
 
 
 

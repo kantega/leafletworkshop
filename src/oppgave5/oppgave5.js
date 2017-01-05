@@ -20,10 +20,16 @@ bakgrunnsLag.addTo(mymap);
 
 var vegobjekter = {};
 
+/*
 var trafikkulykker = L.markerClusterGroup({
     maxClusterRadius: 50
 });
 mymap.addLayer(trafikkulykker);
+*/
+
+var heat = L.heatLayer([], {
+    radius: 10
+}).addTo(mymap);
 
 
 
@@ -75,15 +81,17 @@ function hentData () {
 
                 if (!vegobjekter.hasOwnProperty(json.objekter[i].id)) {
 
+
                     var wkt = json.objekter[i].geometri.wkt;
                     var point = Terraformer.WKT.parse(wkt);
 
                     vegobjekter[json.objekter[i].id] = L.marker(point.coordinates);
 
+                    heat.addLatLng(point.coordinates);
 
-                    trafikkulykker.addLayer(vegobjekter[json.objekter[i].id]);
+                    //trafikkulykker.addLayer(vegobjekter[json.objekter[i].id]);
 
-                    
+
                 }
 
             }

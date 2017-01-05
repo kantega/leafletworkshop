@@ -41,7 +41,7 @@ function hentData () {
     var statistikk = {};
     var kartutsnitt = mymap.getBounds().toBBoxString();
 
-    var url = 'https://www.vegvesen.no/nvdb/api/v2/vegobjekter/570.json?inkluder=geometri,egenskaper&srid=wgs84&antall=10000&kartutsnitt=' + kartutsnitt;
+    var url = 'https://www.vegvesen.no/nvdb/api/v2/vegobjekter/570.json?inkluder=geometri,egenskaper&srid=wgs84&antall=10000&egenskap="5074!=6431 AND 5055>\'1999-12-31\'"&kartutsnitt=' + kartutsnitt;
 
     document.querySelector('.loading').innerHTML = 'Laster ...';
 

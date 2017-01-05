@@ -18,6 +18,7 @@ bakgrunnsLag.addTo(mymap);
 
 
 
+var vegobjekter = {};
 
 var trafikkulykker = L.markerClusterGroup({
     maxClusterRadius: 50
@@ -25,11 +26,13 @@ var trafikkulykker = L.markerClusterGroup({
 mymap.addLayer(trafikkulykker);
 
 
-var vegobjekter = {};
-
-var statistikk = {};
 
 function hentData () {
+
+    //trafikkulykker.clearLayers();
+
+
+    var statistikk = {};
     var kartutsnitt = mymap.getBounds().toBBoxString();
 
     var url = 'https://www.vegvesen.no/nvdb/api/v2/vegobjekter/570.json?inkluder=geometri,egenskaper&srid=wgs84&antall=10000&kartutsnitt=' + kartutsnitt;
@@ -46,31 +49,31 @@ function hentData () {
             for (var i = 0; i < json.objekter.length; i++) {
 
 
-                if (!vegobjekter.hasOwnProperty(json.objekter[i].id)) {
 
-                    if (statistikk.hasOwnProperty('id')) {
-                        statistikk.id.push(json.objekter[i].id);
+                if (statistikk.hasOwnProperty('id')) {
+                    statistikk.id.push(json.objekter[i].id);
+                } else {
+                    statistikk.id = [json.objekter[i].id];
+                }
+
+                for (var j = 0; j < json.objekter[i].egenskaper.length; j++) {
+                    var egenskap = json.objekter[i].egenskaper[j];
+
+                    if (!statistikk.hasOwnProperty(egenskap.navn)) {
+                        statistikk[egenskap.navn] = {};
+                    }
+
+                    if (statistikk[egenskap.navn].hasOwnProperty(egenskap.verdi)) {
+                        statistikk[egenskap.navn][egenskap.verdi].push(json.objekter[i].id);
                     } else {
-                        statistikk.id = [json.objekter[i].id];
+                        statistikk[egenskap.navn][egenskap.verdi] = [json.objekter[i].id];
                     }
 
-                    for (var j = 0; j < json.objekter[i].egenskaper.length; j++) {
-                        var egenskap = json.objekter[i].egenskaper[j];
-
-                        if (!statistikk.hasOwnProperty(egenskap.navn)) {
-                            statistikk[egenskap.navn] = {};
-                        }
-
-                        if (statistikk[egenskap.navn].hasOwnProperty(egenskap.verdi)) {
-                            statistikk[egenskap.navn][egenskap.verdi].push(json.objekter[i].id);
-                        } else {
-                            statistikk[egenskap.navn][egenskap.verdi] = [json.objekter[i].id];
-                        }
-
-                    }
+                }
 
 
 
+                if (!vegobjekter.hasOwnProperty(json.objekter[i].id)) {
 
                     var wkt = json.objekter[i].geometri.wkt;
                     var point = Terraformer.WKT.parse(wkt);
@@ -79,6 +82,8 @@ function hentData () {
 
 
                     trafikkulykker.addLayer(vegobjekter[json.objekter[i].id]);
+
+                    
                 }
 
             }
@@ -88,9 +93,9 @@ function hentData () {
             console.log(statistikk);
 
 
+            document.querySelector('.ukedag').innerHTML = '';
+
             Object.keys(statistikk.Ukedag).forEach(function(value) {
-                console.log(value);
-                console.log(statistikk.Ukedag[value].length);
 
                 var tittel = document.createElement('dt');
                 var verdi = document.createElement('dd');
@@ -122,5 +127,9 @@ mymap.on('moveend', function () {
     hentData();
 });
 
-mymap.setView([60.39, 5.33], 15);
+mymap.setView([60.39, 5.33], 16);
+
+
+
+
 

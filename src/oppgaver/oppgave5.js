@@ -20,12 +20,6 @@ bakgrunnsLag.addTo(mymap);
 
 var vegobjekter = {};
 
-/*
-var trafikkulykker = L.markerClusterGroup({
-    maxClusterRadius: 50
-});
-mymap.addLayer(trafikkulykker);
-*/
 
 var heat = L.heatLayer([], {
     radius: 10
@@ -35,7 +29,6 @@ var heat = L.heatLayer([], {
 
 function hentData () {
 
-    //trafikkulykker.clearLayers();
 
 
     var statistikk = {};
@@ -89,8 +82,6 @@ function hentData () {
 
                     heat.addLatLng(point.coordinates);
 
-                    //trafikkulykker.addLayer(vegobjekter[json.objekter[i].id]);
-
 
                 }
 
@@ -102,6 +93,16 @@ function hentData () {
 
 
             document.querySelector('.ukedag').innerHTML = '';
+
+
+            myPieChart.data.datasets[0].data[0] = statistikk.Ukedag['Mandag'].length;
+            myPieChart.data.datasets[0].data[1] = statistikk.Ukedag['Tirsdag'].length;
+            myPieChart.data.datasets[0].data[2] = statistikk.Ukedag['Onsdag'].length;
+            myPieChart.data.datasets[0].data[3] = statistikk.Ukedag['Torsdag'].length;
+            myPieChart.data.datasets[0].data[4] = statistikk.Ukedag['Fredag'].length;
+            myPieChart.data.datasets[0].data[5] = statistikk.Ukedag['Lørdag'].length;
+            myPieChart.data.datasets[0].data[6] = statistikk.Ukedag['Søndag'].length;
+            myPieChart.update(); 
 
             Object.keys(statistikk.Ukedag).forEach(function(value) {
 
@@ -115,12 +116,6 @@ function hentData () {
                 document.querySelector('.ukedag').appendChild(verdi);
             })
 
-/*
-            for (var k = 0; k < statistikk..length; i++) {
-
-
-            }
-*/
 
 
         }).catch(function(ex) {
@@ -136,6 +131,58 @@ mymap.on('moveend', function () {
 });
 
 mymap.setView([60.39, 5.33], 16);
+
+
+var ctx = document.getElementById("myChart");
+
+
+var data = {
+    labels: [
+        "Mandag",
+        "Tirsdag",
+        "Onsdag",
+        "Torsdag",
+        "Fredag",
+        "Lørdag",
+        "Søndag"
+    ],
+    datasets: [
+        {
+            data: [1, 1, 1, 1, 1, 1, 1],
+            label: "Ukedag",
+            backgroundColor: [
+                "#d53e4f",
+                "#fc8d59",
+                "#fee08b",
+                "#ffffbf",
+                "#e6f598",
+                "#99d594",
+                "#3288bd"
+            ],
+            borderColor: [
+                "#d53e4f",
+                "#fc8d59",
+                "#fee08b",
+                "#ffffbf",
+                "#e6f598",
+                "#99d594",
+                "#3288bd"
+            ]
+        }]
+};
+
+
+var myPieChart = new Chart(ctx,{
+    type: 'bar',
+    data: data,
+    options: {
+        labels: {
+
+        }
+    }
+});
+
+
 
 
 

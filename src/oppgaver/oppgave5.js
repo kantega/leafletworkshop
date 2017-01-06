@@ -176,8 +176,12 @@ var myPieChart = new Chart(ctx,{
     type: 'bar',
     data: data,
     options: {
-        labels: {
-
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
         }
     }
 });

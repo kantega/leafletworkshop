@@ -12,16 +12,29 @@
 </head>
 <body>
 
-    <div id="mapid" style="width: 600px; height: 400px"></div>
-    <button class="js-akvariet">Akvariet</button>
-    <button class="js-bryggen">Bryggen</button>
-    <button class="js-floien">Fløien</button>
-    <button class="js-helebergen">Hele Bergen</button>
+<header>
 
+    <h1>
+        <a href="../index.html">Visualisering av data på kart</a> 
+        Oppgave 2 &ndash; Markører og popups
+    </h1>
 
-    <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
-    <script src="http://cdn-geoweb.s3.amazonaws.com/terraformer/1.0.4/terraformer.min.js"></script>
-    <script src="http://cdn-geoweb.s3.amazonaws.com/terraformer-wkt-parser/1.0.0/terraformer-wkt-parser.min.js"></script>
+</header>
+
+<main>
+
+    <div class="button_row">
+        <button class="js-akvariet">Akvariet</button>
+        <button class="js-bryggen">Bryggen</button>
+        <button class="js-floien">Fløien</button>
+        <button class="js-helebergen">Hele Bergen</button>
+    </div>
+
+    <div id="mapid" class="map_container"></div>
+
+</main>
+
+    <script src="lib/leaflet.js"></script>
     <script src="oppgave2.js"></script>
 </body>
 </html>

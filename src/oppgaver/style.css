@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Muli:300,400,400i,600,700');
+@import url('https://fonts.googleapis.com/css?family=Muli:200,300,400,400i,600,700');
 
 * {
   margin: 0;
@@ -19,9 +19,64 @@ body {
   line-height: 1.6;
 }
 
+header {
+  background: #004882;
+}
+
+main {
+  margin: 4rem auto;
+  max-width: 800px;
+  padding: 0 4rem;
+}
+
+h1 {
+  color: rgba(255, 255, 255, 1);
+  font-size: 2.4rem;
+  font-weight: 200;
+  padding: 2rem;
+  text-align: center;
+}
+
+h1 a {
+  color: rgba(255, 255, 255, 0.75);
+  display: block;
+  font-size: 1.8rem;
+  font-weight: 300;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+
 dt {
   clear: left;
   font-weight: 600;
   float: left;
   margin-right: 1rem;
+}
+
+.map_container {
+  height: 50rem;
+}
+
+.button_row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.button_row button {
+  margin: 0 1rem 1rem 0;
+}
+
+button {
+  background: rgba(0, 113, 205, 1);
+  border: 0;
+  color: rgba(255, 255, 255, 1);
+  font-family: "Muli", sans-serif;
+  font-size: 1.4rem;
+  font-weight: 400;
+  padding: 1rem 1.5rem;
+}
+
+button:hover {
+  background: rgba(0, 113, 205, 0.7);
 }

@@ -12,14 +12,32 @@
 </head>
 <body>
 
-    <div id="mapid" style="width: 600px; height: 400px"></div>
-    <button class="js-akvariet">Akvariet</button>
-    <button class="js-bryggen">Bryggen</button>
-    <button class="js-floien">Fløien</button>
-    <button class="js-helebergen">Hele Bergen</button>
+<header>
+
+    <h1>
+        <a href="../index.html">Visualisering av data på kart</a> 
+        Oppgave 1 &ndash; Kom i gang
+    </h1>
+
+</header>
+
+<main>
+
+    <div class="button_row">
+        <button class="js-akvariet">Akvariet</button>
+        <button class="js-bryggen">Bryggen</button>
+        <button class="js-floien">Fløien</button>
+        <button class="js-helebergen">Hele Bergen</button>
+    </div>
+
+    <div id="mapid" class="map_container"></div>
+
+</main>
 
 
-    <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
+
+    <script src="lib/leaflet.js"></script>
     <script src="oppgave1.js"></script>
+    
 </body>
 </html>

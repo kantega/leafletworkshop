@@ -10,7 +10,7 @@ var bakgrunnsLag = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}
 
 
 var favorittsted = L.marker([60.39, 5.33]);
-favorittsted.bindPopup('Dette er mitt favorittsted i Bergen');
+favorittsted.bindPopup('Dette er mitt favorittsted i Bergen'); 
 
 // Initialisering av kart
 var mymap = L.map('mapid');
@@ -27,18 +27,21 @@ document.querySelector('.js-akvariet').addEventListener('click', function() {
 }, false)
 
 document.querySelector('.js-bryggen').addEventListener('click', function() {
+    // Fjern denne koden
     mymap.flyTo([60.3973, 5.3233], 18, {
         duration: 0.5,
     });
 }, false)
 
 document.querySelector('.js-floien').addEventListener('click', function() {
+    // Fjern denne koden
     mymap.flyTo([60.3944, 5.3436], 18, {
         duration: 0.5,
     });
 }, false)
 
 document.querySelector('.js-helebergen').addEventListener('click', function() {
+    // Fjern denne koden
     mymap.flyTo([60.39, 5.33], 12, {
         duration: 0.5,
     });

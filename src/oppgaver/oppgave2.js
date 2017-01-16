@@ -8,7 +8,7 @@ var bakgrunnsLag = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}
     accessToken: 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpandmbXliNDBjZWd2M2x6bDk3c2ZtOTkifQ._QA7i5Mpkd_m30IGElHziw'
 });
 
-
+// La koordinatene vøre tilgjengelig i kildekoden, eller i oppgaveteksten. 
 var akvariet = L.polygon([
     [60.39973, 5.30204], 
     [60.40063, 5.30399], 
@@ -18,6 +18,8 @@ var akvariet = L.polygon([
 {
   color: '#0f0'
 });
+
+// Legg inn denne koden manuelt.
 akvariet.bindPopup('Akvariet');
 
 var bryggen = L.marker([60.3973, 5.3233]);
@@ -38,6 +40,7 @@ floibanen.bindPopup('Fløibanen');
 
 
 
+// Oppgave: Kommenter ut maxBounds-linje, og henvis til dokumentasjonen
 
 var mymap = L.map('mapid', {
     maxBounds: [[55.86, -0.26], [64.89, 18.50]],
@@ -47,6 +50,7 @@ var mymap = L.map('mapid', {
 mymap.setView([60.39, 5.33], 12);
 bakgrunnsLag.addTo(mymap);
 
+// Kan ha én av linjene nedenfor, som må dupliseres
 akvariet.addTo(mymap);
 bryggen.addTo(mymap);
 floibanen.addTo(mymap);

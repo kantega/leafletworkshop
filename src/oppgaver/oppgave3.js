@@ -111,14 +111,7 @@ document.querySelector('.js-bomstasjoner').addEventListener('click', function() 
                 var wkt = json.objekter[i].geometri.wkt;
                 var point = Terraformer.WKT.parse(wkt);
 
-                var egenskaper = '';
-
-                for (var j = 0; j < json.objekter[i].egenskaper.length; j++) {
-                    var egenskap = json.objekter[i].egenskaper[j];
-                    egenskaper += '<strong>' + egenskap.navn + ':</strong> ' + egenskap.verdi + '<br>';
-                }
-
-                L.marker(point.coordinates).bindPopup(egenskaper).addTo(bomstasjoner);
+                L.marker(point.coordinates).addTo(bomstasjoner);
             }
 
         }).catch(function(ex) {
@@ -140,16 +133,9 @@ document.querySelector('.js-tunneler').addEventListener('click', function() {
         }).then(function(json) {
             for (var i = 0; i < json.objekter.length; i++) {
                 var wkt = json.objekter[i].geometri.wkt;
-                var point = Terraformer.WKT.parse(wkt);
+                var line = Terraformer.WKT.parse(wkt);
 
-                var egenskaper = '';
-
-                for (var j = 0; j < json.objekter[i].egenskaper.length; j++) {
-                    var egenskap = json.objekter[i].egenskaper[j];
-                    egenskaper += '<strong>' + egenskap.navn + ':</strong> ' + egenskap.verdi + '<br>';
-                }
-
-                L.polyline(point.coordinates).bindPopup(egenskaper).addTo(tunneler);
+                L.polyline(line.coordinates).addTo(tunneler);
             }
 
         }).catch(function(ex) {

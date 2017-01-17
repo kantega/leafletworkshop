@@ -1,33 +1,47 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Leaflet-Workshop: Oppgave 4</title>
+    <title>Leaflet-Workshop: Oppgave 3</title>
     <meta charset="utf-8" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.0.0/dist/MarkerCluster.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.0.0/dist/MarkerCluster.Default.css">
 
     <link rel="stylesheet" href="style.css" type="text/css">
-
 </head>
 <body>
 
-    <div id="mapid" style="width: 600px; height: 600px"></div>
-
-    <p class="loading" style="position: absolute; top: 0; right: 0;"></p>
-
-    <h1 class="trafikkulykke__id"></h1>
-
-    <dl class="trafikkulykke__egenskaper"></dl>
 
 
-    <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
-    <script src="https://unpkg.com/leaflet.markercluster@1.0.0/dist/leaflet.markercluster.js"></script>
-    <script src="http://cdn-geoweb.s3.amazonaws.com/terraformer/1.0.4/terraformer.min.js"></script>
-    <script src="http://cdn-geoweb.s3.amazonaws.com/terraformer-wkt-parser/1.0.0/terraformer-wkt-parser.min.js"></script>
-    <script src="oppgave4.js"></script>
+<header>
+
+    <h1>
+        <a href="../index.html">Visualisering av data på kart</a> 
+        Oppgave 3 &ndash; Grupper kartlag
+    </h1>
+
+</header>
+
+<main>
+
+    <div class="button_row">
+    <button class="js-akvariet">Akvariet</button>
+    <button class="js-bryggen">Bryggen</button>
+    <button class="js-floien">Fløien</button>
+    <button class="js-helebergen">Hele Bergen</button>
+    <button class="js-bomstasjoner">Hent bomstasjoner</button>
+    <button class="js-tunneler">Hent tunneler</button>
+    </div>
+
+    <div id="mapid" class="map_container"></div>
+
+</main>
+
+
+    <script src="lib/leaflet.js"></script>
+    <script src="lib/terraformer.min.js"></script>
+    <script src="lib/terraformer-wkt-parser.min.js"></script>
+    <script src="oppgave3.js"></script>
 </body>
 </html>

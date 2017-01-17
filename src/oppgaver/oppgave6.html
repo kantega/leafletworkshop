@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Leaflet-Workshop: Oppgave 4</title>
+    <title>Leaflet-Workshop: Oppgave 5</title>
     <meta charset="utf-8" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,19 +15,28 @@
 </head>
 <body>
 
-    <div id="mapid" style="width: 600px; height: 600px"></div>
+    <div id="mapid" style="width: 50%; height: 100%; position: fixed; top: 0; left: 0;"></div>
 
     <p class="loading" style="position: absolute; top: 0; right: 0;"></p>
 
-    <h1 class="trafikkulykke__id"></h1>
 
-    <dl class="trafikkulykke__egenskaper"></dl>
+    <main style="margin-left: 50%; padding: 20px;">
+
+        <h1 style="margin:0">Ukedag</h1>
+        <canvas id="myChart"style="max-width: 500px; max-height: 500px;"></canvas>
+
+        <dl class="ukedag" style="display: none"></dl>
+
+
+    </main>
 
 
     <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet.markercluster@1.0.0/dist/leaflet.markercluster.js"></script>
     <script src="http://cdn-geoweb.s3.amazonaws.com/terraformer/1.0.4/terraformer.min.js"></script>
     <script src="http://cdn-geoweb.s3.amazonaws.com/terraformer-wkt-parser/1.0.0/terraformer-wkt-parser.min.js"></script>
-    <script src="oppgave5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <script src="lib/leaflet-heat.js"></script>
+    <script src="oppgave6.js"></script>
 </body>
 </html>

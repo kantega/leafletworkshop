@@ -26,6 +26,8 @@ var heat = L.heatLayer([], {
 }).addTo(mymap);
 
 
+const loadingIndicator = document.querySelector('.loading');
+
 
 function hentData () {
 
@@ -36,14 +38,14 @@ function hentData () {
 
     var url = 'https://www.vegvesen.no/nvdb/api/v2/vegobjekter/570.json?inkluder=geometri,egenskaper&srid=wgs84&antall=10000&egenskap="5074!=6431 AND 5055>\'1999-12-31\'"&kartutsnitt=' + kartutsnitt;
 
-    document.querySelector('.loading').innerHTML = 'Laster ...';
+    loadingIndicator.style.opacity = 1;
 
     fetch(url)
         .then(function(response) {
             return response.json()
         }).then(function(json) {
 
-            document.querySelector('.loading').innerHTML = '';
+            loadingIndicator.style.opacity = 0;
 
             for (var i = 0; i < json.objekter.length; i++) {
 

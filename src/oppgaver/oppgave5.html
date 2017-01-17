@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Leaflet-Workshop: Oppgave 4</title>
+
     <meta charset="utf-8" />
+
+    <title>Leaflet-Workshop: Oppgave 4</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -15,19 +17,50 @@
 </head>
 <body>
 
-    <div id="mapid" style="width: 600px; height: 600px"></div>
+<header>
 
-    <p class="loading" style="position: absolute; top: 0; right: 0;"></p>
+    <h1>
+        <a href="../index.html">Visualisering av data på kart</a> 
+        Oppgave 5 &ndash; Markercluster
+    </h1>
 
-    <h1 class="trafikkulykke__id"></h1>
+</header>
 
-    <dl class="trafikkulykke__egenskaper"></dl>
+<main class="columns">
+
+    <div id="mapid" class="map_container">
+        <div class="loading">
+            <div class="sk-circle1 sk-circle"></div>
+            <div class="sk-circle2 sk-circle"></div>
+            <div class="sk-circle3 sk-circle"></div>
+            <div class="sk-circle4 sk-circle"></div>
+            <div class="sk-circle5 sk-circle"></div>
+            <div class="sk-circle6 sk-circle"></div>
+            <div class="sk-circle7 sk-circle"></div>
+            <div class="sk-circle8 sk-circle"></div>
+            <div class="sk-circle9 sk-circle"></div>
+            <div class="sk-circle10 sk-circle"></div>
+            <div class="sk-circle11 sk-circle"></div>
+            <div class="sk-circle12 sk-circle"></div>
+        </div>
+    </div>
+
+    <aside>
+
+        <h2 class="trafikkulykke__id"></h2>
+
+        <dl class="trafikkulykke__egenskaper"></dl>
+    </aside>
+
+</main>
 
 
-    <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
-    <script src="https://unpkg.com/leaflet.markercluster@1.0.0/dist/leaflet.markercluster.js"></script>
-    <script src="http://cdn-geoweb.s3.amazonaws.com/terraformer/1.0.4/terraformer.min.js"></script>
-    <script src="http://cdn-geoweb.s3.amazonaws.com/terraformer-wkt-parser/1.0.0/terraformer-wkt-parser.min.js"></script>
-    <script src="oppgave5.js"></script>
+<script src="lib/leaflet.js"></script>
+<script src="lib/leaflet.markercluster.js"></script>
+<script src="lib/terraformer.min.js"></script>
+<script src="lib/terraformer-wkt-parser.min.js"></script>
+<script src="oppgave5.js"></script>
+
+
 </body>
 </html>

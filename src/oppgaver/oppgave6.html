@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Leaflet-Workshop: Oppgave 5</title>
     <meta charset="utf-8" />
+
+    <title>Leaflet-Workshop: Oppgave 5</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -15,28 +16,52 @@
 </head>
 <body>
 
-    <div id="mapid" style="width: 50%; height: 100%; position: fixed; top: 0; left: 0;"></div>
 
-    <p class="loading" style="position: absolute; top: 0; right: 0;"></p>
+<header>
 
+    <h1>
+        <a href="../index.html">Visualisering av data på kart</a> 
+        Oppgave 6 &ndash; Heatmap
+    </h1>
 
-    <main style="margin-left: 50%; padding: 20px;">
+</header>
 
-        <h1 style="margin:0">Ukedag</h1>
-        <canvas id="myChart"style="max-width: 500px; max-height: 500px;"></canvas>
+<main class="columns">
+
+    <div id="mapid" class="map_container">
+        <div class="loading">
+            <div class="sk-circle1 sk-circle"></div>
+            <div class="sk-circle2 sk-circle"></div>
+            <div class="sk-circle3 sk-circle"></div>
+            <div class="sk-circle4 sk-circle"></div>
+            <div class="sk-circle5 sk-circle"></div>
+            <div class="sk-circle6 sk-circle"></div>
+            <div class="sk-circle7 sk-circle"></div>
+            <div class="sk-circle8 sk-circle"></div>
+            <div class="sk-circle9 sk-circle"></div>
+            <div class="sk-circle10 sk-circle"></div>
+            <div class="sk-circle11 sk-circle"></div>
+            <div class="sk-circle12 sk-circle"></div>
+        </div>
+    </div>
+
+    <aside>
+
+        <h2>Ukedag</h2>
+        <canvas id="myChart" style="max-width: 500px; max-height: 500px;"></canvas>
 
         <dl class="ukedag" style="display: none"></dl>
+    </aside>
+
+</main>
 
 
-    </main>
+<script src="lib/leaflet.js"></script>
+<script src="lib/terraformer.min.js"></script>
+<script src="lib/terraformer-wkt-parser.min.js"></script>
+<script src="lib/Chart.min.js"></script>
+<script src="lib/leaflet-heat.js"></script>
+<script src="oppgave6.js"></script>
 
-
-    <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
-    <script src="https://unpkg.com/leaflet.markercluster@1.0.0/dist/leaflet.markercluster.js"></script>
-    <script src="http://cdn-geoweb.s3.amazonaws.com/terraformer/1.0.4/terraformer.min.js"></script>
-    <script src="http://cdn-geoweb.s3.amazonaws.com/terraformer-wkt-parser/1.0.0/terraformer-wkt-parser.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-    <script src="lib/leaflet-heat.js"></script>
-    <script src="oppgave6.js"></script>
 </body>
 </html>

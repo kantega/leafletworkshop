@@ -160,35 +160,52 @@ Bruk fetch til å hente alle bomstasjoner, og legg til en markør på kartet for
 
 ### 4.2 Hent tunneler
 
+Tunneler er en annen vegobjekttype det er mye av i Bergen. Men i motsetning til bomstasjon, har tunneler en utstrekning som visualiseres ved hjelp av en linje, i stedet for et punkt. 
+
+API-kallet i forrige oppgave hentet alle bomstasjoner i hele Norge, og ikke bare i Bergen. Dette gikk problemfritt, siden det er et lite datasett, men for tunneler ønsker vi å begrense responsen som returneres. Vi kan gjøre dette ved å legge til et områdefilter på API-kallet, som kun henter tunneler i Hordaland (fylke=12). Vi henter vegobjekttypen **tunnelløp**, med id lik `67`.  
+
+```
+https://www.vegvesen.no/nvdb/api/v2/vegobjekter/67.json?inkluder=geometri&srid=wgs84&fylke=12
+```
+
+Hent alle tunnelløp i Hordaland, og legg til en linje på kartet for hvert tunnelløp som returneres.
+
 
 ### 4.3 Legg til loading-indikator
 
+Det er et godt prinsipp å gi brukeren en indikasjon på nettsiden venter på data som lastes ned i bakgrunnen. 
 
-## Alle oppgaver
-
-
-- [ ] 1.1 Finn koordinat
-- [ ] 1.2 Endre startposisjon
-- [ ] 1.3 Naviger mellom severdigheter
-- [ ] 1.4 Øk navigasjonshastigheten
-- [ ] 1.5 Legg til en markør
+Legg til en loading-indikator som startes idet det gjøres et API-kall, og skjules når API-kallet er fullført.
 
 
-- [ ] 2.1 Avgrens kartets ytre rammer
-- [ ] 2.2 Legg til Akvariet
-- [ ] 2.3 Legg til Bryggen
-- [ ] 2.4 Legg til Fløibanen
-- [ ] 2.5 Legg til popups med informasjon
-- [ ] 2.6 Refaktoriser navigasjonen
 
 
-- [ ] 3.1 Grupper severdigheter
-- [ ] 3.2 Slå kartlag av og på
+## Oppgave 5: Markercluster
+
+I denne oppgaven vil vi jobbe med et mye større datasett: Vegobjekttypen **trafikkulykke**, med id lik `570`. For datasett av denne størrelsen, er vi nødt til å bruke andre teknikker for å få til en fornuftig visualisering på kart.
+
+Todo: Fjern sirkel for aktivt objekt
 
 
-- [ ] 4.1 Hent bomstasjoner
-- [ ] 4.2 Hent tunneler
-- [ ] 4.3 Legg til loading-indikator
+### 5.1 Hent trafikkulykker innenfor kartutsnitt
+
+Datasettet for trafikkulykker er så stort at vi er nødt til å begrense oss til kun å hente data innenfor det aktive kartutsnittet.
+
+Metoden [`map.getBounds`](http://leafletjs.com/reference-1.0.3.html#map-getbounds) kan benyttes til å hente det aktive kartutsnittet, og [`.toBBoxString()`](http://leafletjs.com/reference-1.0.3.html#latlngbounds-tobboxstring) konverterer det returnerte arrayet til en string.
+
+APIet tilbyr parameteren `kartutsnitt` for begrense søkeområdet. Parameteren `antall` kan i tillegg benyttes til å begrense antall vegobjekter som returneres i responsen.
+
+
+
+
+### 5.2 Legg til markercluster
+### 5.3 Vis egenskapsdata
+### 5.4 Oppdater data ved panorering
+### 5.5 Ikke legg til duplikater
+
+
+
+
 
 [``]() 
 

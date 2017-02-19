@@ -10,13 +10,13 @@ const bakgrunnsLag = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{
 });
 
 
-const mymap = L.map('mapid', {
+const map = L.map('mapid', {
     center: [60.39, 5.33],
     maxBounds: [[55.86, -0.26], [64.89, 18.50]],
     minZoom: 6,
     zoom: 12,
 });
-mymap.addLayer(bakgrunnsLag);
+map.addLayer(bakgrunnsLag);
 
 
 const loadingIndicator = document.querySelector('.loading');
@@ -50,7 +50,7 @@ document.querySelector('.js-bomstasjoner').addEventListener('click', () => {
                 const wkt = vegobjekt.geometri.wkt;
                 const geometry = Terraformer.WKT.parse(wkt);
 
-                L.marker(geometry.coordinates).addTo(mymap);
+                L.marker(geometry.coordinates).addTo(map);
                 
             });
 
@@ -82,7 +82,7 @@ document.querySelector('.js-tunneler').addEventListener('click', () => {
                 const wkt = vegobjekt.geometri.wkt;
                 const geometry = Terraformer.WKT.parse(wkt);
 
-                L.polyline(geometry.coordinates).addTo(mymap);
+                L.polyline(geometry.coordinates).addTo(map);
                 
             });
 

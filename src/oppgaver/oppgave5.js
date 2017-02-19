@@ -11,23 +11,21 @@ const bakgrunnsLag = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{
 });
 
 
-const mymap = L.map('mapid', {
+const map = L.map('mapid', {
     maxBounds: [[55.86, -0.26], [64.89, 18.50]],
     minZoom: 6,
 });
 
 
-bakgrunnsLag.addTo(mymap);
+bakgrunnsLag.addTo(map);
 
 const selectedLayer = L.layerGroup();
-selectedLayer.addTo(mymap);
-//mymap.addLayer(selectedLayer);
+selectedLayer.addTo(map);
 
 const trafikkulykker = L.markerClusterGroup({
     maxClusterRadius: 50
 });
-trafikkulykker.addTo(mymap);
-//mymap.addLayer(trafikkulykker);
+trafikkulykker.addTo(map);
 
 const vegobjekter = {};
 
@@ -114,7 +112,7 @@ function addVegobjekter (result) {
 
 
 function fetchVegobjekter () {
-    const kartutsnitt = mymap.getBounds().toBBoxString();
+    const kartutsnitt = map.getBounds().toBBoxString();
 
     const url = NVDBAPI + '/vegobjekter/570.json?inkluder=geometri&srid=wgs84&antall=10000&kartutsnitt=' + kartutsnitt;
 
@@ -136,9 +134,9 @@ function fetchVegobjekter () {
 }
 
 
-mymap.on('moveend', () => {
+map.on('moveend', () => {
     fetchVegobjekter();
 });
 
-mymap.setView([60.39, 5.33], 15);
+map.setView([60.39, 5.33], 15);
 

@@ -19,15 +19,15 @@ const map = L.map('mapid', {
 
 bakgrunnsLag.addTo(map);
 
-const selectedLayer = L.layerGroup();
-selectedLayer.addTo(map);
 
 const trafikkulykker = L.markerClusterGroup({
     maxClusterRadius: 50
 });
 trafikkulykker.addTo(map);
 
+
 let vegobjekter = {};
+
 
 const loadingIndicator = document.querySelector('.loading');
 
@@ -65,13 +65,6 @@ function showInfo (vegobjekt) {
 
 
 function highlightFeature (e) {
-
-    selectedLayer.clearLayers();
-    L.circleMarker(e.target._latlng, {
-        color: '#f00',
-        radius: 10
-    }).addTo(selectedLayer);
-
 
     const id = e.target.options.title;
     const url = NVDBAPI + '/vegobjekter/570/' + id + '.json';

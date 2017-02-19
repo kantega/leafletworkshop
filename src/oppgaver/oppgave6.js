@@ -30,19 +30,19 @@ function hideLoadingIndicator () {
 }
 
 
-const mymap = L.map('mapid', {
+const map = L.map('mapid', {
     maxBounds: [[55.86, -0.26], [64.89, 18.50]],
     minZoom: 6,
 });
 
-mymap.addLayer(bakgrunnsLag);
-mymap.addLayer(heat);
+map.addLayer(bakgrunnsLag);
+map.addLayer(heat);
 
-mymap.on('moveend', function () {
+map.on('moveend', function () {
     hentData();
 });
 
-mymap.setView([60.39, 5.33], 16);
+map.setView([60.39, 5.33], 16);
 
 
 
@@ -99,7 +99,7 @@ function addVegobjekter (result) {
 
 function hentData () {
 
-    const kartutsnitt = mymap.getBounds().toBBoxString();
+    const kartutsnitt = map.getBounds().toBBoxString();
 
     const url = NVDBAPI + '/vegobjekter/570.json?inkluder=geometri,egenskaper&srid=wgs84&antall=10000&egenskap="5074!=6431 AND 5055>\'1999-12-31\'"&kartutsnitt=' + kartutsnitt;
 
@@ -119,14 +119,14 @@ function hentData () {
 
             addVegobjekter(json.objekter);
 
-            myPieChart.data.datasets[0].data[0] = statistikk.Ukedag['Mandag'].length;
-            myPieChart.data.datasets[0].data[1] = statistikk.Ukedag['Tirsdag'].length;
-            myPieChart.data.datasets[0].data[2] = statistikk.Ukedag['Onsdag'].length;
-            myPieChart.data.datasets[0].data[3] = statistikk.Ukedag['Torsdag'].length;
-            myPieChart.data.datasets[0].data[4] = statistikk.Ukedag['Fredag'].length;
-            myPieChart.data.datasets[0].data[5] = statistikk.Ukedag['Lørdag'].length;
-            myPieChart.data.datasets[0].data[6] = statistikk.Ukedag['Søndag'].length;
-            myPieChart.update(); 
+            myChart.data.datasets[0].data[0] = statistikk.Ukedag['Mandag'].length;
+            myChart.data.datasets[0].data[1] = statistikk.Ukedag['Tirsdag'].length;
+            myChart.data.datasets[0].data[2] = statistikk.Ukedag['Onsdag'].length;
+            myChart.data.datasets[0].data[3] = statistikk.Ukedag['Torsdag'].length;
+            myChart.data.datasets[0].data[4] = statistikk.Ukedag['Fredag'].length;
+            myChart.data.datasets[0].data[5] = statistikk.Ukedag['Lørdag'].length;
+            myChart.data.datasets[0].data[6] = statistikk.Ukedag['Søndag'].length;
+            myChart.update(); 
 
         }).catch(function(ex) {
             console.log('parsing failed', ex);
@@ -173,7 +173,7 @@ const data = {
 };
 
 
-const myPieChart = new Chart(ctx,{
+const myChart = new Chart(ctx,{
     type: 'bar',
     data: data,
     options: {

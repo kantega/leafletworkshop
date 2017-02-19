@@ -27,7 +27,17 @@ const trafikkulykker = L.markerClusterGroup({
 });
 trafikkulykker.addTo(map);
 
-const vegobjekter = {};
+let vegobjekter = {};
+
+const loadingIndicator = document.querySelector('.loading');
+
+function showLoadingIndicator () {
+    loadingIndicator.style.opacity = 1;
+}
+
+function hideLoadingIndicator () {
+    loadingIndicator.style.opacity = 0;
+}
 
 const trafikkulykkeTittel = document.querySelector('.trafikkulykke__id');
 const trafikkulykkeEgenskaper = document.querySelector('.trafikkulykke__egenskaper');
@@ -51,6 +61,7 @@ function showInfo (vegobjekt) {
 
     });
 }
+
 
 
 function highlightFeature (e) {
@@ -77,16 +88,6 @@ function highlightFeature (e) {
         })
 }
 
-
-const loadingIndicator = document.querySelector('.loading');
-
-function showLoadingIndicator () {
-    loadingIndicator.style.opacity = 1;
-}
-
-function hideLoadingIndicator () {
-    loadingIndicator.style.opacity = 0;
-}
 
 
 function addVegobjekter (result) {

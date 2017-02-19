@@ -195,10 +195,16 @@ Metoden [`map.getBounds`](http://leafletjs.com/reference-1.0.3.html#map-getbound
 
 APIet tilbyr parameteren `kartutsnitt` for begrense søkeområdet. Parameteren `antall` kan i tillegg benyttes til å begrense antall vegobjekter som returneres i responsen.
 
-
+Hent alle trafikkulykker innenfor kartutsnittet. Legg til hver trafikkulykke som en markør i en layerGroup, som igjen legges til kartet. 
 
 
 ### 5.2 Legg til markercluster
+
+API-kallet i forrige oppgave resulterte i et uhåndterlig antall markører. Nettleseren ble delvis uresponsiv, og visningen på kart gav heller ikke stor mening.
+
+
+
+
 ### 5.3 Vis egenskapsdata
 ### 5.4 Oppdater data ved panorering
 ### 5.5 Ikke legg til duplikater

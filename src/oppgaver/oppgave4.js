@@ -6,7 +6,7 @@ const bakgrunnsLag = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{
         '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
         'Imagery © <a href="http://mapbox.com">Mapbox</a>',
     id: 'mapbox.streets',
-    accessToken: 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpandmbXliNDBjZWd2M2x6bDk3c2ZtOTkifQ._QA7i5Mpkd_m30IGElHziw'
+    accessToken: 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw'
 });
 
 
@@ -16,8 +16,7 @@ const mymap = L.map('mapid', {
     minZoom: 6,
     zoom: 12,
 });
-
-bakgrunnsLag.addTo(mymap);
+mymap.addLayer(bakgrunnsLag);
 
 
 const loadingIndicator = document.querySelector('.loading');
@@ -31,17 +30,16 @@ function hideLoadingIndicator () {
 }
 
 
-
 document.querySelector('.js-bomstasjoner').addEventListener('click', () => {
 
     showLoadingIndicator();
 
-    const url = NVDBAPI + '/vegobjekter/45.json?inkluder=geometri,egenskaper&srid=wgs84&fylke=12';
+    const url = NVDBAPI + '/vegobjekter/45.json?inkluder=geometri&srid=wgs84&fylke=12';
 
     fetch(url)
 
         .then((response) => {
-            return response.json()
+            return response.json();
 
         }).then((json) => {
 
@@ -57,28 +55,27 @@ document.querySelector('.js-bomstasjoner').addEventListener('click', () => {
             });
 
         }).catch((ex) => {
-            console.log('parsing failed', ex)
+            console.log('parsing failed', ex);
 
         })
 
-}, false)
+}, false);
 
 
 document.querySelector('.js-tunneler').addEventListener('click', () => {
 
     showLoadingIndicator();
 
-    const url = NVDBAPI + '/vegobjekter/67.json?inkluder=geometri,egenskaper&srid=wgs84&fylke=12';
+    const url = NVDBAPI + '/vegobjekter/67.json?inkluder=geometri&srid=wgs84&fylke=12';
 
     fetch(url)
 
         .then((response) => {
-            return response.json()
+            return response.json();
 
         }).then((json) => {
 
             hideLoadingIndicator();
-
 
             json.objekter.forEach(vegobjekt => {
 
@@ -91,10 +88,10 @@ document.querySelector('.js-tunneler').addEventListener('click', () => {
 
 
         }).catch((ex) => {
-            console.log('parsing failed', ex)
+            console.log('parsing failed', ex);
 
         })
 
-}, false)
+}, false);
 
 

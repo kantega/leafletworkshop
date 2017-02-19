@@ -1,48 +1,25 @@
 
 const NVDBAPI = 'https://www.vegvesen.no/nvdb/api/v2';
 
-
-const loadingIndicator = document.querySelector('.loading');
-
 const bakgrunnsLag = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
     maxZoom: 18,
     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
         '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
         'Imagery © <a href="http://mapbox.com">Mapbox</a>',
     id: 'mapbox.streets',
-    accessToken: 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpandmbXliNDBjZWd2M2x6bDk3c2ZtOTkifQ._QA7i5Mpkd_m30IGElHziw'
+    accessToken: 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw'
 });
-
-
-const mymap = L.map('mapid', {
-    maxBounds: [[55.86, -0.26], [64.89, 18.50]],
-    minZoom: 6,
-});
-
-
-bakgrunnsLag.addTo(mymap);
-
-
-
-const vegobjekter = {};
 
 
 const heat = L.heatLayer([], {
     radius: 10
-}).addTo(mymap);
-
-
-
-mymap.on('moveend', function () {
-    hentData();
 });
 
-mymap.setView([60.39, 5.33], 16);
+
+let vegobjekter = {};
 
 
-
-
-
+const loadingIndicator = document.querySelector('.loading');
 
 function showLoadingIndicator () {
     loadingIndicator.style.opacity = 1;
@@ -51,6 +28,22 @@ function showLoadingIndicator () {
 function hideLoadingIndicator () {
     loadingIndicator.style.opacity = 0;
 }
+
+
+const mymap = L.map('mapid', {
+    maxBounds: [[55.86, -0.26], [64.89, 18.50]],
+    minZoom: 6,
+});
+
+mymap.addLayer(bakgrunnsLag);
+mymap.addLayer(heat);
+
+mymap.on('moveend', function () {
+    hentData();
+});
+
+mymap.setView([60.39, 5.33], 16);
+
 
 
 function getStatistics (vegobjekter) {
@@ -122,14 +115,9 @@ function hentData () {
 
             const statistikk = getStatistics(json.objekter);
 
-            addVegobjekter(json.objekter);
-
-
             console.log(statistikk);
 
-
-            document.querySelector('.ukedag').innerHTML = '';
-
+            addVegobjekter(json.objekter);
 
             myPieChart.data.datasets[0].data[0] = statistikk.Ukedag['Mandag'].length;
             myPieChart.data.datasets[0].data[1] = statistikk.Ukedag['Tirsdag'].length;
@@ -140,34 +128,16 @@ function hentData () {
             myPieChart.data.datasets[0].data[6] = statistikk.Ukedag['Søndag'].length;
             myPieChart.update(); 
 
-            Object.keys(statistikk.Ukedag).forEach(function(value) {
-
-                var tittel = document.createElement('dt');
-                var verdi = document.createElement('dd');
-
-                tittel.innerHTML = value;
-                verdi.innerHTML = statistikk.Ukedag[value].length;
-
-                document.querySelector('.ukedag').appendChild(tittel);
-                document.querySelector('.ukedag').appendChild(verdi);
-            })
-
-
-
         }).catch(function(ex) {
-            console.log('parsing failed', ex)
+            console.log('parsing failed', ex);
         })
 }
 
 
 
+const ctx = document.querySelector('#myChart');
 
-
-
-var ctx = document.getElementById("myChart");
-
-
-var data = {
+const data = {
     labels: [
         "Mandag",
         "Tirsdag",
@@ -203,7 +173,7 @@ var data = {
 };
 
 
-var myPieChart = new Chart(ctx,{
+const myPieChart = new Chart(ctx,{
     type: 'bar',
     data: data,
     options: {

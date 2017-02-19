@@ -1,15 +1,16 @@
-// Bakgrunnskart
-var bakgrunnsLag = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+
+const bakgrunnsLag = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
     maxZoom: 18,
     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
         '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
         'Imagery © <a href="http://mapbox.com">Mapbox</a>',
     id: 'mapbox.streets',
-    accessToken: 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpandmbXliNDBjZWd2M2x6bDk3c2ZtOTkifQ._QA7i5Mpkd_m30IGElHziw'
+    accessToken: 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw'
 });
 
-// La koordinatene vøre tilgjengelig i kildekoden, eller i oppgaveteksten. 
-var akvariet = L.polygon([
+const DURATION = 0.5;
+
+const akvariet = L.polygon([
     [60.39973, 5.30204], 
     [60.40063, 5.30399], 
     [60.40011, 5.30590], 
@@ -18,11 +19,9 @@ var akvariet = L.polygon([
 {
   color: '#0f0'
 });
-
-// Legg inn denne koden manuelt.
 akvariet.bindPopup('Akvariet');
 
-var bryggen = L.marker([60.3973, 5.3233]);
+const bryggen = L.marker([60.3973, 5.3233]);
 bryggen.bindPopup('Bryggen');
 
 var floibanen = L.polyline([
@@ -39,46 +38,40 @@ var floibanen = L.polyline([
 floibanen.bindPopup('Fløibanen');
 
 
-
-// Oppgave: Kommenter ut maxBounds-linje, og henvis til dokumentasjonen
-
-var mymap = L.map('mapid', {
+const mymap = L.map('mapid', {
     maxBounds: [[55.86, -0.26], [64.89, 18.50]],
     minZoom: 6 
 });
-
 mymap.setView([60.39, 5.33], 12);
-bakgrunnsLag.addTo(mymap);
-
-// Kan ha én av linjene nedenfor, som må dupliseres
-akvariet.addTo(mymap);
-bryggen.addTo(mymap);
-floibanen.addTo(mymap);
+mymap.addLayer(bakgrunnsLag);
+mymap.addLayer(akvariet);
+mymap.addLayer(bryggen);
+mymap.addLayer(floibanen);
 
 
-document.querySelector('.js-akvariet').addEventListener('click', function() {
+document.querySelector('.js-akvariet').addEventListener('click', () => {
     mymap.flyToBounds(akvariet.getBounds(), {
-        duration: 0.5,
+        duration: DURATION,
     });
-}, false)
+}, false);
 
-document.querySelector('.js-bryggen').addEventListener('click', function() {
+document.querySelector('.js-bryggen').addEventListener('click', () => {
     mymap.flyTo(bryggen.getLatLng(), 18, {
-        duration: 0.5,
+        duration: DURATION,
     });
-}, false)
+}, false);
 
-document.querySelector('.js-floien').addEventListener('click', function() {
+document.querySelector('.js-floien').addEventListener('click', () => {
     mymap.flyToBounds(floibanen.getBounds(), {
-        duration: 0.5,
+        duration: DURATION,
     });
-}, false)
+}, false);
 
-document.querySelector('.js-helebergen').addEventListener('click', function() {
+document.querySelector('.js-helebergen').addEventListener('click', () => {
     mymap.flyTo([60.39, 5.33], 12, {
-        duration: 0.5,
+        duration: DURATION,
     });
-}, false)
+}, false);
 
 
 function onMapClick(e) {

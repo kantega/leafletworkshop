@@ -7,7 +7,7 @@ const bakgrunnsLag = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{
         '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
         'Imagery © <a href="http://mapbox.com">Mapbox</a>',
     id: 'mapbox.streets',
-    accessToken: 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpandmbXliNDBjZWd2M2x6bDk3c2ZtOTkifQ._QA7i5Mpkd_m30IGElHziw'
+    accessToken: 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw'
 });
 
 
@@ -20,16 +20,16 @@ const mymap = L.map('mapid', {
 bakgrunnsLag.addTo(mymap);
 
 const selectedLayer = L.layerGroup();
-mymap.addLayer(selectedLayer);
+selectedLayer.addTo(mymap);
+//mymap.addLayer(selectedLayer);
 
 const trafikkulykker = L.markerClusterGroup({
     maxClusterRadius: 50
 });
-mymap.addLayer(trafikkulykker);
-
+trafikkulykker.addTo(mymap);
+//mymap.addLayer(trafikkulykker);
 
 const vegobjekter = {};
-
 
 const trafikkulykkeTittel = document.querySelector('.trafikkulykke__id');
 const trafikkulykkeEgenskaper = document.querySelector('.trafikkulykke__egenskaper');
@@ -75,7 +75,7 @@ function highlightFeature (e) {
             showInfo(json);
 
         }).catch((ex) => {
-            console.log('parsing failed', ex)
+            console.log('parsing failed', ex);
         })
 }
 
@@ -130,7 +130,7 @@ function fetchVegobjekter () {
             addVegobjekter(json.objekter);
 
         }).catch(function(ex) {
-            console.log('parsing failed', ex)
+            console.log('parsing failed', ex);
 
         })
 }

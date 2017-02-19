@@ -7,6 +7,7 @@
 
     <title>Leaflet Workshop</title>
 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli:300,400,400i,600,700" type="text/css">
     <link rel="stylesheet" href="style.css" type="text/css">
 
 </head>
@@ -159,6 +160,21 @@
         <div class="content">
 
         <div class="description">
+
+
+        <h3>Avgrens kartets ytre rammer</h3>
+
+        <p>Akkurat nå er det mulig å panorere kartet over hele verden, men for oss er det kun relevant å vise Vestlandet. </p>
+
+        <p>Når du instansierer et kart ved hjelp av <code>L.map('mapid')</code>, kan du legge ved et eget objekt med innstillinger. Eksempel:</p>
+
+
+<pre><code>L.map('mapid', {
+    test: 'verdi',
+    test: 'verdi'
+})</code></pre>
+
+
 
 <p>
 Bakgrunnskart er gøy, men alt som kan legges på toppen av kartet er enda gøyere.

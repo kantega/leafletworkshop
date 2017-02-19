@@ -12,7 +12,6 @@ const bakgrunnsLag = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{
 const DURATION = 0.5;
 
 const favorittsted = L.marker([60.39, 5.33]);
-favorittsted.bindPopup('Dette er mitt favorittsted i Bergen'); 
 
 
 const map = L.map('mapid');

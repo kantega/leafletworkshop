@@ -34,7 +34,7 @@ document.querySelector('.js-bomstasjoner').addEventListener('click', () => {
 
     showLoadingIndicator();
 
-    const url = NVDBAPI + '/vegobjekter/45.json?inkluder=geometri&srid=wgs84&fylke=12';
+    const url = NVDBAPI + '/vegobjekter/45.json?inkluder=geometri&srid=wgs84';
 
     fetch(url)
 

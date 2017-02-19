@@ -36,11 +36,7 @@ const floibanen = L.polyline([
 });
 floibanen.bindPopup('Fløibanen');
 
-
-const steder = new L.LayerGroup();
-steder.addLayer(akvariet);
-steder.addLayer(bryggen);
-steder.addLayer(floibanen);
+const steder = L.layerGroup([akvariet, bryggen, floibanen]);
 
 
 const baseLayers = {
@@ -52,41 +48,42 @@ const overlays = {
     "Steder": steder
 };
 
-const mymap = L.map('mapid', {
+const map = L.map('mapid', {
     center: [60.39, 5.33],
-    layers: [streets, steder],
     maxBounds: [[55.86, -0.26], [64.89, 18.50]],
     minZoom: 6,
     zoom: 12,
 });
+map.addLayer(streets);
+map.addLayer(steder);
 
 
 const layerControl = L.control.layers(baseLayers, overlays, {
     collapsed: false
 });
-layerControl.addTo(mymap);
+layerControl.addTo(map);
 
 
 document.querySelector('.js-akvariet').addEventListener('click', () => {
-    mymap.flyToBounds(akvariet.getBounds(), {
+    map.flyToBounds(akvariet.getBounds(), {
         duration: DURATION,
     });
 }, false);
 
 document.querySelector('.js-bryggen').addEventListener('click', () => {
-    mymap.flyTo(bryggen.getLatLng(), 18, {
+    map.flyTo(bryggen.getLatLng(), 18, {
         duration: DURATION,
     });
 }, false);
 
 document.querySelector('.js-floien').addEventListener('click', () => {
-    mymap.flyToBounds(floibanen.getBounds(), {
+    map.flyToBounds(floibanen.getBounds(), {
         duration: DURATION,
     });
 }, false);
 
 document.querySelector('.js-helebergen').addEventListener('click', () => {
-    mymap.flyTo([60.39, 5.33], 12, {
+    map.flyTo([60.39, 5.33], 12, {
         duration: DURATION,
     });
 }, false);

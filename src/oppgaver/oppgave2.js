@@ -38,37 +38,37 @@ var floibanen = L.polyline([
 floibanen.bindPopup('Fløibanen');
 
 
-const mymap = L.map('mapid', {
+const map = L.map('mapid', {
     maxBounds: [[55.86, -0.26], [64.89, 18.50]],
     minZoom: 6 
 });
-mymap.setView([60.39, 5.33], 12);
-mymap.addLayer(bakgrunnsLag);
-mymap.addLayer(akvariet);
-mymap.addLayer(bryggen);
-mymap.addLayer(floibanen);
+map.setView([60.39, 5.33], 12);
+map.addLayer(bakgrunnsLag);
+map.addLayer(akvariet);
+map.addLayer(bryggen);
+map.addLayer(floibanen);
 
 
 document.querySelector('.js-akvariet').addEventListener('click', () => {
-    mymap.flyToBounds(akvariet.getBounds(), {
+    map.flyToBounds(akvariet.getBounds(), {
         duration: DURATION,
     });
 }, false);
 
 document.querySelector('.js-bryggen').addEventListener('click', () => {
-    mymap.flyTo(bryggen.getLatLng(), 18, {
+    map.flyTo(bryggen.getLatLng(), 18, {
         duration: DURATION,
     });
 }, false);
 
 document.querySelector('.js-floien').addEventListener('click', () => {
-    mymap.flyToBounds(floibanen.getBounds(), {
+    map.flyToBounds(floibanen.getBounds(), {
         duration: DURATION,
     });
 }, false);
 
 document.querySelector('.js-helebergen').addEventListener('click', () => {
-    mymap.flyTo([60.39, 5.33], 12, {
+    map.flyTo([60.39, 5.33], 12, {
         duration: DURATION,
     });
 }, false);
@@ -78,6 +78,6 @@ function onMapClick(e) {
     console.log('Du klikket på koordinaten [' + e.latlng.lat + ', ' + e.latlng.lng + ']');
 }
 
-mymap.on('click', onMapClick);
+map.on('click', onMapClick);
 
 

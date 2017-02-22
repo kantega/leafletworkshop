@@ -8,12 +8,18 @@ const mbUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token
 const grayscale   = L.tileLayer(mbUrl, {id: 'mapbox.light', attribution: mbAttr});
 const streets  = L.tileLayer(mbUrl, {id: 'mapbox.streets',   attribution: mbAttr});
 
-const DURATION = 0.5;
+const map = L.map('mapid', {
+    center: [60.39, 5.33],
+    maxBounds: [[55.86, -0.26], [64.89, 18.50]],
+    minZoom: 6,
+    zoom: 12
+});
+map.addLayer(streets);
 
 const akvariet = L.polygon([
-    [60.39973, 5.30204], 
-    [60.40063, 5.30399], 
-    [60.40011, 5.30590], 
+    [60.39973, 5.30204],
+    [60.40063, 5.30399],
+    [60.40011, 5.30590],
     [60.39863, 5.30412]
 ], {
   color: '#0f0'
@@ -25,69 +31,68 @@ const bryggen = L.marker([60.3973, 5.3233]);
 bryggen.bindPopup('Bryggen');
 
 const floibanen = L.polyline([
-    [60.3964173561773, 5.328556895256043], 
-    [60.39660550579725, 5.329484939575195], 
-    [60.396311355912495, 5.331035256385803], 
-    [60.39560644537202, 5.333991050720216], 
-    [60.39533878737165, 5.337563753128053], 
+    [60.3964173561773, 5.328556895256043],
+    [60.39660550579725, 5.329484939575195],
+    [60.396311355912495, 5.331035256385803],
+    [60.39560644537202, 5.333991050720216],
+    [60.39533878737165, 5.337563753128053],
     [60.39480346476893, 5.342504382133484]
 ], {
   color: '#f00'
 });
 floibanen.bindPopup('Fløibanen');
 
-const steder = L.layerGroup([akvariet, bryggen, floibanen]);
+/*
+ Oppgave 3.1 - layerGroup
+
+ I forrige oppgave lagde vi tre kartlag (Akvariet, Bryggen og Fløibanen) og
+ viste dem på kartet. Vi kan samle disse lagene i en gruppe med L.layerGroup,
+ slik at vi kan behandle dem som ett lag i stedet. Bruk L.layerGroup til å lage
+ en gruppe, og legg den til i kartet. Se
+ http://leafletjs.com/examples/layers-control/
+ */
+// din kode her
 
 
+/*
+ Oppgave 3.2 - slå kartlag av og på
+
+ L.control.layers tar to argumenter: baseLayers og overlays. Bruk
+ L.control.layers til velge mellom gatekart og et kart i gråtoner. Variablene
+ `grayscale` og `streets`, som er definert øverst i denne fila, definerer de to
+ kartlagene.
+ */
 const baseLayers = {
-    "Streets": streets,
-    "Grayscale": grayscale
+    // definer kartlagene her
 };
-
 const overlays = {
-    "Steder": steder
+    // definer gruppen fra 3.1 her
 };
-
-const map = L.map('mapid', {
-    center: [60.39, 5.33],
-    maxBounds: [[55.86, -0.26], [64.89, 18.50]],
-    minZoom: 6,
-    zoom: 12,
-});
-map.addLayer(streets);
-map.addLayer(steder);
+// bruk L.control.layers til å legge til kartlagene og stedene, og legg dem til
+// i kartet med .addTo(map)
 
 
-const layerControl = L.control.layers(baseLayers, overlays, {
-    collapsed: false
-});
-layerControl.addTo(map);
-
-
+const duration = 0.5;
 document.querySelector('.js-akvariet').addEventListener('click', () => {
     map.flyToBounds(akvariet.getBounds(), {
-        duration: DURATION,
+        duration
     });
-}, false);
+});
 
 document.querySelector('.js-bryggen').addEventListener('click', () => {
     map.flyTo(bryggen.getLatLng(), 18, {
-        duration: DURATION,
+        duration
     });
-}, false);
+});
 
 document.querySelector('.js-floien').addEventListener('click', () => {
     map.flyToBounds(floibanen.getBounds(), {
-        duration: DURATION,
+        duration
     });
-}, false);
+});
 
 document.querySelector('.js-helebergen').addEventListener('click', () => {
     map.flyTo([60.39, 5.33], 12, {
-        duration: DURATION,
+        duration
     });
-}, false);
-
-
-
-
+});

@@ -72,7 +72,7 @@ const floibanen = [
  Oppgave 2.5 - Popups
 
  Når man klikker på de forskjellige markørene i kartet, skal det dukke opp en
- popup som forklarer hva du klikket på. Bruk L.popup for å legge til en markør
+ popup som forklarer hva du klikket på. Bruk bindPopup for å legge til en markør
  på Akvariet, Bryggen og Fløibanen. Se
  http://leafletjs.com/reference-1.0.3.html#popup
  */

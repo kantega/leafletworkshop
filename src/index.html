@@ -13,536 +13,236 @@
 </head>
 <body>
 
-<nav>
-    <ul>
-        <li><a href="#">Start</a></li>
-        <li><a href="#">Oppgave 1</a></li>
-        <li><a href="#">Oppgave 2</a></li>
-        <li><a href="#">Oppgave 3</a></li>
-        <li><a href="#">Oppgave 4</a></li>
-        <li><a href="#">Oppgave 5</a></li>
-    </ul>
-</nav>              
+<header>
+         
+    <h1><span>Workshop </span>Visualisering av data på kart</h1>
+
+    <p>
+        Bruk denne siden for å få oversikt over alle oppgaver og deloppgaver.
+        Klikk på en deloppgave for å markere den som fullført.
+    </p>
+
+    <p>
+        Full oppgavetekst er tilgjengelig på Github: 
+        <a href="https://github.com/kantega/leafletworkshop">https://github.com/kantega/leafletworkshop</a>
+    </p>
+
+
+
+</header>
 
 <main>
 
-    <section>
-        <h1><span>Workshop </span>Visualisering av data på kart</h1>
+    <section class="tasks">
 
-        <p>
-        I denne workshopen vil dere få en innføring i å visualisere informasjon på kart i nettleseren, 
-        ved hjelp av Javascript-biblioteket <a href="http://leafletjs.com/">Leaflet</a>.
-        </p>
+        <h2><a href="oppgaver/oppgave1.html">Oppgave 1: Kom i gang</a></h2>
 
-        <p>
-        Workshopen er bygd opp av en rekke praktiske oppgaver. Hver oppgave har en tilhørende HTML- og en javascript-fil, og javascript-filen inneholder flere feil som dere må rette opp i, for å få 
-        applikasjonen til å fungere som forventet.
-        </p>
-
-        <p>
-        Alle oppgavetekstene er samlet på denne siden, og filene knyttet til hver oppgave befinner seg i egne undermapper.
-        </p>
-
-        <h2>Kort om kart</h2>
-
-            <p>
-                Jordkloden vår kan modelleres som et flatt kart bestående av breddegrader (<em>latitude</em>) og lengdegrader (<em>longitude</em>). 
-            </p>
-
-            <p>
-                Det finnes flere ulike projeksjoner og koordinatsystemer for å plassere objekter nøyaktig på kart, men i denne workshopen vil vi utelukkende bruke lengde- og breddegrader, også kalt WGS84. 
-            </p>
-
-            <p>
-                <img src="http://www.hicksvillepublicschools.org/cms/lib2/NY01001760/Centricity/Domain/1236/latitude_longitude.gif" alt="">
-            </p>
-
-        <ul>
-            <li>https://www.vegvesen.no/nvdb/apidokumentasjon/</li>
-            <li>http://colorbrewer2.org/</li>
-            <li>https://github.github.io/fetch/</li>
-        </ul>
-
-
-    </section>
-
-
-    <section>
-        
-        <h2>Oppgave 1</h2>
-        
-        <div class="content">
-
-        <div class="description">
-
-
-            <h3>Oppgave 1</h3>
-
-            
-
-
-
-
-            <p>
-                Et kart i Leaflet består av et 
-
-            Kart består av koordinater.
-            I dag bruker vi lengde- og breddegrad, WGS84. Akkurat som Google.
-            Eksempel: Et punkt (Hva er først?)
-            </p>
-
-            <p>
-            Et kart består av flere lag ovenfor hverandre. Helt nederst er et baselayer, som er selve bakgrunnskartet. kartografi som viser terreng, bebyggelse og veier. Ortofoto, flybilder. 
-            </p>
-
-            <p>
-            Tar utgangspunkt i http://leafletjs.com/examples/quick-start/Kort vise frem hva koden består av?
-            </p>
-
-            <h3>Utfordring</h3>
-
-            <p>
-            Vi har laget et fungerende leaflet-kart med et <a href="#">bakgrunnskart</a> fra mapbox. Vi vil lage en interaktiv guide som viser kjente steder i Bergen, men har tilsynelatende gjort noe feil. Kartet åpnes i Timbuktu, og knappene våre fungerer ikke.
-            </p>
-
-        </div>
-
-        <div class="tasks">
-
-            <h3>Oppgaver</h3>
-
-            <ol class="tasks__list">
-                <li>
-                    <input type="checkbox" id="task1-1"> 
-                    <label for="task1-1">
-                    Klikk på kart for å få tilbake koordinat i utviklerkonsoll. Få denne til å fungere.
-                    </label>
-                </li>
-                <li>
-                    <input type="checkbox" id="task1-2"> 
-                    <label for="task1-2">
-                        Endre startposisjonen til å vise et oversiktsbilde over Bergen.
-                    </label>
-                </li>
-                <li>
-                    <input type="checkbox" id="task1-3"> 
-                    <label for="task1-3">
-                    Få navigasjonen til å fungere.
-                    </label>
-                </li>
-                <li>
-                    <input type="checkbox" id="task1-4"> 
-                    <label for="task1-4">
-                    Øk animasjonshastigheten
-                    </label>
-                </li>
-                <li>
-                    <input type="checkbox" id="task1-5"> 
-                    <label for="task1-5">
-                    Legg til en markør på ditt favorittsted
-                    </label>
-                </li>
-            </ol>
-
-            <p><a href="oppgaver/oppgave1.html">Åpne oppgave</a></p>
-
-        </div>
-
-        </div>
+        <ol class="tasks__list">
+            <li>
+                <input type="checkbox" id="task1-1"> 
+                <label for="task1-1">
+                    1.1 Finn koordinater
+                </label>
+            </li>
+            <li>
+                <input type="checkbox" id="task1-2"> 
+                <label for="task1-2">
+                    1.2 Endre startposisjon
+                </label>
+            </li>
+            <li>
+                <input type="checkbox" id="task1-3"> 
+                <label for="task1-3">
+                    1.3 Naviger mellom severdigheter
+                </label>
+            </li>
+            <li>
+                <input type="checkbox" id="task1-4"> 
+                <label for="task1-4">
+                    1.4 Øk navigasjonshastigheten
+                </label>
+            </li>
+            <li>
+                <input type="checkbox" id="task1-5"> 
+                <label for="task1-5">
+                    1.5 Legg til en markør
+                </label>
+            </li>
+        </ol>
 
     </section>
 
 
+    <section class="tasks">
 
-    <section>
-        <h2>Oppgave 2</h2>
+        <h2><a href="oppgaver/oppgave2.html">Oppgave 2: Markører og popups</a></h2>
 
-        <div class="content">
-
-        <div class="description">
-
-
-        <h3>Avgrens kartets ytre rammer</h3>
-
-        <p>Akkurat nå er det mulig å panorere kartet over hele verden, men for oss er det kun relevant å vise Vestlandet. </p>
-
-        <p>Når du instansierer et kart ved hjelp av <code>L.map('mapid')</code>, kan du legge ved et eget objekt med innstillinger. Eksempel:</p>
-
-
-<pre><code>L.map('mapid', {
-    test: 'verdi',
-    test: 'verdi'
-})</code></pre>
-
-
-
-<p>
-Bakgrunnskart er gøy, men alt som kan legges på toppen av kartet er enda gøyere.
-</p>
-<p>
-Leaflet støtter flere typer geometrier.
-</p>
-<ul>
-<li>Point</li>
-<li>Polyline (og MultiPolyLine)</li>
-<li>Polygon (og MultiPolygon)</li>
-<li>Rectangel, circle, </li>
-</ul>
-
-<h3>Utfordring</h3>
-
-<p>
-Vi vil utvide turistguiden vår ved å legge til en visuell avgrensning over hvor Bergen sentrum er. Nå kan kartet brukes til å besøke hele verden. Det er sikkert nok å kun vise Hordaland/Vestlandet.
-</p>
-
-
-        </div>
-
-        <div class="tasks">
-
-
-
-            <ol class="tasks__list">
-                <li>
-                    <input type="checkbox" id="task2-1"> 
-                    <label for="task2-1">
-                        Avgrens kartets ytre rammer
-                    </label>
-                </li>
-                <li>
-                    <input type="checkbox" id="task2-2"> 
-                    <label for="task2-2">
-                        Polygon for å vise akvariet. Farge: grønn.
-                    </label>
-                </li>
-                <li>
-                    <input type="checkbox" id="task2-3"> 
-                    <label for="task2-3">
-                        Marker for å vise bryggen
-                    </label>
-                </li>
-                <li>
-                    <input type="checkbox" id="task2-4"> 
-                    <label for="task2-4">
-                        Linje for å vise fløibanen. Farge: rød:
-                    </label>
-                </li>
-                <li>
-                    <input type="checkbox" id="task2-5"> 
-                    <label for="task2-5">
-                        Legg til popups for hvert sted som vise navn og bilde
-                    </label>
-                </li>
-                <li>
-                    <input type="checkbox" id="task2-6"> 
-                    <label for="task2-6">
-                        FlyTo layer i stedet for punkt.  
-                    </label>
-                </li>
-            </ol>
-
-            <p><a href="oppgaver/oppgave2.html">Åpne oppgave</a></p>
-
-        </div>
-
-        </div>
-
-    </section>
-
-    <section>
-        <h2>Oppgave 3</h2>
-
-
-        <div class="content">
-
-        <div class="description">
-
-<p>
-Kartet blir enda mer livlig, når du fyller det med nyttige data fra eksterne kilder. 
-I dag er den vanligste måten å gjøre dette ved REST API. 
-</p>
-
-<p>
-Her bruker vi Javascript-biblioteket Fetch til å hente data. Fortsatt et relativt nytt API, så inkluderer er polyfill for utvidet nettleserstøtte. 
-</p>
-
-<p>
-Datagrunnlag fra Statens vegvesen, Nasjonal vegdatabank. Inneholder alt langs veg. Data leveres ut på json-format, og inneholder koordinader på WKT-format (Don't worry, vi transformerer for dere). 
-</p>
-
-<p>
-I Leaflet kan lag grupperes. 
-</p>
-
-        <h3>Utfordring</h3>
-
-<p>
-Mange turister kommer kjørende inn til Bergen med bil. Utvid applikasjonen med noen flere datasett.
-</p>
-
-
-        </div>
-
-        <div class="tasks">
-
-
-
-            <ol class="tasks__list">
-                <li>
-                    <input type="checkbox" id="task3-1"> 
-                    <label for="task3-1">
-                      Legg til bytte mellom bakgrunnskart og flyfoto (layerswitcher)
-                    </label>
-                </li>
-
-                <li>
-                    <input type="checkbox" id="task3-2"> 
-                    <label for="task3-2">
-                        Plasser gamle markers i en egen layergroup ++
-                    </label>
-                </li>
-                <li>
-                    <input type="checkbox" id="task3-3"> 
-                    <label for="task3-3">
-                        x
-                    </label>
-                </li>
-                <li>
-                    <input type="checkbox" id="task3-4"> 
-                    <label for="task3-4">
-                        x
-                    </label>
-                </li>
-                <li>
-                    <input type="checkbox" id="task3-5"> 
-                    <label for="task3-5">
-                        x
-                    </label>
-                </li>
-            </ol>
-
-            <p><a href="oppgaver/oppgave3.html">Åpne oppgave</a></p>
-
-        </div>
-
-        </div>
+        <ol class="tasks__list">
+            <li>
+                <input type="checkbox" id="task2-1"> 
+                <label for="task2-1">
+                    2.1 Avgrens kartets ytre rammer
+                </label>
+            </li>
+            <li>
+                <input type="checkbox" id="task2-2"> 
+                <label for="task2-2">
+                    2.2 Legg til Akvariet
+                </label>
+            </li>
+            <li>
+                <input type="checkbox" id="task2-3"> 
+                <label for="task2-3">
+                    2.3 Legg til Bryggen
+                </label>
+            </li>
+            <li>
+                <input type="checkbox" id="task2-4"> 
+                <label for="task2-4">
+                    2.4 Legg til Fløibanen
+                </label>
+            </li>
+            <li>
+                <input type="checkbox" id="task2-5"> 
+                <label for="task2-5">
+                    2.5 Legg til popups med informasjon
+                </label>
+            </li>
+            <li>
+                <input type="checkbox" id="task2-6"> 
+                <label for="task2-6">
+                    2.6 Refaktoriser navigasjonen
+                </label>
+            </li>
+        </ol>
 
     </section>
 
 
-    <section>
-        <h2>Oppgave 4</h2>
+    <section class="tasks">
 
+    <h2><a href="oppgaver/oppgave3.html">Oppgave 3: Grupper lag</a></h2>
 
-        <div class="content">
-
-        <div class="description">
-
-<p>
-Kartet blir enda mer livlig, når du fyller det med nyttige data fra eksterne kilder. 
-I dag er den vanligste måten å gjøre dette ved REST API. 
-</p>
-
-<p>
-Her bruker vi Javascript-biblioteket Fetch til å hente data. Fortsatt et relativt nytt API, så inkluderer er polyfill for utvidet nettleserstøtte. 
-</p>
-
-<p>
-Datagrunnlag fra Statens vegvesen, Nasjonal vegdatabank. Inneholder alt langs veg. Data leveres ut på json-format, og inneholder koordinader på WKT-format (Don't worry, vi transformerer for dere). 
-</p>
-
-<p>
-I Leaflet kan lag grupperes. 
-</p>
-
-        <h3>Utfordring</h3>
-
-<p>
-Mange turister kommer kjørende inn til Bergen med bil. Utvid applikasjonen med noen flere datasett.
-</p>
-
-
-        </div>
-
-        <div class="tasks">
-
-
-
-            <ol class="tasks__list">
-                <li>
-                    <input type="checkbox" id="task4-1"> 
-                    <label for="task4-1">
-                       x
-                    </label>
-                </li>
-
-                <li>
-                    <input type="checkbox" id="task4-2"> 
-                    <label for="task4-2">
-                        x
-                    </label>
-                </li>
-                <li>
-                    <input type="checkbox" id="task4-3"> 
-                    <label for="task4-3">
-                        Hent bomstasjoner, og legg dem til bomstasjoner i en egen layergroup
-                    </label>
-                </li>
-                <li>
-                    <input type="checkbox" id="task4-4"> 
-                    <label for="task4-4">
-                        Legg til tunneler innenfor kartutsnittet, i en egen layergroup.
-                    </label>
-                </li>
-                <li>
-                    <input type="checkbox" id="task4-5"> 
-                    <label for="task4-5">
-                        Legg til loading-indikator
-                    </label>
-                </li>
-            </ol>
-
-            <p><a href="oppgaver/oppgave4.html">Åpne oppgave</a></p>
-
-        </div>
-
-        </div>
-
-    </section>
-
-    <section>
-        <h2>Oppgave 5</h2>
-
-        <div class="content">
-
-        <div class="description">
-
-        <p>Starter med blanke ark. Visualisere trafikkulykker</p>
-
-        <p>Markercluster</p>
-
-
-        </div>
-
-        <div class="tasks">
-
-
-
-            <ol class="tasks__list">
-                <li>
-                    <input type="checkbox" id="task5-1"> 
-                    <label for="task5-1">
-                        Hent trafikkulykker innenfor kartutsnitt
-                    </label>
-                </li>
-
-                <li>
-                    <input type="checkbox" id="task5-2"> 
-                    <label for="task5-2">
-                        x
-                    </label>
-                </li>
-                <li>
-                    <input type="checkbox" id="task5-3"> 
-                    <label for="task5-3">
-                        Legg til markercluster
-                    </label>
-                </li>
-                <li>
-                    <input type="checkbox" id="task5-4"> 
-                    <label for="task5-4">
-                        Trykk på ulykke, og vis egenskapsdata til høyre
-                    </label>
-                </li>
-                <li>
-                    <input type="checkbox" id="task5-5"> 
-                    <label for="task5-5">
-                        Hent trafikkulykker når kartutsnittet endres. 
-                    </label>
-                </li>
-                <li>
-                    <input type="checkbox" id="task5-6"> 
-                    <label for="task5-6">
-                        Optimalisering: Kun legg til nye.
-                    </label>
-                </li>
-            </ol>
-
-            <p><a href="oppgaver/oppgave5.html">Åpne oppgave</a></p>
-
-        </div>
-
-        </div>
+        <ol class="tasks__list">
+            <li>
+                <input type="checkbox" id="task3-1"> 
+                <label for="task3-1">
+                    3.1 Grupper severdigheter
+                </label>
+            </li>
+            <li>
+                <input type="checkbox" id="task3-2"> 
+                <label for="task3-2">
+                    3.2 Slå kartlag av og på
+                </label>
+            </li>
+        </ol>
 
     </section>
 
 
-    <section>
-        <h2>Oppgave 6</h2>
+    <section class="tasks">
 
-        <div class="content">
+        <h2><a href="oppgaver/oppgave4.html">Oppgave 4: Hent data</a></h2>
 
-        <div class="description">
+        <ol class="tasks__list">
+            <li>
+                <input type="checkbox" id="task4-1"> 
+                <label for="task4-1">
+                   4.1 Hent bomstasjoner
+                </label>
+            </li>
+            <li>
+                <input type="checkbox" id="task4-2"> 
+                <label for="task4-2">
+                    4.2 Hent tunneler
+                </label>
+            </li>
+            <li>
+                <input type="checkbox" id="task4-3"> 
+                <label for="task4-3">
+                    4.3 Legg til loading-indikator
+                </label>
+            </li>
+        </ol>
+
+    </section>
 
 
-        <p>ChartJS. http://colorbrewer2.org/</p>
+    <section class="tasks">
+
+        <h2><a href="oppgaver/oppgave5.html">Oppgave 5: Markercluster</a></h2>
+
+        <ol class="tasks__list">
+            <li>
+                <input type="checkbox" id="task5-1"> 
+                <label for="task5-1">
+                    5.1 Hent trafikkulykker innenfor kartutsnitt
+                </label>
+            </li>
+
+            <li>
+                <input type="checkbox" id="task5-2"> 
+                <label for="task5-2">
+                    5.2 Legg til markercluster
+                </label>
+            </li>
+            <li>
+                <input type="checkbox" id="task5-3"> 
+                <label for="task5-3">
+                    5.3 Oppdater data ved panorering
+                </label>
+            </li>
+            <li>
+                <input type="checkbox" id="task5-4"> 
+                <label for="task5-4">
+                    5.4 Ikke legg til duplikater
+                </label>
+            </li>
+            <li>
+                <input type="checkbox" id="task5-5"> 
+                <label for="task5-5">
+                    5.5 Vis egenskapsdata
+                </label>
+            </li>
+        </ol>
+
+    </section>
 
 
-        </div>
+    <section class="tasks">
 
-        <div class="tasks">
+        <h2><a href="oppgaver/oppgave6.html">Oppgave 6: Heatmap</a></h2>
 
+        <ol class="tasks__list">
+            <li>
+                <input type="checkbox" id="task6-1"> 
+                <label for="task6-1">
+                    6.1 Legg til heatmap
+                </label>
+            </li>
 
+            <li>
+                <input type="checkbox" id="task6-2"> 
+                <label for="task6-2">
+                    6.2 Legg til søylediagram
+                </label>
+            </li>
+            <li>
+                <input type="checkbox" id="task6-3"> 
+                <label for="task6-3">
+                    6.3 Endre fargeskala
+                </label>
+            </li>
 
-            <ol class="tasks__list">
-                <li>
-                    <input type="checkbox" id="task6-1"> 
-                    <label for="task6-1">
-                        Heatmap
-                    </label>
-                </li>
+        </ol>
 
-                <li>
-                    <input type="checkbox" id="task6-2"> 
-                    <label for="task6-2">
-                        Chartjs
-                    </label>
-                </li>
-                <li>
-                    <input type="checkbox" id="task6-3"> 
-                    <label for="task6-3">
-                        Farger
-                    </label>
-                </li>
-                <li>
-                    <input type="checkbox" id="task6-4"> 
-                    <label for="task6-4">
-                        x
-                    </label>
-                </li>
-                <li>
-                    <input type="checkbox" id="task6-5"> 
-                    <label for="task6-5">
-                        x
-                    </label>
-                </li>
-                <li>
-                    <input type="checkbox" id="task6-6"> 
-                    <label for="task6-6">
-                        x
-                    </label>
-                </li>
-            </ol>
-
-            <p><a href="oppgaver/oppgave6.html">Åpne oppgave</a></p>
-
-        </div>
-
-        </div>
     </section>
     
 
 </main>
+
+<script src="index.js"></script>
 
 </body>
 </html>

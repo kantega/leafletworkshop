@@ -116,7 +116,7 @@ For Akvariet og Fløibanen kan `map.flyTo` erstattes av [`map.flyToBounds`](http
 
 
 
-## Oppgave 3
+## Oppgave 3: Grupper lag
 
 I denne oppgaven vil vi se nærmere på gruppering og aktivering/deaktivering av kartlag. Det vil være nyttig å ha [Layer Groups and Layers Control](http://leafletjs.com/examples/layers-control/) åpen mens dere løser disse oppgavene. 
 

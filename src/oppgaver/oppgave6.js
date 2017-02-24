@@ -11,11 +11,6 @@ const bakgrunnsLag = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{
 });
 
 
-const heat = L.heatLayer([], {
-    radius: 10
-});
-
-
 let vegobjekter = {};
 
 
@@ -36,7 +31,18 @@ const map = L.map('mapid', {
 });
 
 map.addLayer(bakgrunnsLag);
-map.addLayer(heat);
+
+/*
+ 6.1 Legg til heatmap
+
+ Bruk pluginen Leaflet.heat til å visualisere trafikkulykkene som et heatmap. Klassen L.heatLayer kan brukes i stedet for L.markerClusterGroup.
+ */
+// deklarer heat som et heatlayer og legg laget til på map.
+// fjere i tillegg utkommenteringen under funksjonen addVegobjekter.
+
+// const heat
+// map.addLayer(heat);
+
 
 map.on('moveend', function () {
     hentData();
@@ -89,7 +95,7 @@ function addVegobjekter (result) {
 
             vegobjekter[vegobjekt.id] = L.marker(point.coordinates);
 
-            heat.addLatLng(point.coordinates);
+            //heat.addLatLng(point.coordinates);
 
         }
     })
@@ -119,14 +125,18 @@ function hentData () {
 
             addVegobjekter(json.objekter);
 
-            myChart.data.datasets[0].data[0] = statistikk.Ukedag['Mandag'].length;
-            myChart.data.datasets[0].data[1] = statistikk.Ukedag['Tirsdag'].length;
-            myChart.data.datasets[0].data[2] = statistikk.Ukedag['Onsdag'].length;
-            myChart.data.datasets[0].data[3] = statistikk.Ukedag['Torsdag'].length;
-            myChart.data.datasets[0].data[4] = statistikk.Ukedag['Fredag'].length;
-            myChart.data.datasets[0].data[5] = statistikk.Ukedag['Lørdag'].length;
-            myChart.data.datasets[0].data[6] = statistikk.Ukedag['Søndag'].length;
-            myChart.update(); 
+            /*
+             6.2 Legg til søylediagram
+
+             Chart.js er et nyttig bibliotek for å visualisere data i form av en rekke typer diagrammer. Trafikkulykker har også mange interessante egenskaper som kan visualiseres på denne måten.
+
+             Tips: Grunnlagsdata logges til utviklerkonsollet.
+
+             Bruk Chart.js til å lage et søylediagram som viser antall trafikkulykker, fordelt på ukedag.
+             */
+            // legg inn kode for å sette myChart.
+            //myChart.data.datasets[0].data[0] = ?
+            //myChart.update();
 
         }).catch(function(ex) {
             console.log('parsing failed', ex);
@@ -136,6 +146,14 @@ function hentData () {
 
 
 const ctx = document.querySelector('#myChart');
+
+/*
+ 6.3 Endre fargeskala
+
+ Det er ikke alltid lett å finne gode fargekombinasjoner. Verken til markører, eller til diagrammer.
+
+ Finn en pen fargekombinasjon hos ColorBrewer, og oppdater fargeskalaen til søylediagrammet.
+ */
 
 const data = {
     labels: [

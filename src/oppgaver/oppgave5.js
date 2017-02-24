@@ -19,10 +19,19 @@ const map = L.map('mapid', {
 
 bakgrunnsLag.addTo(map);
 
+/*
+ 5.2 Legg til markercluster
 
-const trafikkulykker = L.markerClusterGroup({
-    maxClusterRadius: 50
-});
+ API-kallet i forrige oppgave resulterte i et uhåndterlig antall markører. Nettleseren ble delvis uresponsiv, og visningen på kart ga heller ikke stor mening.
+
+ Når vi opererer med så mange markører, gir det ikke mening å vise hver enkelt markør. Vi ønsker heller å gruppere markører som er nære hverandre, og fortelle med tall hvor mange markører som befinner seg innenfor hver gruppering. For å få til dette, kan vi bruke pluginen Leaflet.markercluster.
+
+ Legg til trafikkulykkene i L.markerClusterGroup, i stedet for å bruke L.layerGroup.
+ */
+
+const trafikkulykker = L.layerGroup(); // bytt ut layerGroup med markerClusterGroup
+
+
 trafikkulykker.addTo(map);
 
 
@@ -43,6 +52,18 @@ const trafikkulykkeTittel = document.querySelector('.trafikkulykke__id');
 const trafikkulykkeEgenskaper = document.querySelector('.trafikkulykke__egenskaper');
 
 
+/*
+ 5.4 Vis egenskapsdata
+
+ Punkter på kart er bare halve moroa! Trafikkulykker har også mange spennende egenskapsdata, med detaljert informasjon om hver eneste trafikkulykke.
+ For eksempel ulykkesdato, vær og føreforhold, og antall involverte personer.
+
+ Vi ønsker at det skal komme opp informasjon om trafikkulykken i feltet til høyre, når dere klikker på en markør i kartet.
+
+ I NVDB har Hver trafikkulykke har en unik id. Vi lagrer denne iden på hver markør, ved å sende inn et options-objekt med title når vi oppretter markøren.
+ Når dere klikker på markøren, bruker vi denne iden til å gjøre et nytt API-kall hvor vi henter detaljert informasjon om akkurat denne trafikkulykken.
+
+ */
 function showInfo (vegobjekt) {
 
     trafikkulykkeTittel.innerHTML = vegobjekt.id;
@@ -56,9 +77,7 @@ function showInfo (vegobjekt) {
         tittel.innerHTML = egenskap.navn;
         verdi.innerHTML = egenskap.verdi;
 
-        trafikkulykkeEgenskaper.appendChild(tittel);
-        trafikkulykkeEgenskaper.appendChild(verdi);
-
+        // legg til tittel og verdi på trafikkulykkeEgenskaper. Dette kan gjøres med javascriptfunksjonen appendChild.
     });
 }
 
@@ -91,24 +110,37 @@ function addVegobjekter (result) {
             const wkt = vegobjekt.geometri.wkt;
             const point = Terraformer.WKT.parse(wkt);
 
-            vegobjekter[vegobjekt.id] = L.marker(point.coordinates, {
-                title: vegobjekt.id
-            }).on({
-                click: highlightFeature
-            });
+            vegobjekter[vegobjekt.id] = null;
+            /* I stedet for at objektet settes til null skal du opprett et markerobjekt. Se http://leafletjs.com/reference.html#marker
+             Ved klikk skal funksjonen highlightFeature kalles.
+             */
 
             trafikkulykker.addLayer(vegobjekter[vegobjekt.id]);
         }
 
     })
-    
+
 }
 
 
-function fetchVegobjekter () {
-    const kartutsnitt = map.getBounds().toBBoxString();
+/*
+ Oppgave 5.1 Hent trafikkulykker innenfor kartutsnitt
 
-    const url = NVDBAPI + '/vegobjekter/570.json?inkluder=geometri&srid=wgs84&antall=10000&kartutsnitt=' + kartutsnitt;
+ Datasettet for trafikkulykker er så stort at vi er nødt til å begrense oss til kun å hente data innenfor det
+ aktive kartutsnittet. Metoden map.getBounds kan benyttes til å hente det aktive kartutsnittet, og .toBBoxString()
+ konverterer det returnerte arrayet til en string.
+
+ APIet tilbyr parameteren kartutsnitt for begrense søkeområdet.
+ Parameteren antall kan i tillegg benyttes til å begrense antall vegobjekter som returneres i responsen.
+
+ Hent alle trafikkulykker innenfor kartutsnittet. Legg til hver trafikkulykke som en markør i en layerGroup,
+ som igjen legges til kartet.
+ */
+
+function fetchVegobjekter () {
+
+    // URL mangler antall og kartutsnitt, det er din oppgave å rette på det.
+    const url = NVDBAPI + '/vegobjekter/570.json?inkluder=geometri&srid=wgs84';
 
     showLoadingIndicator();
 
@@ -127,10 +159,16 @@ function fetchVegobjekter () {
         })
 }
 
+/*
+ 5.3 Oppdater data ved panorering
 
-map.on('moveend', () => {
-    fetchVegobjekter();
-});
+ Nå hentes data første gang kartet lastes, men det skjer ingenting når dere zoomer inn/ut eller panorerer kartet. Det kan vi gjøre noe med!
+
+ Bruk metoden map.on til å lytte til eventen moveend, og referer til funksjonen som henter data.
+ Se http://leafletjs.com/reference-1.0.3.html#evented
+ */
+
+// skriv inn koden for map.on her.
 
 map.setView([60.39, 5.33], 15);
 

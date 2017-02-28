@@ -19,22 +19,6 @@ const map = L.map('mapid', {
 
 bakgrunnsLag.addTo(map);
 
-/*
- 5.2 Legg til markercluster
-
- API-kallet i forrige oppgave resulterte i et uhåndterlig antall markører. Nettleseren ble delvis uresponsiv, og visningen på kart ga heller ikke stor mening.
-
- Når vi opererer med så mange markører, gir det ikke mening å vise hver enkelt markør. Vi ønsker heller å gruppere markører som er nære hverandre, og fortelle med tall hvor mange markører som befinner seg innenfor hver gruppering. For å få til dette, kan vi bruke pluginen Leaflet.markercluster.
-
- Legg til trafikkulykkene i L.markerClusterGroup, i stedet for å bruke L.layerGroup.
- */
-
-const trafikkulykker = L.layerGroup(); // bytt ut layerGroup med markerClusterGroup
-
-
-trafikkulykker.addTo(map);
-
-
 let vegobjekter = {};
 
 
@@ -48,59 +32,41 @@ function hideLoadingIndicator () {
     loadingIndicator.style.opacity = 0;
 }
 
-const trafikkulykkeTittel = document.querySelector('.trafikkulykke__id');
-const trafikkulykkeEgenskaper = document.querySelector('.trafikkulykke__egenskaper');
-
-
 /*
- 5.4 Vis egenskapsdata
+ Oppgave 5.1 Hent trafikkulykker innenfor kartutsnitt
 
- Punkter på kart er bare halve moroa! Trafikkulykker har også mange spennende egenskapsdata, med detaljert informasjon om hver eneste trafikkulykke.
- For eksempel ulykkesdato, vær og føreforhold, og antall involverte personer.
+ Datasettet for trafikkulykker er så stort at vi er nødt til å begrense oss til kun å hente data innenfor det
+ aktive kartutsnittet. Metoden map.getBounds kan benyttes til å hente det aktive kartutsnittet, og .toBBoxString()
+ konverterer det returnerte arrayet til en string.
 
- Vi ønsker at det skal komme opp informasjon om trafikkulykken i feltet til høyre, når dere klikker på en markør i kartet.
+ APIet tilbyr parameteren kartutsnitt for begrense søkeområdet.
+ Parameteren antall kan i tillegg benyttes til å begrense antall vegobjekter som returneres i responsen.
 
- I NVDB har Hver trafikkulykke har en unik id. Vi lagrer denne iden på hver markør, ved å sende inn et options-objekt med title når vi oppretter markøren.
- Når dere klikker på markøren, bruker vi denne iden til å gjøre et nytt API-kall hvor vi henter detaljert informasjon om akkurat denne trafikkulykken.
-
+ Hent alle trafikkulykker innenfor kartutsnittet. Legg til hver trafikkulykke som en markør,
+ som igjen legges til kartet.
  */
-function showInfo (vegobjekt) {
 
-    trafikkulykkeTittel.innerHTML = vegobjekt.id;
-    trafikkulykkeEgenskaper.innerHTML = '';
+function fetchVegobjekter () {
 
-    vegobjekt.egenskaper.forEach(egenskap => {
+    // URL mangler antall og kartutsnitt, det er din oppgave å rette på det.
+    const url = NVDBAPI + '/vegobjekter/570.json?inkluder=geometri&srid=wgs84';
 
-        const tittel = document.createElement('dt');
-        const verdi = document.createElement('dd');
-
-        tittel.innerHTML = egenskap.navn;
-        verdi.innerHTML = egenskap.verdi;
-
-        // legg til tittel og verdi på trafikkulykkeEgenskaper. Dette kan gjøres med javascriptfunksjonen appendChild.
-    });
-}
-
-
-
-function highlightFeature (e) {
-
-    const id = e.target.options.title;
-    const url = NVDBAPI + '/vegobjekter/570/' + id + '.json';
+    showLoadingIndicator();
 
     fetch(url)
         .then((response) => {
             return response.json()
 
         }).then((json) => {
-            showInfo(json);
+        hideLoadingIndicator();
 
-        }).catch((ex) => {
-            console.log('parsing failed', ex);
-        })
+        addVegobjekter(json.objekter);
+
+    }).catch(function(ex) {
+        console.log('parsing failed', ex);
+
+    })
 }
-
-
 
 function addVegobjekter (result) {
     result.forEach(vegobjekt => {
@@ -122,42 +88,35 @@ function addVegobjekter (result) {
 
 }
 
+function highlightFeature (e) {
 
-/*
- Oppgave 5.1 Hent trafikkulykker innenfor kartutsnitt
-
- Datasettet for trafikkulykker er så stort at vi er nødt til å begrense oss til kun å hente data innenfor det
- aktive kartutsnittet. Metoden map.getBounds kan benyttes til å hente det aktive kartutsnittet, og .toBBoxString()
- konverterer det returnerte arrayet til en string.
-
- APIet tilbyr parameteren kartutsnitt for begrense søkeområdet.
- Parameteren antall kan i tillegg benyttes til å begrense antall vegobjekter som returneres i responsen.
-
- Hent alle trafikkulykker innenfor kartutsnittet. Legg til hver trafikkulykke som en markør i en layerGroup,
- som igjen legges til kartet.
- */
-
-function fetchVegobjekter () {
-
-    // URL mangler antall og kartutsnitt, det er din oppgave å rette på det.
-    const url = NVDBAPI + '/vegobjekter/570.json?inkluder=geometri&srid=wgs84';
-
-    showLoadingIndicator();
+    const id = e.target.options.title;
+    const url = NVDBAPI + '/vegobjekter/570/' + id + '.json';
 
     fetch(url)
         .then((response) => {
             return response.json()
 
         }).then((json) => {
-            hideLoadingIndicator();
+        showInfo(json);
 
-            addVegobjekter(json.objekter);
-
-        }).catch(function(ex) {
-            console.log('parsing failed', ex);
-
-        })
+    }).catch((ex) => {
+        console.log('parsing failed', ex);
+    })
 }
+
+
+/*
+ 5.2 Legg til markercluster
+
+ API-kallet i forrige oppgave resulterte i et uhåndterlig antall markører. Nettleseren ble delvis uresponsiv, og visningen på kart ga heller ikke stor mening.
+
+ Når vi opererer med så mange markører, gir det ikke mening å vise hver enkelt markør. Vi ønsker heller å gruppere markører som er nære hverandre, og fortelle med tall hvor mange markører som befinner seg innenfor hver gruppering. For å få til dette, kan vi bruke pluginen Leaflet.markercluster.
+
+ Legg til trafikkulykkene i L.markerClusterGroup.
+ */
+
+
 
 /*
  5.3 Oppdater data ved panorering
@@ -172,3 +131,37 @@ function fetchVegobjekter () {
 
 map.setView([60.39, 5.33], 15);
 
+
+
+/*
+ 5.4 Vis egenskapsdata
+
+ Punkter på kart er bare halve moroa! Trafikkulykker har også mange spennende egenskapsdata, med detaljert informasjon om hver eneste trafikkulykke.
+ For eksempel ulykkesdato, vær og føreforhold, og antall involverte personer.
+
+ Vi ønsker at det skal komme opp informasjon om trafikkulykken i feltet til høyre, når dere klikker på en markør i kartet.
+
+ I NVDB har Hver trafikkulykke har en unik id. Vi lagrer denne iden på hver markør, ved å sende inn et options-objekt med title når vi oppretter markøren.
+ Når dere klikker på markøren, bruker vi denne iden til å gjøre et nytt API-kall hvor vi henter detaljert informasjon om akkurat denne trafikkulykken.
+
+ */
+
+const trafikkulykkeTittel = document.querySelector('.trafikkulykke__id');
+const trafikkulykkeEgenskaper = document.querySelector('.trafikkulykke__egenskaper');
+
+function showInfo (vegobjekt) {
+
+    trafikkulykkeTittel.innerHTML = vegobjekt.id;
+    trafikkulykkeEgenskaper.innerHTML = '';
+
+    vegobjekt.egenskaper.forEach(egenskap => {
+
+        const tittel = document.createElement('dt');
+        const verdi = document.createElement('dd');
+
+        tittel.innerHTML = egenskap.navn;
+        verdi.innerHTML = egenskap.verdi;
+
+        // legg til tittel og verdi på trafikkulykkeEgenskaper. Dette kan gjøres med javascriptfunksjonen appendChild.
+    });
+}

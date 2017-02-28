@@ -101,6 +101,15 @@ function addVegobjekter (result) {
     })
 }
 
+/*
+ 6.2 Legg til søylediagram
+
+ Chart.js er et nyttig bibliotek for å visualisere data i form av en rekke typer diagrammer. Trafikkulykker har også mange interessante egenskaper som kan visualiseres på denne måten.
+
+ Tips: Grunnlagsdata logges til utviklerkonsollet.
+
+ Bruk Chart.js til å lage et søylediagram som viser antall trafikkulykker, fordelt på ukedag.
+ */
 
 
 function hentData () {
@@ -125,15 +134,6 @@ function hentData () {
 
             addVegobjekter(json.objekter);
 
-            /*
-             6.2 Legg til søylediagram
-
-             Chart.js er et nyttig bibliotek for å visualisere data i form av en rekke typer diagrammer. Trafikkulykker har også mange interessante egenskaper som kan visualiseres på denne måten.
-
-             Tips: Grunnlagsdata logges til utviklerkonsollet.
-
-             Bruk Chart.js til å lage et søylediagram som viser antall trafikkulykker, fordelt på ukedag.
-             */
             // legg inn kode for å sette myChart.
             //myChart.data.datasets[0].data[0] = ?
             //myChart.update();

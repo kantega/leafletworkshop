@@ -19,6 +19,8 @@ const map = L.map('mapid', {
 
 bakgrunnsLag.addTo(map);
 
+
+
 let vegobjekter = {};
 
 
@@ -49,7 +51,7 @@ function hideLoadingIndicator () {
 function fetchVegobjekter () {
 
     // URL mangler antall og kartutsnitt, det er din oppgave å rette på det.
-    const url = NVDBAPI + '/vegobjekter/570.json?inkluder=geometri&srid=wgs84';
+    const url = NVDBAPI + '/vegobjekter/570.json?inkluder=geometri&srid=wgs84'; 
 
     showLoadingIndicator();
 
@@ -68,6 +70,7 @@ function fetchVegobjekter () {
     })
 }
 
+
 function addVegobjekter (result) {
     result.forEach(vegobjekt => {
 
@@ -76,17 +79,34 @@ function addVegobjekter (result) {
             const wkt = vegobjekt.geometri.wkt;
             const point = Terraformer.WKT.parse(wkt);
 
-            vegobjekter[vegobjekt.id] = null;
-            /* I stedet for at objektet settes til null skal du opprett et markerobjekt. Se http://leafletjs.com/reference.html#marker
-             Ved klikk skal funksjonen highlightFeature kalles.
-             */
+            vegobjekter[vegobjekt.id] = L.marker(point.coordinates, {
+                title: vegobjekt.id
+            }).on({
+                click: highlightFeature
+            });;
+
 
             trafikkulykker.addLayer(vegobjekter[vegobjekt.id]);
         }
 
     })
-
 }
+
+
+/*
+     4.2 Legg til markercluster
+
+     API-kallet i forrige oppgave resulterte i et uhåndterlig antall markører. Nettleseren ble delvis uresponsiv, og visningen på kart ga heller ikke stor mening.
+
+     Når vi opererer med så mange markører, gir det ikke mening å vise hver enkelt markør. Vi ønsker heller å gruppere markører som er nære hverandre, og fortelle med tall hvor mange markører som befinner seg innenfor hver gruppering. For å få til dette, kan vi bruke pluginen Leaflet.markercluster.
+
+     Legg til trafikkulykkene i L.markerClusterGroup, i stedet for L.layerGroup.
+*/
+
+
+const trafikkulykker = L.layerGroup();
+trafikkulykker.addTo(map);
+
 
 function highlightFeature (e) {
 
@@ -106,15 +126,6 @@ function highlightFeature (e) {
 }
 
 
-/*
- 4.2 Legg til markercluster
-
- API-kallet i forrige oppgave resulterte i et uhåndterlig antall markører. Nettleseren ble delvis uresponsiv, og visningen på kart ga heller ikke stor mening.
-
- Når vi opererer med så mange markører, gir det ikke mening å vise hver enkelt markør. Vi ønsker heller å gruppere markører som er nære hverandre, og fortelle med tall hvor mange markører som befinner seg innenfor hver gruppering. For å få til dette, kan vi bruke pluginen Leaflet.markercluster.
-
- Legg til trafikkulykkene i L.markerClusterGroup.
- */
 
 
 
@@ -125,11 +136,16 @@ function highlightFeature (e) {
 
  Bruk metoden map.on til å lytte til eventen moveend, og referer til funksjonen som henter data.
  Se http://leafletjs.com/reference-1.0.3.html#evented
+
  */
 
-// skriv inn koden for map.on her.
+// map.on må settes før map.setView
+
 
 map.setView([60.39, 5.33], 15);
+
+
+fetchVegobjekter();
 
 
 

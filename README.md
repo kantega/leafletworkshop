@@ -44,6 +44,10 @@ const add = (a, b) => a + b;
 
 Bruk alltid `const`/`let` i stedet for `var`. 
 
+## Oppgaver 
+
+Oppgavene står beskrevet i javascript-filene under `src/`. Begynne med å åpne `oppgave1.html` i nettleseren, og `oppgave1.js` i en editor.
+
 ## Bonusoppgaver
 
 Gjennom denne workshopen har dere fått en god grunnleggende kunnskap om Leaflet, og er godt rustet til å lage mye spennende. Her er noen forslag til hva dere kan se på videre: 

@@ -76,7 +76,7 @@ map.setView([0,0], 4);
 
  Oppgave 1.4
 
- Når navigasjonen fungerer: øk animasjonshastigheten, slik at det ikke tar så lang tid å fly til hvert sted. Vi anbefaler 0.5 sekunder.
+ Når navigasjonen fungerer: juster duration i options-objektet, til en verdi du synes passer. For eksempel 0.5 sekunder. 
 
  Legg merke til at funksjonen du brukte i oppgave 1.3 tar et valgfritt argument
  "Zoom/pan options". Se http://leafletjs.com/reference-1.0.3.html#pan-options

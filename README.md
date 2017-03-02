@@ -22,10 +22,27 @@ Det finnes flere ulike projeksjoner og koordinatsystemer for å plassere objekte
 
 ![Lengde- og breddegrader](http://www.hicksvillepublicschools.org/cms/lib2/NY01001760/Centricity/Domain/1236/latitude_longitude.gif)
 
+## ES2015
 
+I koden bruker vi en del syntaks fra 2015-standarden av javascript, kalt ES2015. Det er mange forskjeller fra tidligere versjoner, som du kan lese mer om her: https://babeljs.io/learn-es2015/
 
+De viktigste nye versjonene vi bruker i denne workshop-en er _arrow functions_, og _const_ og _let_ i stedet for _var_. 
 
+### Arrow functions
 
+_Arrow functions_ er ny syntaks for anonyme funksjoner, og ser slik ut:
+
+```javascript
+const add = (a, b) => a + b;
+```
+
+`add` er en funksjon som tar to tall, og returnerer summen av dem. _Arrow functions_ setter heller ikke `this`, som er forskjellig fra `function`. 
+
+### `const` og `let`
+
+`const` og `let` erstatter `var`. `const` er konstante verdier, og `let` er variabler. Til forskjell fra `var`, er `const` og `let` block scoped, som betyr at de ikke er definert utenfor den blokka de ble deklarert i. 
+
+Bruk alltid `const`/`let` i stedet for `var`. 
 ## Oppgave 1: Kom i gang
 
 I denne oppgaven lærer vi å opprette et helt enkelt Leaflet-kart. Gjerne ta en titt på [Leaflet Quick Start Guide](http://leafletjs.com/examples/quick-start/) ved siden av. Legg merke til at [`L.map`](http://leafletjs.com/reference-1.0.3.html#map) Instansierer Leaflet-kartet, og [`L.tileLayer`](http://leafletjs.com/reference-1.0.3.html#tilelayer) angir et bakgrunnskart. 

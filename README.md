@@ -7,6 +7,21 @@ Workshopen er bygd opp av en rekke praktiske oppgaver. Hver oppgave har en tilh�
 
 
 
+## Kort om kart
+
+
+Jordkloden vår kan modelleres som et flatt kart bestående av breddegrader (*latitude*) og lengdegrader (*longitude*). 
+
+Breddegrader går fra -90 til +90, der 0-breddegraden er ekvator. Lengdegrader går fra -180 til +180, der 0-lengdegraden går gjennom Greenwich i London.
+
+Et punkt på kartet kan angis ved hjelp av en koordinat, angitt på følgende måte `[*breddegrad*, *lengdegrad*]`. Bredde- og lengdegrader kan angis som desimaltall. I denne workshopen vil det flere steder være nødvendig å angi 4 desimaler, for å få en nøyaktig nok posisjon på kart.
+
+Et punkt i Bergen sentrum kan for eksempel uttrykkes med følgende koordiant: `[60.3912, 5.3305]`
+
+Det finnes flere ulike projeksjoner og koordinatsystemer for å plassere objekter nøyaktig på kart, men i denne workshopen vil vi utelukkende bruke lengde- og breddegrader, også kalt WGS84. 
+
+![Lengde- og breddegrader](http://www.hicksvillepublicschools.org/cms/lib2/NY01001760/Centricity/Domain/1236/latitude_longitude.gif)
+
 
 
 

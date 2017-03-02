@@ -106,6 +106,8 @@ document.querySelector('.js-floien').addEventListener('click', () => {
     });
 });
 
+
+// Denne snutten skal ikke refaktoriseres
 document.querySelector('.js-helebergen').addEventListener('click', () => {
     map.flyTo([60.39, 5.33], 12, {
         duration

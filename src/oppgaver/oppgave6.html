@@ -7,8 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.0.0/dist/MarkerCluster.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.0.0/dist/MarkerCluster.Default.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli:300,400,400i,600,700" type="text/css">
     <link rel="stylesheet" href="style.css" type="text/css">
 </head>
@@ -18,42 +16,25 @@
 
     <h1>
         <a href="../index.html">Visualisering av data på kart</a> 
-        Oppgave 6 &ndash; Heatmap
+        Oppgave 6 &ndash; Grupper kartlag
     </h1>
 
 </header>
 
-<main class="columns">
+<main>
 
-    <div id="mapid" class="map_container">
-        <div class="loading">
-            <div class="sk-circle1 sk-circle"></div>
-            <div class="sk-circle2 sk-circle"></div>
-            <div class="sk-circle3 sk-circle"></div>
-            <div class="sk-circle4 sk-circle"></div>
-            <div class="sk-circle5 sk-circle"></div>
-            <div class="sk-circle6 sk-circle"></div>
-            <div class="sk-circle7 sk-circle"></div>
-            <div class="sk-circle8 sk-circle"></div>
-            <div class="sk-circle9 sk-circle"></div>
-            <div class="sk-circle10 sk-circle"></div>
-            <div class="sk-circle11 sk-circle"></div>
-            <div class="sk-circle12 sk-circle"></div>
-        </div>
+    <div class="button_row">
+        <button class="js-akvariet">Akvariet</button>
+        <button class="js-bryggen">Bryggen</button>
+        <button class="js-floien">Fløien</button>
+        <button class="js-helebergen">Hele Bergen</button>
     </div>
 
-    <aside>
-        <h2>Ukedag</h2>
-        <canvas id="myChart" style="max-width: 500px; max-height: 500px;"></canvas>
-    </aside>
+    <div id="mapid" class="map_container"></div>
 
 </main>
 
 <script src="lib/leaflet.js"></script>
-<script src="lib/terraformer.min.js"></script>
-<script src="lib/terraformer-wkt-parser.min.js"></script>
-<script src="lib/Chart.min.js"></script>
-<script src="lib/leaflet-heat.js"></script>
 <script src="oppgave6.js"></script>
 
 </body>

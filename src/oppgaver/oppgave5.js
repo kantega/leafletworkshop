@@ -11,14 +11,6 @@ const bakgrunnsLag = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{
 });
 
 
-const map = L.map('mapid', {
-    maxBounds: [[55.86, -0.26], [64.89, 18.50]],
-    minZoom: 6,
-});
-
-
-bakgrunnsLag.addTo(map);
-
 let vegobjekter = {};
 
 
@@ -32,136 +24,190 @@ function hideLoadingIndicator () {
     loadingIndicator.style.opacity = 0;
 }
 
+
+const map = L.map('mapid', {
+    maxBounds: [[55.86, -0.26], [64.89, 18.50]],
+    minZoom: 6,
+});
+
+map.addLayer(bakgrunnsLag);
+
 /*
- Oppgave 5.1 Hent trafikkulykker innenfor kartutsnitt
+ 5.1 Legg til heatmap
 
- Datasettet for trafikkulykker er så stort at vi er nødt til å begrense oss til kun å hente data innenfor det
- aktive kartutsnittet. Metoden map.getBounds kan benyttes til å hente det aktive kartutsnittet, og .toBBoxString()
- konverterer det returnerte arrayet til en string.
-
- APIet tilbyr parameteren kartutsnitt for begrense søkeområdet.
- Parameteren antall kan i tillegg benyttes til å begrense antall vegobjekter som returneres i responsen.
-
- Hent alle trafikkulykker innenfor kartutsnittet. Legg til hver trafikkulykke som en markør,
- som igjen legges til kartet.
+ Bruk pluginen Leaflet.heat til å visualisere trafikkulykkene som et heatmap. Klassen L.heatLayer kan brukes i stedet for L.markerClusterGroup.
  */
+// deklarer heat som et heatlayer og legg laget til på map.
+// fjere i tillegg utkommenteringen under funksjonen addVegobjekter.
 
-function fetchVegobjekter () {
+// const heat
+// map.addLayer(heat);
 
-    // URL mangler antall og kartutsnitt, det er din oppgave å rette på det.
-    const url = NVDBAPI + '/vegobjekter/570.json?inkluder=geometri&srid=wgs84';
 
-    showLoadingIndicator();
+map.on('moveend', function () {
+    hentData();
+});
 
-    fetch(url)
-        .then((response) => {
-            return response.json()
+map.setView([60.39, 5.33], 16);
 
-        }).then((json) => {
-        hideLoadingIndicator();
 
-        addVegobjekter(json.objekter);
 
-    }).catch(function(ex) {
-        console.log('parsing failed', ex);
+function getStatistics (vegobjekter) {
 
-    })
+    let statistikk = {};
+
+    vegobjekter.forEach(vegobjekt => {
+
+        if (statistikk.hasOwnProperty('id')) {
+            statistikk.id.push(vegobjekt.id);
+        } else {
+            statistikk.id = [vegobjekt.id];
+        }
+
+        vegobjekt.egenskaper.forEach(egenskap => {
+
+            if (!statistikk.hasOwnProperty(egenskap.navn)) {
+                statistikk[egenskap.navn] = {};
+            }
+
+            if (statistikk[egenskap.navn].hasOwnProperty(egenskap.verdi)) {
+                statistikk[egenskap.navn][egenskap.verdi].push(vegobjekt.id);
+
+            } else {
+                statistikk[egenskap.navn][egenskap.verdi] = [vegobjekt.id];
+            }
+
+        });
+    });
+
+    return statistikk;
 }
+
+
 
 function addVegobjekter (result) {
     result.forEach(vegobjekt => {
 
         if (!vegobjekter.hasOwnProperty(vegobjekt.id)) {
 
-            const wkt = vegobjekt.geometri.wkt;
-            const point = Terraformer.WKT.parse(wkt);
+            var wkt = vegobjekt.geometri.wkt;
+            var point = Terraformer.WKT.parse(wkt);
 
-            vegobjekter[vegobjekt.id] = null;
-            /* I stedet for at objektet settes til null skal du opprett et markerobjekt. Se http://leafletjs.com/reference.html#marker
-             Ved klikk skal funksjonen highlightFeature kalles.
-             */
+            vegobjekter[vegobjekt.id] = L.marker(point.coordinates);
 
-            trafikkulykker.addLayer(vegobjekter[vegobjekt.id]);
+            //heat.addLatLng(point.coordinates);
+
         }
-
     })
-
 }
 
-function highlightFeature (e) {
+/*
+ 5.2 Legg til søylediagram
 
-    const id = e.target.options.title;
-    const url = NVDBAPI + '/vegobjekter/570/' + id + '.json';
+ Chart.js er et nyttig bibliotek for å visualisere data i form av en rekke typer diagrammer. Trafikkulykker har også mange interessante egenskaper som kan visualiseres på denne måten.
+
+ Tips: Grunnlagsdata logges til utviklerkonsollet.
+
+ Bruk Chart.js til å lage et søylediagram som viser antall trafikkulykker, fordelt på ukedag.
+ */
+
+
+function hentData () {
+
+    const kartutsnitt = map.getBounds().toBBoxString();
+
+    const url = NVDBAPI + '/vegobjekter/570.json?inkluder=geometri,egenskaper&srid=wgs84&antall=10000&egenskap="5074!=6431 AND 5055>\'1999-12-31\'"&kartutsnitt=' + kartutsnitt;
+
+    showLoadingIndicator();
 
     fetch(url)
-        .then((response) => {
+        .then(function(response) {
             return response.json()
 
-        }).then((json) => {
-        showInfo(json);
+        }).then(function(json) {
 
-    }).catch((ex) => {
-        console.log('parsing failed', ex);
-    })
+            hideLoadingIndicator();
+
+            const statistikk = getStatistics(json.objekter);
+
+            console.log(statistikk);
+
+            addVegobjekter(json.objekter);
+
+            // legg inn kode for å sette myChart.
+            //myChart.data.datasets[0].data[0] = ?
+            //myChart.update();
+
+        }).catch(function(ex) {
+            console.log('parsing failed', ex);
+        })
 }
 
 
-/*
- 5.2 Legg til markercluster
 
- API-kallet i forrige oppgave resulterte i et uhåndterlig antall markører. Nettleseren ble delvis uresponsiv, og visningen på kart ga heller ikke stor mening.
-
- Når vi opererer med så mange markører, gir det ikke mening å vise hver enkelt markør. Vi ønsker heller å gruppere markører som er nære hverandre, og fortelle med tall hvor mange markører som befinner seg innenfor hver gruppering. For å få til dette, kan vi bruke pluginen Leaflet.markercluster.
-
- Legg til trafikkulykkene i L.markerClusterGroup.
- */
-
-
+const ctx = document.querySelector('#myChart');
 
 /*
- 5.3 Oppdater data ved panorering
+ 5.3 Endre fargeskala
 
- Nå hentes data første gang kartet lastes, men det skjer ingenting når dere zoomer inn/ut eller panorerer kartet. Det kan vi gjøre noe med!
+ Det er ikke alltid lett å finne gode fargekombinasjoner. Verken til markører, eller til diagrammer.
 
- Bruk metoden map.on til å lytte til eventen moveend, og referer til funksjonen som henter data.
- Se http://leafletjs.com/reference-1.0.3.html#evented
+ Finn en pen fargekombinasjon hos ColorBrewer, og oppdater fargeskalaen til søylediagrammet.
  */
 
-// skriv inn koden for map.on her.
+const data = {
+    labels: [
+        "Mandag",
+        "Tirsdag",
+        "Onsdag",
+        "Torsdag",
+        "Fredag",
+        "Lørdag",
+        "Søndag"
+    ],
+    datasets: [
+        {
+            data: [0, 0, 0, 0, 0, 0, 0],
+            label: "Ukedag",
+            backgroundColor: [
+                "#d53e4f",
+                "#fc8d59",
+                "#fee08b",
+                "#ffffbf",
+                "#e6f598",
+                "#99d594",
+                "#3288bd"
+            ],
+            borderColor: [
+                "#d53e4f",
+                "#fc8d59",
+                "#fee08b",
+                "#ffffbf",
+                "#e6f598",
+                "#99d594",
+                "#3288bd"
+            ]
+        }]
+};
 
-map.setView([60.39, 5.33], 15);
+
+const myChart = new Chart(ctx,{
+    type: 'bar',
+    data: data,
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
 
 
 
-/*
- 5.4 Vis egenskapsdata
 
- Punkter på kart er bare halve moroa! Trafikkulykker har også mange spennende egenskapsdata, med detaljert informasjon om hver eneste trafikkulykke.
- For eksempel ulykkesdato, vær og føreforhold, og antall involverte personer.
 
- Vi ønsker at det skal komme opp informasjon om trafikkulykken i feltet til høyre, når dere klikker på en markør i kartet.
 
- I NVDB har Hver trafikkulykke har en unik id. Vi lagrer denne iden på hver markør, ved å sende inn et options-objekt med title når vi oppretter markøren.
- Når dere klikker på markøren, bruker vi denne iden til å gjøre et nytt API-kall hvor vi henter detaljert informasjon om akkurat denne trafikkulykken.
 
- */
-
-const trafikkulykkeTittel = document.querySelector('.trafikkulykke__id');
-const trafikkulykkeEgenskaper = document.querySelector('.trafikkulykke__egenskaper');
-
-function showInfo (vegobjekt) {
-
-    trafikkulykkeTittel.innerHTML = vegobjekt.id;
-    trafikkulykkeEgenskaper.innerHTML = '';
-
-    vegobjekt.egenskaper.forEach(egenskap => {
-
-        const tittel = document.createElement('dt');
-        const verdi = document.createElement('dd');
-
-        tittel.innerHTML = egenskap.navn;
-        verdi.innerHTML = egenskap.verdi;
-
-        // legg til tittel og verdi på trafikkulykkeEgenskaper. Dette kan gjøres med javascriptfunksjonen appendChild.
-    });
-}

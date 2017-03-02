@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.0.0/dist/MarkerCluster.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.0.0/dist/MarkerCluster.Default.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli:300,400,400i,600,700" type="text/css">
     <link rel="stylesheet" href="style.css" type="text/css">
 </head>
@@ -16,17 +18,12 @@
 
     <h1>
         <a href="../index.html">Visualisering av data på kart</a> 
-        Oppgave 4 &ndash; Hent data
+        Oppgave 4 &ndash; Markercluster
     </h1>
 
 </header>
 
-<main>
-
-    <div class="button_row">
-        <button class="js-bomstasjoner">Hent bomstasjoner</button>
-        <button class="js-tunneler">Hent tunneler</button>
-    </div>
+<main class="columns">
 
     <div id="mapid" class="map_container">
         <div class="loading">
@@ -45,9 +42,15 @@
         </div>
     </div>
 
+    <aside>
+        <h2 class="trafikkulykke__id"></h2>
+        <dl class="trafikkulykke__egenskaper"></dl>
+    </aside>
+
 </main>
 
 <script src="lib/leaflet.js"></script>
+<script src="lib/leaflet.markercluster.js"></script>
 <script src="lib/terraformer.min.js"></script>
 <script src="lib/terraformer-wkt-parser.min.js"></script>
 <script src="oppgave4.js"></script>

@@ -1,213 +1,98 @@
 
-const NVDBAPI = 'https://www.vegvesen.no/nvdb/api/v2';
-
-const bakgrunnsLag = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-    maxZoom: 18,
-    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+const mbAttr = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
         '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-        'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-    id: 'mapbox.streets',
-    accessToken: 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw'
-});
+        'Imagery © <a href="http://mapbox.com">Mapbox</a>';
 
+const mbUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
 
-let vegobjekter = {};
-
-
-const loadingIndicator = document.querySelector('.loading');
-
-function showLoadingIndicator () {
-    loadingIndicator.style.opacity = 1;
-}
-
-function hideLoadingIndicator () {
-    loadingIndicator.style.opacity = 0;
-}
-
+const grayscale   = L.tileLayer(mbUrl, {id: 'mapbox.light', attribution: mbAttr});
+const streets  = L.tileLayer(mbUrl, {id: 'mapbox.streets',   attribution: mbAttr});
 
 const map = L.map('mapid', {
+    center: [60.39, 5.33],
     maxBounds: [[55.86, -0.26], [64.89, 18.50]],
     minZoom: 6,
+    zoom: 12
 });
+map.addLayer(streets);
 
-map.addLayer(bakgrunnsLag);
-
-/*
- 6.1 Legg til heatmap
-
- Bruk pluginen Leaflet.heat til å visualisere trafikkulykkene som et heatmap. Klassen L.heatLayer kan brukes i stedet for L.markerClusterGroup.
- */
-// deklarer heat som et heatlayer og legg laget til på map.
-// fjere i tillegg utkommenteringen under funksjonen addVegobjekter.
-
-// const heat
-// map.addLayer(heat);
-
-
-map.on('moveend', function () {
-    hentData();
+const akvariet = L.polygon([
+    [60.39973, 5.30204],
+    [60.40063, 5.30399],
+    [60.40011, 5.30590],
+    [60.39863, 5.30412]
+], {
+  color: '#0f0'
 });
-
-map.setView([60.39, 5.33], 16);
-
+akvariet.bindPopup('Akvariet');
 
 
-function getStatistics (vegobjekter) {
+const bryggen = L.marker([60.3973, 5.3233]);
+bryggen.bindPopup('Bryggen');
 
-    let statistikk = {};
-
-    vegobjekter.forEach(vegobjekt => {
-
-        if (statistikk.hasOwnProperty('id')) {
-            statistikk.id.push(vegobjekt.id);
-        } else {
-            statistikk.id = [vegobjekt.id];
-        }
-
-        vegobjekt.egenskaper.forEach(egenskap => {
-
-            if (!statistikk.hasOwnProperty(egenskap.navn)) {
-                statistikk[egenskap.navn] = {};
-            }
-
-            if (statistikk[egenskap.navn].hasOwnProperty(egenskap.verdi)) {
-                statistikk[egenskap.navn][egenskap.verdi].push(vegobjekt.id);
-
-            } else {
-                statistikk[egenskap.navn][egenskap.verdi] = [vegobjekt.id];
-            }
-
-        });
-    });
-
-    return statistikk;
-}
-
-
-
-function addVegobjekter (result) {
-    result.forEach(vegobjekt => {
-
-        if (!vegobjekter.hasOwnProperty(vegobjekt.id)) {
-
-            var wkt = vegobjekt.geometri.wkt;
-            var point = Terraformer.WKT.parse(wkt);
-
-            vegobjekter[vegobjekt.id] = L.marker(point.coordinates);
-
-            //heat.addLatLng(point.coordinates);
-
-        }
-    })
-}
+const floibanen = L.polyline([
+    [60.3964173561773, 5.328556895256043],
+    [60.39660550579725, 5.329484939575195],
+    [60.396311355912495, 5.331035256385803],
+    [60.39560644537202, 5.333991050720216],
+    [60.39533878737165, 5.337563753128053],
+    [60.39480346476893, 5.342504382133484]
+], {
+  color: '#f00'
+});
+floibanen.bindPopup('Fløibanen');
 
 /*
- 6.2 Legg til søylediagram
+ Oppgave 6.1 - layerGroup
 
- Chart.js er et nyttig bibliotek for å visualisere data i form av en rekke typer diagrammer. Trafikkulykker har også mange interessante egenskaper som kan visualiseres på denne måten.
-
- Tips: Grunnlagsdata logges til utviklerkonsollet.
-
- Bruk Chart.js til å lage et søylediagram som viser antall trafikkulykker, fordelt på ukedag.
+ I forrige oppgave lagde vi tre kartlag (Akvariet, Bryggen og Fløibanen) og
+ viste dem på kartet. Vi kan samle disse lagene i en gruppe med L.layerGroup,
+ slik at vi kan behandle dem som ett lag i stedet. Bruk L.layerGroup til å lage
+ en gruppe, og legg den til i kartet. Se
+ http://leafletjs.com/examples/layers-control/
  */
+// din kode her
 
-
-function hentData () {
-
-    const kartutsnitt = map.getBounds().toBBoxString();
-
-    const url = NVDBAPI + '/vegobjekter/570.json?inkluder=geometri,egenskaper&srid=wgs84&antall=10000&egenskap="5074!=6431 AND 5055>\'1999-12-31\'"&kartutsnitt=' + kartutsnitt;
-
-    showLoadingIndicator();
-
-    fetch(url)
-        .then(function(response) {
-            return response.json()
-
-        }).then(function(json) {
-
-            hideLoadingIndicator();
-
-            const statistikk = getStatistics(json.objekter);
-
-            console.log(statistikk);
-
-            addVegobjekter(json.objekter);
-
-            // legg inn kode for å sette myChart.
-            //myChart.data.datasets[0].data[0] = ?
-            //myChart.update();
-
-        }).catch(function(ex) {
-            console.log('parsing failed', ex);
-        })
-}
-
-
-
-const ctx = document.querySelector('#myChart');
 
 /*
- 6.3 Endre fargeskala
+ Oppgave 6.2 - slå kartlag av og på
 
- Det er ikke alltid lett å finne gode fargekombinasjoner. Verken til markører, eller til diagrammer.
-
- Finn en pen fargekombinasjon hos ColorBrewer, og oppdater fargeskalaen til søylediagrammet.
+ L.control.layers tar to argumenter: baseLayers og overlays. Bruk
+ L.control.layers til velge mellom gatekart og et kart i gråtoner. Variablene
+ `grayscale` og `streets`, som er definert øverst i denne fila, definerer de to
+ kartlagene.
  */
-
-const data = {
-    labels: [
-        "Mandag",
-        "Tirsdag",
-        "Onsdag",
-        "Torsdag",
-        "Fredag",
-        "Lørdag",
-        "Søndag"
-    ],
-    datasets: [
-        {
-            data: [0, 0, 0, 0, 0, 0, 0],
-            label: "Ukedag",
-            backgroundColor: [
-                "#d53e4f",
-                "#fc8d59",
-                "#fee08b",
-                "#ffffbf",
-                "#e6f598",
-                "#99d594",
-                "#3288bd"
-            ],
-            borderColor: [
-                "#d53e4f",
-                "#fc8d59",
-                "#fee08b",
-                "#ffffbf",
-                "#e6f598",
-                "#99d594",
-                "#3288bd"
-            ]
-        }]
+const baseLayers = {
+    // definer kartlagene her
 };
+const overlays = {
+    // definer gruppen fra 6.1 her
+};
+// bruk L.control.layers til å legge til kartlagene og stedene, og legg dem til
+// i kartet med .addTo(map)
 
 
-const myChart = new Chart(ctx,{
-    type: 'bar',
-    data: data,
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        }
-    }
+const duration = 0.5;
+document.querySelector('.js-akvariet').addEventListener('click', () => {
+    map.flyToBounds(akvariet.getBounds(), {
+        duration
+    });
 });
 
+document.querySelector('.js-bryggen').addEventListener('click', () => {
+    map.flyTo(bryggen.getLatLng(), 18, {
+        duration
+    });
+});
 
+document.querySelector('.js-floien').addEventListener('click', () => {
+    map.flyToBounds(floibanen.getBounds(), {
+        duration
+    });
+});
 
-
-
-
-
+document.querySelector('.js-helebergen').addEventListener('click', () => {
+    map.flyTo([60.39, 5.33], 12, {
+        duration
+    });
+});

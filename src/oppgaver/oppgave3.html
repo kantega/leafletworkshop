@@ -16,7 +16,7 @@
 
     <h1>
         <a href="../index.html">Visualisering av data på kart</a> 
-        Oppgave 3 &ndash; Grupper kartlag
+        Oppgave 3 &ndash; Hent data
     </h1>
 
 </header>
@@ -24,17 +24,32 @@
 <main>
 
     <div class="button_row">
-        <button class="js-akvariet">Akvariet</button>
-        <button class="js-bryggen">Bryggen</button>
-        <button class="js-floien">Fløien</button>
-        <button class="js-helebergen">Hele Bergen</button>
+        <button class="js-bomstasjoner">Hent bomstasjoner</button>
+        <button class="js-tunneler">Hent tunneler</button>
     </div>
 
-    <div id="mapid" class="map_container"></div>
+    <div id="mapid" class="map_container">
+        <div class="loading">
+            <div class="sk-circle1 sk-circle"></div>
+            <div class="sk-circle2 sk-circle"></div>
+            <div class="sk-circle3 sk-circle"></div>
+            <div class="sk-circle4 sk-circle"></div>
+            <div class="sk-circle5 sk-circle"></div>
+            <div class="sk-circle6 sk-circle"></div>
+            <div class="sk-circle7 sk-circle"></div>
+            <div class="sk-circle8 sk-circle"></div>
+            <div class="sk-circle9 sk-circle"></div>
+            <div class="sk-circle10 sk-circle"></div>
+            <div class="sk-circle11 sk-circle"></div>
+            <div class="sk-circle12 sk-circle"></div>
+        </div>
+    </div>
 
 </main>
 
 <script src="lib/leaflet.js"></script>
+<script src="lib/terraformer.min.js"></script>
+<script src="lib/terraformer-wkt-parser.min.js"></script>
 <script src="oppgave3.js"></script>
 
 </body>

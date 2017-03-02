@@ -116,34 +116,13 @@ For Akvariet og Fløibanen kan `map.flyTo` erstattes av [`map.flyToBounds`](http
 
 
 
-## Oppgave 3: Grupper lag
-
-I denne oppgaven vil vi se nærmere på gruppering og aktivering/deaktivering av kartlag. Det vil være nyttig å ha [Layer Groups and Layers Control](http://leafletjs.com/examples/layers-control/) åpen mens dere løser disse oppgavene. 
-
-
-
-
-### 3.1 Grupper severdigheter
-
-Bruk klassen [`L.layerGroup`](http://leafletjs.com/reference-1.0.3.html#layergroup) til å gruppere severdighetene, som dere så legger til kartet.
-
-
-### 3.2 Slå kartlag av og på
-
-Kartlag kan deles inn i to kategorier. **Baselayers** og **Overlays**. Baselayers er selve bakgrunnskartet, mens alle markører og andre geometrier er overlays.
-
-Klassen [`L.control.layers`](http://leafletjs.com/reference-1.0.3.html#control-layers) er et verktøy som gjør det mulig bytte baselayers, og slå overlays av og på.
-
-Legg til en mulighet for å bytte mellom det ordinære bakgrunnskartet og et bakgrunnskart i gråtoner. Gjør det også mulig å slå visningen av severdigheter av og på.
 
 
 
 
 
 
-
-
-## Oppgave 4: Hent data
+## Oppgave e: Hent data
 
 Kartet blir enda mer livlig, når dere fyller det med nyttige data fra eksterne kilder. I dag er det vanlig å hente data fra et REST API.
 
@@ -162,7 +141,7 @@ https://www.vegvesen.no/nvdb/api/v2/vegobjekttyper.json
 
 
 
-### 4.1 Hent bomstasjoner
+### e.1 Hent bomstasjoner
 
 Vi ønsker å hente alle bomstasjoner, og vise posisjonen til hver enkelt bomstasjon på kartet ved hjelp av en markør. NVDB har en vegobjekttype som heter **bomstasjon**, med id lik `45`. 
 
@@ -184,7 +163,7 @@ APIet returnerer geometri på WKT-format, så vi har inkludert et bibliotek som 
 Bruk fetch til å hente alle bomstasjoner, og legg til en markør på kartet for hver bomstasjon som returneres.
 
 
-### 4.2 Hent tunneler
+### e.2 Hent tunneler
 
 Tunneler er en annen vegobjekttype det er mye av i Bergen. Men i motsetning til bomstasjon, har tunneler en utstrekning som visualiseres ved hjelp av en linje, i stedet for et punkt. 
 
@@ -197,7 +176,7 @@ https://www.vegvesen.no/nvdb/api/v2/vegobjekter/67.json?inkluder=geometri&srid=w
 Hent alle tunnelløp i Hordaland, og legg til en linje på kartet for hvert tunnelløp som returneres.
 
 
-### 4.3 Legg til loading-indikator
+### e.3 Legg til loading-indikator
 
 Det er et godt prinsipp å gi brukeren en indikasjon på nettsiden venter på data som lastes ned i bakgrunnen. 
 
@@ -210,14 +189,14 @@ Legg til en loading-indikator som startes idet det gjøres et API-kall, og skjul
 
 
 
-## Oppgave 5: Markercluster
+## Oppgave 4: Markercluster
 
 I denne oppgaven vil vi jobbe med et mye større datasett: Vegobjekttypen **trafikkulykke**, med id lik `570`. For datasett av denne størrelsen, er vi nødt til å bruke andre teknikker for å få til en fornuftig visualisering på kart.
 
 
 
 
-### 5.1 Hent trafikkulykker innenfor kartutsnitt
+### 4.1 Hent trafikkulykker innenfor kartutsnitt
 
 Datasettet for trafikkulykker er så stort at vi er nødt til å begrense oss til kun å hente data innenfor det aktive kartutsnittet.
 
@@ -228,7 +207,7 @@ APIet tilbyr parameteren `kartutsnitt` for begrense søkeområdet. Parameteren `
 Hent alle trafikkulykker innenfor kartutsnittet. Legg til hver trafikkulykke som en markør i en layerGroup, som igjen legges til kartet. 
 
 
-### 5.2 Legg til markercluster
+### 4.2 Legg til markercluster
 
 API-kallet i forrige oppgave resulterte i et uhåndterlig antall markører. Nettleseren ble delvis uresponsiv, og visningen på kart ga heller ikke stor mening.
 
@@ -237,21 +216,21 @@ Når vi opererer med så mange markører, gir det ikke mening å vise hver enkel
 Legg til trafikkulykkene i `L.markerClusterGroup`, i stedet for å bruke `L.layerGroup`.
 
 
-### 5.3 Oppdater data ved panorering
+### 4.3 Oppdater data ved panorering
 
 Nå hentes data første gang kartet lastes, men det skjer ingenting når dere zoomer inn/ut eller panorerer kartet. Det kan vi gjøre noe med!
 
 Bruk metoden [`map.on`](http://leafletjs.com/reference-1.0.3.html#evented-on) til å lytte til eventen `moveend`, og flytt funksjonen som henter data. 
 
 
-### 5.4 Ikke legg til duplikater
+### 4.4 Ikke legg til duplikater
 
 Har dere sett nøye på tallet innenfor hver markercluster? Om dere panorerer mye frem og tilbake, vokser det! Det skyldes at vi ved nye API-kall får returnert vegobjekter som allerede finnes på kartet, og vi legger dem ukritisk til kartet på nytt igjen.
 
 Modifiser Javascript-koden, og sørg for at vi ikke legger til duplikater. 
 
 
-### 5.5 Vis egenskapsdata
+### 4.5 Vis egenskapsdata
 
 Punkter på kart er bare halve moroa! Trafikkulykker har også mange spennende egenskapsdata, med detaljert informasjon om hver eneste trafikkulykke. For eksempel ulykkesdato, vær og føreforhold, og antall involverte personer. 
 
@@ -267,7 +246,7 @@ I NVDB har Hver trafikkulykke har en unik id. Vi lagrer denne iden på hver mark
 
 
 
-## Oppgave 6: Heatmap
+## Oppgave 5: Heatmap
 
 Trafikkulykker kan også visualiseres i form av et heatmap eller et diagram.
 
@@ -282,12 +261,12 @@ Les mer [egenskapsfilter](https://www.vegvesen.no/nvdb/apidokumentasjon/#/parame
 
 
 
-### 6.1 Legg til heatmap
+### 5.1 Legg til heatmap
 
 Bruk pluginen [Leaflet.heat](https://github.com/Leaflet/Leaflet.heat) til å visualisere trafikkulykkene som et heatmap. Klassen `L.heatLayer` kan brukes i stedet for `L.markerClusterGroup`.
 
 
-### 6.2 Legg til søylediagram
+### 5.2 Legg til søylediagram
 
 [Chart.js](http://www.chartjs.org/) er et nyttig bibliotek for å visualisere data i form av en rekke typer diagrammer. Trafikkulykker har også mange interessante egenskaper som kan visualiseres på denne måten. 
 
@@ -296,11 +275,38 @@ Tips: Grunnlagsdata logges til utviklerkonsollet.
 Bruk Chart.js til å lage et søylediagram som viser antall trafikkulykker, fordelt på ukedag.
 
 
-### 6.3 Endre fargeskala
+### 5.3 Endre fargeskala
 
 Det er ikke alltid lett å finne gode fargekombinasjoner. Verken til markører, eller til diagrammer. 
 
 Finn en pen fargekombinasjon hos [ColorBrewer](http://colorbrewer2.org/#type=diverging&scheme=Spectral&n=7), og oppdater fargeskalaen til søylediagrammet. 
+
+
+
+
+
+
+
+
+## Oppgave 6: Grupper lag
+
+I denne oppgaven vil vi se nærmere på gruppering og aktivering/deaktivering av kartlag. Det vil være nyttig å ha [Layer Groups and Layers Control](http://leafletjs.com/examples/layers-control/) åpen mens dere løser disse oppgavene. 
+
+
+
+
+### 6.1 Grupper severdigheter
+
+Bruk klassen [`L.layerGroup`](http://leafletjs.com/reference-1.0.3.html#layergroup) til å gruppere severdighetene, som dere så legger til kartet.
+
+
+### 6.2 Slå kartlag av og på
+
+Kartlag kan deles inn i to kategorier. **Baselayers** og **Overlays**. Baselayers er selve bakgrunnskartet, mens alle markører og andre geometrier er overlays.
+
+Klassen [`L.control.layers`](http://leafletjs.com/reference-1.0.3.html#control-layers) er et verktøy som gjør det mulig bytte baselayers, og slå overlays av og på.
+
+Legg til en mulighet for å bytte mellom det ordinære bakgrunnskartet og et bakgrunnskart i gråtoner. Gjør det også mulig å slå visningen av severdigheter av og på.
 
 
 

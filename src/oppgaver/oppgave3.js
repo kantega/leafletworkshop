@@ -1,12 +1,14 @@
+const NVDBAPI = 'https://www.vegvesen.no/nvdb/api/v2';
 
-const mbAttr = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+const bakgrunnsLag = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+    maxZoom: 18,
+    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
         '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-        'Imagery © <a href="http://mapbox.com">Mapbox</a>';
+        'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+    id: 'mapbox.streets',
+    accessToken: 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw'
+});
 
-const mbUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
-
-const grayscale   = L.tileLayer(mbUrl, {id: 'mapbox.light', attribution: mbAttr});
-const streets  = L.tileLayer(mbUrl, {id: 'mapbox.streets',   attribution: mbAttr});
 
 const map = L.map('mapid', {
     center: [60.39, 5.33],
@@ -14,85 +16,79 @@ const map = L.map('mapid', {
     minZoom: 6,
     zoom: 12
 });
-map.addLayer(streets);
-
-const akvariet = L.polygon([
-    [60.39973, 5.30204],
-    [60.40063, 5.30399],
-    [60.40011, 5.30590],
-    [60.39863, 5.30412]
-], {
-  color: '#0f0'
-});
-akvariet.bindPopup('Akvariet');
+map.addLayer(bakgrunnsLag);
 
 
-const bryggen = L.marker([60.3973, 5.3233]);
-bryggen.bindPopup('Bryggen');
+const loadingIndicator = document.querySelector('.loading');
 
-const floibanen = L.polyline([
-    [60.3964173561773, 5.328556895256043],
-    [60.39660550579725, 5.329484939575195],
-    [60.396311355912495, 5.331035256385803],
-    [60.39560644537202, 5.333991050720216],
-    [60.39533878737165, 5.337563753128053],
-    [60.39480346476893, 5.342504382133484]
-], {
-  color: '#f00'
-});
-floibanen.bindPopup('Fløibanen');
+function showLoadingIndicator () {
+    loadingIndicator.style.opacity = 1;
+}
+
+function hideLoadingIndicator () {
+    loadingIndicator.style.opacity = 0;
+}
 
 /*
- Oppgave 3.1 - layerGroup
+ Oppgave 3.1 - hent bomstasjoner
 
- I forrige oppgave lagde vi tre kartlag (Akvariet, Bryggen og Fløibanen) og
- viste dem på kartet. Vi kan samle disse lagene i en gruppe med L.layerGroup,
- slik at vi kan behandle dem som ett lag i stedet. Bruk L.layerGroup til å lage
- en gruppe, og legg den til i kartet. Se
- http://leafletjs.com/examples/layers-control/
+ I denne oppgaven skal vi bruke fetch til å hente alle bomstasjoner, og vise en
+ markør på kartet for hver stasjon.
+
+ Først henter vi dataene, og gjør dem om til JSON-format. Så bruker vi
+ Terraformer for å konvertere koordinatene fra WKT-format til lister med lengde-
+ og breddegrad, som vi er vant til fra de tidligere oppgavene. Til slutt blir
+ funksjonen drawMarkers kalt. Argumentet geometryList er en liste med punkter
+ som skal tegnes i kartet.
+
+ http://leafletjs.com/reference-1.0.3.html#marker
+ https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
  */
-// din kode her
+function drawMarkers(geometryList) {
+    // din kode her
+}
+
+const bomstasjonURL = NVDBAPI + '/vegobjekter/45.json?inkluder=geometri&srid=wgs84';
+document.querySelector('.js-bomstasjoner').addEventListener('click', () => {
+    showLoadingIndicator();
+
+    fetch(bomstasjonURL)
+        .then(response => {
+            hideLoadingIndicator();
+            return response.json();
+        })
+        .then(json => {
+            return json.objekter.map(vegobjekt => {
+                const wkt = vegobjekt.geometri.wkt;
+                const geometry = Terraformer.WKT.parse(wkt);
+                return geometry.coordinates;
+            });
+        })
+        .then(drawMarkers)
+        .catch((ex) => {
+            console.log('parsing failed', ex);
+        });
+});
 
 
 /*
- Oppgave 3.2 - slå kartlag av og på
+ Oppgave 3.2 - hent tunneler
 
- L.control.layers tar to argumenter: baseLayers og overlays. Bruk
- L.control.layers til velge mellom gatekart og et kart i gråtoner. Variablene
- `grayscale` og `streets`, som er definert øverst i denne fila, definerer de to
- kartlagene.
+ I denne oppgaven skal vi hente data om tunneler i og rundt Bergen, og tegne dem
+ i kartet. Det er mye likt med oppgave 3.1, med unntak av to ting:
+
+ 1. URL-en er forskjellig.
+ 2. Tunnelene er linjer, ikke punkter. Altså er koordinatene en liste med punkter.
+
+ Følg framgangsmåten fra oppgave 3.1 for å hente dataene og tegne tunnelene i
+ Hordaland på kartet.
+
+ http://leafletjs.com/reference-1.0.3.html#polyline
  */
-const baseLayers = {
-    // definer kartlagene her
-};
-const overlays = {
-    // definer gruppen fra 3.1 her
-};
-// bruk L.control.layers til å legge til kartlagene og stedene, og legg dem til
-// i kartet med .addTo(map)
+const tunnelURL = NVDBAPI + '/vegobjekter/67.json?inkluder=geometri&srid=wgs84&fylke=12';
 
-
-const duration = 0.5;
-document.querySelector('.js-akvariet').addEventListener('click', () => {
-    map.flyToBounds(akvariet.getBounds(), {
-        duration
-    });
+document.querySelector('.js-tunneler').addEventListener('click', () => {
+    // din kode her
 });
 
-document.querySelector('.js-bryggen').addEventListener('click', () => {
-    map.flyTo(bryggen.getLatLng(), 18, {
-        duration
-    });
-});
 
-document.querySelector('.js-floien').addEventListener('click', () => {
-    map.flyToBounds(floibanen.getBounds(), {
-        duration
-    });
-});
-
-document.querySelector('.js-helebergen').addEventListener('click', () => {
-    map.flyTo([60.39, 5.33], 12, {
-        duration
-    });
-});

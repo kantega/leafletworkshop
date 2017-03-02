@@ -1,3 +1,4 @@
+
 const NVDBAPI = 'https://www.vegvesen.no/nvdb/api/v2';
 
 const bakgrunnsLag = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
@@ -11,12 +12,14 @@ const bakgrunnsLag = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{
 
 
 const map = L.map('mapid', {
-    center: [60.39, 5.33],
     maxBounds: [[55.86, -0.26], [64.89, 18.50]],
     minZoom: 6,
-    zoom: 12
 });
-map.addLayer(bakgrunnsLag);
+
+
+bakgrunnsLag.addTo(map);
+
+let vegobjekter = {};
 
 
 const loadingIndicator = document.querySelector('.loading');
@@ -30,65 +33,135 @@ function hideLoadingIndicator () {
 }
 
 /*
- Oppgave 4.1 - hent bomstasjoner
+ Oppgave 4.1 Hent trafikkulykker innenfor kartutsnitt
 
- I denne oppgaven skal vi bruke fetch til å hente alle bomstasjoner, og vise en
- markør på kartet for hver stasjon.
+ Datasettet for trafikkulykker er så stort at vi er nødt til å begrense oss til kun å hente data innenfor det
+ aktive kartutsnittet. Metoden map.getBounds kan benyttes til å hente det aktive kartutsnittet, og .toBBoxString()
+ konverterer det returnerte arrayet til en string.
 
- Først henter vi dataene, og gjør dem om til JSON-format. Så bruker vi
- Terraformer for å konvertere koordinatene fra WKT-format til lister med lengde-
- og breddegrad, som vi er vant til fra de tidligere oppgavene. Til slutt blir
- funksjonen drawMarkers kalt. Argumentet geometryList er en liste med punkter
- som skal tegnes i kartet.
+ APIet tilbyr parameteren kartutsnitt for begrense søkeområdet.
+ Parameteren antall kan i tillegg benyttes til å begrense antall vegobjekter som returneres i responsen.
 
- http://leafletjs.com/reference-1.0.3.html#marker
- https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+ Hent alle trafikkulykker innenfor kartutsnittet. Legg til hver trafikkulykke som en markør,
+ som igjen legges til kartet.
  */
-function drawMarkers(geometryList) {
-    // din kode her
-}
 
-const bomstasjonURL = NVDBAPI + '/vegobjekter/45.json?inkluder=geometri&srid=wgs84';
-document.querySelector('.js-bomstasjoner').addEventListener('click', () => {
+function fetchVegobjekter () {
+
+    // URL mangler antall og kartutsnitt, det er din oppgave å rette på det.
+    const url = NVDBAPI + '/vegobjekter/570.json?inkluder=geometri&srid=wgs84';
+
     showLoadingIndicator();
 
-    fetch(bomstasjonURL)
-        .then(response => {
-            hideLoadingIndicator();
-            return response.json();
-        })
-        .then(json => {
-            return json.objekter.map(vegobjekt => {
-                const wkt = vegobjekt.geometri.wkt;
-                const geometry = Terraformer.WKT.parse(wkt);
-                return geometry.coordinates;
-            });
-        })
-        .then(drawMarkers)
-        .catch((ex) => {
-            console.log('parsing failed', ex);
-        });
-});
+    fetch(url)
+        .then((response) => {
+            return response.json()
+
+        }).then((json) => {
+        hideLoadingIndicator();
+
+        addVegobjekter(json.objekter);
+
+    }).catch(function(ex) {
+        console.log('parsing failed', ex);
+
+    })
+}
+
+function addVegobjekter (result) {
+    result.forEach(vegobjekt => {
+
+        if (!vegobjekter.hasOwnProperty(vegobjekt.id)) {
+
+            const wkt = vegobjekt.geometri.wkt;
+            const point = Terraformer.WKT.parse(wkt);
+
+            vegobjekter[vegobjekt.id] = null;
+            /* I stedet for at objektet settes til null skal du opprett et markerobjekt. Se http://leafletjs.com/reference.html#marker
+             Ved klikk skal funksjonen highlightFeature kalles.
+             */
+
+            trafikkulykker.addLayer(vegobjekter[vegobjekt.id]);
+        }
+
+    })
+
+}
+
+function highlightFeature (e) {
+
+    const id = e.target.options.title;
+    const url = NVDBAPI + '/vegobjekter/570/' + id + '.json';
+
+    fetch(url)
+        .then((response) => {
+            return response.json()
+
+        }).then((json) => {
+        showInfo(json);
+
+    }).catch((ex) => {
+        console.log('parsing failed', ex);
+    })
+}
 
 
 /*
- Oppgave 4.2 - hent tunneler
+ 4.2 Legg til markercluster
 
- I denne oppgaven skal vi hente data om tunneler i og rundt Bergen, og tegne dem
- i kartet. Det er mye likt med oppgave 4.1, med unntak av to ting:
+ API-kallet i forrige oppgave resulterte i et uhåndterlig antall markører. Nettleseren ble delvis uresponsiv, og visningen på kart ga heller ikke stor mening.
 
- 1. URL-en er forskjellig.
- 2. Tunnelene er linjer, ikke punkter. Altså er koordinatene en liste med punkter.
+ Når vi opererer med så mange markører, gir det ikke mening å vise hver enkelt markør. Vi ønsker heller å gruppere markører som er nære hverandre, og fortelle med tall hvor mange markører som befinner seg innenfor hver gruppering. For å få til dette, kan vi bruke pluginen Leaflet.markercluster.
 
- Følg framgangsmåten fra oppgave 4.1 for å hente dataene og tegne tunnelene i
- Hordaland på kartet.
-
- http://leafletjs.com/reference-1.0.3.html#polyline
+ Legg til trafikkulykkene i L.markerClusterGroup.
  */
-const tunnelURL = NVDBAPI + '/vegobjekter/67.json?inkluder=geometri&srid=wgs84&fylke=12';
-
-document.querySelector('.js-tunneler').addEventListener('click', () => {
-    // din kode her
-});
 
 
+
+/*
+ 4.3 Oppdater data ved panorering
+
+ Nå hentes data første gang kartet lastes, men det skjer ingenting når dere zoomer inn/ut eller panorerer kartet. Det kan vi gjøre noe med!
+
+ Bruk metoden map.on til å lytte til eventen moveend, og referer til funksjonen som henter data.
+ Se http://leafletjs.com/reference-1.0.3.html#evented
+ */
+
+// skriv inn koden for map.on her.
+
+map.setView([60.39, 5.33], 15);
+
+
+
+/*
+ 4.4 Vis egenskapsdata
+
+ Punkter på kart er bare halve moroa! Trafikkulykker har også mange spennende egenskapsdata, med detaljert informasjon om hver eneste trafikkulykke.
+ For eksempel ulykkesdato, vær og føreforhold, og antall involverte personer.
+
+ Vi ønsker at det skal komme opp informasjon om trafikkulykken i feltet til høyre, når dere klikker på en markør i kartet.
+
+ I NVDB har Hver trafikkulykke har en unik id. Vi lagrer denne iden på hver markør, ved å sende inn et options-objekt med title når vi oppretter markøren.
+ Når dere klikker på markøren, bruker vi denne iden til å gjøre et nytt API-kall hvor vi henter detaljert informasjon om akkurat denne trafikkulykken.
+
+ */
+
+const trafikkulykkeTittel = document.querySelector('.trafikkulykke__id');
+const trafikkulykkeEgenskaper = document.querySelector('.trafikkulykke__egenskaper');
+
+function showInfo (vegobjekt) {
+
+    trafikkulykkeTittel.innerHTML = vegobjekt.id;
+    trafikkulykkeEgenskaper.innerHTML = '';
+
+    vegobjekt.egenskaper.forEach(egenskap => {
+
+        const tittel = document.createElement('dt');
+        const verdi = document.createElement('dd');
+
+        tittel.innerHTML = egenskap.navn;
+        verdi.innerHTML = egenskap.verdi;
+
+        // legg til tittel og verdi på trafikkulykkeEgenskaper. Dette kan gjøres med javascriptfunksjonen appendChild.
+    });
+}

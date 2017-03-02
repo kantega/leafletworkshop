@@ -6,6 +6,8 @@
  at L.map instansierer Leaflet-kartet, og L.tileLayer angir et bakgrunnskart.
  */
 
+// bakgrunnsLag definerer kartdataene som vi viser i kartet. Vi har satt det opp
+// for dere, men til andre prosjekter kan dere hente data fra mapbox.com
 const bakgrunnsLag = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
     maxZoom: 18,
     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
@@ -15,7 +17,10 @@ const bakgrunnsLag = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{
     accessToken: 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw'
 });
 
+// map definerer selve kartet. Vi bruker den hver gang vi skal legge til noe i
+// kartet, eller endre kartet på noe vis.
 const map = L.map('mapid');
+// addLayer legger til et kartlag, i dette tilfellet kartdataene som viser verdenskartet. 
 map.addLayer(bakgrunnsLag);
 
 
@@ -59,7 +64,7 @@ map.setView([0,0], 4);
 
  Få navigasjonen til å fungere. Over kartet er det fire knapper, som ikke gjør
  noe (enda). Når man klikker på dem, skal kartet vise enten Akvariet, Bryggen,
- Fløien eller hele Bergen. Under har vi lagt til en event listener på
+ Fløibanen eller hele Bergen. Under har vi lagt til en event listener på
  Akvariet-knappen, men den gjør ingenting enda. Fyll inn funksjonen slik at
  kartet endrer visning til Akvariet, og zoomer inn. Legg også til event
  listeners for de andre knappene. Koordinatene kan du finne ved å klikke i

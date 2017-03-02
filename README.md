@@ -137,7 +137,7 @@ For Akvariet og Fløibanen kan `map.flyTo` erstattes av [`map.flyToBounds`](http
 
 
 
-## Oppgave e: Hent data
+## Oppgave 3: Hent data
 
 Kartet blir enda mer livlig, når dere fyller det med nyttige data fra eksterne kilder. I dag er det vanlig å hente data fra et REST API.
 
@@ -156,7 +156,7 @@ https://www.vegvesen.no/nvdb/api/v2/vegobjekttyper.json
 
 
 
-### e.1 Hent bomstasjoner
+### 3.1 Hent bomstasjoner
 
 Vi ønsker å hente alle bomstasjoner, og vise posisjonen til hver enkelt bomstasjon på kartet ved hjelp av en markør. NVDB har en vegobjekttype som heter **bomstasjon**, med id lik `45`. 
 
@@ -178,7 +178,7 @@ APIet returnerer geometri på WKT-format, så vi har inkludert et bibliotek som 
 Bruk fetch til å hente alle bomstasjoner, og legg til en markør på kartet for hver bomstasjon som returneres.
 
 
-### e.2 Hent tunneler
+### 3.2 Hent tunneler
 
 Tunneler er en annen vegobjekttype det er mye av i Bergen. Men i motsetning til bomstasjon, har tunneler en utstrekning som visualiseres ved hjelp av en linje, i stedet for et punkt. 
 
@@ -191,7 +191,7 @@ https://www.vegvesen.no/nvdb/api/v2/vegobjekter/67.json?inkluder=geometri&srid=w
 Hent alle tunnelløp i Hordaland, og legg til en linje på kartet for hvert tunnelløp som returneres.
 
 
-### e.3 Legg til loading-indikator
+### 3.3 Legg til loading-indikator
 
 Det er et godt prinsipp å gi brukeren en indikasjon på nettsiden venter på data som lastes ned i bakgrunnen. 
 
@@ -238,14 +238,7 @@ Nå hentes data første gang kartet lastes, men det skjer ingenting når dere zo
 Bruk metoden [`map.on`](http://leafletjs.com/reference-1.0.3.html#evented-on) til å lytte til eventen `moveend`, og flytt funksjonen som henter data. 
 
 
-### 4.4 Ikke legg til duplikater
-
-Har dere sett nøye på tallet innenfor hver markercluster? Om dere panorerer mye frem og tilbake, vokser det! Det skyldes at vi ved nye API-kall får returnert vegobjekter som allerede finnes på kartet, og vi legger dem ukritisk til kartet på nytt igjen.
-
-Modifiser Javascript-koden, og sørg for at vi ikke legger til duplikater. 
-
-
-### 4.5 Vis egenskapsdata
+### 4.4 Vis egenskapsdata
 
 Punkter på kart er bare halve moroa! Trafikkulykker har også mange spennende egenskapsdata, med detaljert informasjon om hver eneste trafikkulykke. For eksempel ulykkesdato, vær og føreforhold, og antall involverte personer. 
 

@@ -1,4 +1,10 @@
+/*
+Oppgave 4: Markercluster
 
+I denne oppgaven vil vi jobbe med et mye større datasett: Vegobjekttypen
+trafikkulykke, med id lik 570. For datasett av denne størrelsen, er vi nødt til
+å bruke andre teknikker for å få til en fornuftig visualisering på kart.
+ */
 const NVDBAPI = 'https://www.vegvesen.no/nvdb/api/v2';
 
 const bakgrunnsLag = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {

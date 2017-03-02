@@ -1,3 +1,20 @@
+/*
+## Oppgave 5: Heatmap
+
+Trafikkulykker kan også visualiseres i form av et heatmap eller et diagram.
+
+I denne oppgaven henter vi både geometri og egenskaper for alle trafikkulykker i
+hvert eneste API-kall, og har derfor lagt inn et datofilter for å begrense
+datamengden.
+
+https://www.vegvesen.no/nvdb/api/v2/vegobjekter/570.json?inkluder=geometri,egenskaper&srid=wgs84&egenskap="5055>'1999-12-31'"
+
+Les mer om
+[egenskapsfilter](https://www.vegvesen.no/nvdb/apidokumentasjon/#/parameter/egenskapsfilter)
+og [vegobjekttypen
+trafikkulykke](https://www.vegvesen.no/nvdb/api/v2/vegobjekttyper/570.json) for
+å finne flere måter å filtrere datasettet på.
+ */
 
 const NVDBAPI = 'https://www.vegvesen.no/nvdb/api/v2';
 

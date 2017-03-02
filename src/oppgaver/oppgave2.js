@@ -1,3 +1,10 @@
+/*
+ Oppgave 2: Markører og popups
+
+ I denne oppgaven vil vi fortsette på det gode grunnlaget vi etablerte i oppgave
+ 1, og lære mer om markører og geometrier.
+ */
+
 const bakgrunnsLag = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
     maxZoom: 18,
     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
@@ -15,6 +22,10 @@ const boundaryNorthEash = [64.89, 18.50];
 /*
  Oppgave 2.1 - Avgrens kartet
 
+ Kartets startposisjon er Bergen, og i denne workshopen vil vi kun forholde oss
+ til Bergen og omegn. Derfor ønsker vi også å avgrense kartets ytre rammer, så
+ det ikke blir mulig å navigere seg vekk fra Vestlandet.
+
  Vi ønsker ikke at det skal være mulig å zoom/flytte kartet for langt. Over har
  vi gitt dere koordinatene til to punkter, som bestemmer avgrensningen. Bruk
  options-objektet til L.map for å avgrense kartet. Se
@@ -30,9 +41,15 @@ map.setView([60.39, 5.33], 12);
 /*
  Oppgave 2.2 - polygon rundt akvariet
 
+ Akkurat nå er det mulig å navigere seg frem til Akvariet, men vil gjerne at
+ Akvariets beliggenhet skal bli enda mer synlig.
+
  Under har vi gitt dere koordinatene til området som avgrenser Akvariet i
- Bergen. Bruk L.polygon til å tegne et polygon på kartet. Fargen skal være
- grønn. Se http://leafletjs.com/reference-1.0.3.html#polygon
+ Bergen. Bruk L.polygon til å tegne et polygon på kartet. L.polygon tar også et
+ options-objekt som parameter, der man blant annet kan sette fargen. Fargen skal
+ være grønn.
+
+ Se http://leafletjs.com/reference-1.0.3.html#polygon
  */
 const akvariet = [
     [60.39973, 5.30204],
@@ -55,8 +72,13 @@ const bryggen = [60.3973, 5.3233];
 /*
  Oppgave 2.4 - Fløibanen
 
+ Det vil være mer praktisk å bruke en linje enn et polygon eller en markør for å
+ visualisere Fløibanen.
+
  Bruk L.polyline for å markere traséen til Fløibanen. Koordinatene er gitt
- under. Se http://leafletjs.com/reference-1.0.3.html#polyline
+ under. Linjen til Fløibanen skal være rød.
+
+ Se http://leafletjs.com/reference-1.0.3.html#polyline
  */
 const floibanen = [
     [60.3964173561773, 5.328556895256043],
@@ -73,8 +95,13 @@ const floibanen = [
 
  Når man klikker på de forskjellige markørene i kartet, skal det dukke opp en
  popup som forklarer hva du klikket på. Bruk bindPopup for å legge til en markør
- på Akvariet, Bryggen og Fløibanen. Se
- http://leafletjs.com/reference-1.0.3.html#popup
+ på Akvariet, Bryggen og Fløibanen.
+
+ Legg til popups på Akvariet, Bryggen og Fløibanen med navn på severdigheten, og
+eventuell annen relevant informasjon. bindPopup godtar HTML, så det er mulig å
+formatere teksten og legge til bilder.
+    
+ Se http://leafletjs.com/reference-1.0.3.html#popup
  */
 // din kode her
 
@@ -85,8 +112,9 @@ const floibanen = [
  Alle flyTo-kallene har nå hardkodete koordinater. Skriv dem om til å hente
  koordinatene fra markørene som vi har laget tidligere, slik at tallene bare er
  skrevet inn ett sted. Endre også flyTo til flyToBounds der det er aktuelt, slik
- at Leaflet regner ut zoom-nivå på egen hånd. Se
- http://leafletjs.com/reference-1.0.3.html#map-flytobounds
+ at Leaflet regner ut zoom-nivå på egen hånd.
+
+ Se http://leafletjs.com/reference-1.0.3.html#map-flytobounds
  */
 document.querySelector('.js-akvariet').addEventListener('click', () => {
     map.flyTo([60.399737639725814, 5.304079055786133], 18, {

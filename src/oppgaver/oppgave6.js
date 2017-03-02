@@ -1,4 +1,11 @@
+/*
+Oppgave 6: Grupper lag
 
+I denne oppgaven vil vi se nærmere på gruppering og aktivering/deaktivering av
+kartlag. Det vil være nyttig å ha [Layer Groups and Layers
+Control](http://leafletjs.com/examples/layers-control/) åpen mens dere løser
+disse oppgavene.
+ */
 const mbAttr = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
         '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
         'Imagery © <a href="http://mapbox.com">Mapbox</a>';
@@ -56,6 +63,9 @@ floibanen.bindPopup('Fløibanen');
 
 /*
  Oppgave 6.2 - slå kartlag av og på
+
+ Kartlag kan deles inn i to kategorier. Baselayers og Overlays. Baselayers er
+ selve bakgrunnskartet, mens alle markører og andre geometrier er overlays.
 
  L.control.layers tar to argumenter: baseLayers og overlays. Bruk
  L.control.layers til velge mellom gatekart og et kart i gråtoner. Variablene

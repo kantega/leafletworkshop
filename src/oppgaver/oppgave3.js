@@ -1,3 +1,31 @@
+/*
+Oppgave 3: Hent data
+
+Kartet blir enda mer livlig, når dere fyller det med nyttige data fra eksterne kilder. I dag er det vanlig å hente data fra et REST API.
+
+I denne oppgaven vil vi hente data fra [Nasjonal
+vegdatabank](http://www.vegvesen.no/fag/teknologi/Nasjonal+vegdatabank) (NVDB).
+Gjerne ha [API-dokumentasjonen](https://www.vegvesen.no/nvdb/apidokumentasjon/)
+lett tilgjengelig, og bruk [Vegkart](https://www.vegvesen.no/vegkart/vegkart/)
+til å få et innsyn i datagrunnlaget.
+
+Vi bruker Javascript-APIet
+[fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) til å hente
+data. Vær oppmerksom på at fetch ikke er støttet i alle nettlesere ennå, og det
+er nødvendig å legge til et [polyfill](https://github.com/github/fetch) for
+[blant annet Internet Explorer 11](http://caniuse.com/#search=fetch).
+
+Tips: Test APIet i nettleseren for å verifisere at dere får tilbake riktig
+respons. Legg til .json i API-kallene for å få responsen på json-format, og bruk
+et tillegg som [JSON
+formatter](https://chrome.google.com/webstore/detail/json-formatter/bcjindcccaagfpapjjmafapmmgkkhgoa)
+for å gjøre den mer lesbar.
+
+Eksempel: Dette API-kallet returnerer en liste over alle tilgjengelige datasett
+fra NVDB:
+
+https://www.vegvesen.no/nvdb/api/v2/vegobjekttyper.json
+ */
 const NVDBAPI = 'https://www.vegvesen.no/nvdb/api/v2';
 
 const bakgrunnsLag = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
@@ -32,8 +60,16 @@ function hideLoadingIndicator () {
 /*
  Oppgave 3.1 - hent bomstasjoner
 
- I denne oppgaven skal vi bruke fetch til å hente alle bomstasjoner, og vise en
- markør på kartet for hver stasjon.
+ Vi ønsker å hente alle bomstasjoner, og vise posisjonen til hver enkelt
+ bomstasjon på kartet ved hjelp av en markør. NVDB har en vegobjekttype som
+ heter bomstasjon, med id lik 45.
+
+ API-kall for å hente bomstasjoner blir derfor:
+
+ https://www.vegvesen.no/nvdb/api/v2/vegobjekter/45.json
+
+ Vi skal bruke fetch til å hente alle bomstasjoner, og vise en markør på kartet
+ for hver stasjon.
 
  Først henter vi dataene, og gjør dem om til JSON-format. Så bruker vi
  Terraformer for å konvertere koordinatene fra WKT-format til lister med lengde-
@@ -74,7 +110,19 @@ document.querySelector('.js-bomstasjoner').addEventListener('click', () => {
 /*
  Oppgave 3.2 - hent tunneler
 
- I denne oppgaven skal vi hente data om tunneler i og rundt Bergen, og tegne dem
+ Tunneler er en annen vegobjekttype det er mye av i Bergen. Men i motsetning til
+ bomstasjon, har tunneler en utstrekning som visualiseres ved hjelp av en linje,
+ i stedet for et punkt.
+
+ API-kallet i forrige oppgave hentet alle bomstasjoner i hele Norge, og ikke
+ bare i Bergen. Dette gikk problemfritt, siden det er et lite datasett, men for
+ tunneler ønsker vi å begrense responsen som returneres. Vi kan gjøre dette ved
+ å legge til et områdefilter på API-kallet, som kun henter tunneler i Hordaland
+ (fylke=12). Vi henter vegobjekttypen tunnelløp, med id lik 67.
+
+ https://www.vegvesen.no/nvdb/api/v2/vegobjekter/67.json?inkluder=geometri&srid=wgs84&fylke=12
+
+ Vi skal hente data om tunneler i og rundt Bergen, og tegne dem
  i kartet. Det er mye likt med oppgave 3.1, med unntak av to ting:
 
  1. URL-en er forskjellig.

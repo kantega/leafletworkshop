@@ -40,7 +40,7 @@ map.addLayer(bakgrunnsLag);
 // deklarer heat som et heatlayer og legg laget til på map.
 // fjere i tillegg utkommenteringen under funksjonen addVegobjekter.
 
-// const heat
+// const heat = ;
 // map.addLayer(heat);
 
 
@@ -93,7 +93,7 @@ function addVegobjekter (result) {
             var wkt = vegobjekt.geometri.wkt;
             var point = Terraformer.WKT.parse(wkt);
 
-            vegobjekter[vegobjekt.id] = L.marker(point.coordinates);
+            vegobjekter[vegobjekt.id] = true;
 
             //heat.addLatLng(point.coordinates);
 
@@ -170,22 +170,22 @@ const data = {
             data: [0, 0, 0, 0, 0, 0, 0],
             label: "Ukedag",
             backgroundColor: [
-                "#d53e4f",
-                "#fc8d59",
-                "#fee08b",
-                "#ffffbf",
-                "#e6f598",
-                "#99d594",
-                "#3288bd"
+                "#f00",
+                "#f00",
+                "#f00",
+                "#f00",
+                "#f00",
+                "#f00",
+                "#f00"
             ],
             borderColor: [
-                "#d53e4f",
-                "#fc8d59",
-                "#fee08b",
-                "#ffffbf",
-                "#e6f598",
-                "#99d594",
-                "#3288bd"
+                "#000",
+                "#000",
+                "#000",
+                "#000",
+                "#000",
+                "#000",
+                "#000"
             ]
         }]
 };

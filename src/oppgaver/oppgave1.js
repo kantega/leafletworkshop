@@ -67,8 +67,8 @@ map.setView([0,0], 4);
  Fløibanen eller hele Bergen. Under har vi lagt til en event listener på
  Akvariet-knappen, men den gjør ingenting enda. Fyll inn funksjonen slik at
  kartet endrer visning til Akvariet, og zoomer inn. Legg også til event
- listeners for de andre knappene. Koordinatene kan du finne ved å klikke i
- kartet.
+ listeners for de andre knappene. Koordinatene for akvariet og bryggen har vi
+ definert. Koordinatene for Fløibanen kan du finne ved å klikke i kartet.
 
  Metoden flyTo kan brukes til dette: http://leafletjs.com/reference-1.0.3.html#map-flyto
 
@@ -82,6 +82,8 @@ map.setView([0,0], 4);
  "Zoom/pan options". Se http://leafletjs.com/reference-1.0.3.html#pan-options
  for flere detaljer.
  */
+const akvariet = [60.3995309599726, 5.303993225097656];
+const bryggen = [60.39696060211701, 5.323219299316407];
 document.querySelector('.js-akvariet').addEventListener('click', () => {
     // din kode her
 });

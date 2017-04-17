@@ -43,17 +43,25 @@ function hideLoadingIndicator () {
 
 
 const map = L.map('mapid', {
-    maxBounds: [[55.86, -0.26], [64.89, 18.50]],
+    maxBounds: [[62.61356, 7.51465], [65.14611, 14.89746]],
     minZoom: 6,
 });
 
 map.addLayer(bakgrunnsLag);
 
 /*
- 5.1 Legg til heatmap
+    5.1 Legg til heatmap
 
- Bruk pluginen Leaflet.heat til å visualisere trafikkulykkene som et heatmap. Klassen L.heatLayer kan brukes i stedet for L.markerClusterGroup.
+    Bruk pluginen Leaflet.heat (https://github.com/Leaflet/Leaflet.heat) til å visualisere trafikkulykkene som et heatmap. 
+    Klassen L.heatLayer kan brukes i stedet for L.markerClusterGroup.
+
+    Tips: 
+    Du kan velge hvordan heatmapen skal se ut og oppføre seg.
+    Prøv å endre radius for å få kartet til se penere ut.
+
  */
+
+
 // deklarer heat som et heatlayer og legg laget til på map.
 // fjere i tillegg utkommenteringen under funksjonen addVegobjekter.
 
@@ -65,7 +73,7 @@ map.on('moveend', function () {
     hentData();
 });
 
-map.setView([60.39, 5.33], 16);
+map.setView([63.430, 10.395], 16);
 
 
 
@@ -121,7 +129,8 @@ function addVegobjekter (result) {
 /*
  5.2 Legg til søylediagram
 
- Chart.js er et nyttig bibliotek for å visualisere data i form av en rekke typer diagrammer. Trafikkulykker har også mange interessante egenskaper som kan visualiseres på denne måten.
+ Chart.js er et nyttig bibliotek for å visualisere data i form av en rekke typer diagrammer. 
+ Trafikkulykker har også mange interessante egenskaper som kan visualiseres på denne måten.
 
  Tips: Grunnlagsdata logges til utviklerkonsollet.
 
@@ -169,7 +178,8 @@ const ctx = document.querySelector('#myChart');
 
  Det er ikke alltid lett å finne gode fargekombinasjoner. Verken til markører, eller til diagrammer.
 
- Finn en pen fargekombinasjon hos ColorBrewer, og oppdater fargeskalaen til søylediagrammet.
+ Finn en pen fargekombinasjon hos ColorBrewer (http://colorbrewer2.org/), 
+ og oppdater fargeskalaen til søylediagrammet.
  */
 
 const data = {

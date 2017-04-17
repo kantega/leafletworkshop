@@ -39,8 +39,8 @@ const bakgrunnsLag = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{
 
 
 const map = L.map('mapid', {
-    center: [60.39, 5.33],
-    maxBounds: [[55.86, -0.26], [64.89, 18.50]],
+    center: [63.430, 10.395],
+    maxBounds: [[62.61356, 7.51465], [65.14611, 14.89746]],
     minZoom: 6,
     zoom: 12
 });
@@ -110,30 +110,30 @@ document.querySelector('.js-bomstasjoner').addEventListener('click', () => {
 /*
  Oppgave 3.2 - hent tunneler
 
- Tunneler er en annen vegobjekttype det er mye av i Bergen. Men i motsetning til
+ Tunneler er en annen vegobjekttype det er mye av i Trondheim. Men i motsetning til
  bomstasjon, har tunneler en utstrekning som visualiseres ved hjelp av en linje,
  i stedet for et punkt.
 
  API-kallet i forrige oppgave hentet alle bomstasjoner i hele Norge, og ikke
- bare i Bergen. Dette gikk problemfritt, siden det er et lite datasett, men for
+ bare i Trondheim. Dette gikk problemfritt, siden det er et lite datasett, men for
  tunneler ønsker vi å begrense responsen som returneres. Vi kan gjøre dette ved
- å legge til et områdefilter på API-kallet, som kun henter tunneler i Hordaland
- (fylke=12). Vi henter vegobjekttypen tunnelløp, med id lik 67.
+ å legge til et områdefilter på API-kallet, som kun henter tunneler i Sør-Trøndelag
+ (fylke=16). Vi henter vegobjekttypen tunnelløp, med id lik 67.
 
- https://www.vegvesen.no/nvdb/api/v2/vegobjekter/67.json?inkluder=geometri&srid=wgs84&fylke=12
+ https://www.vegvesen.no/nvdb/api/v2/vegobjekter/67.json?inkluder=geometri&srid=wgs84&fylke=16
 
- Vi skal hente data om tunneler i og rundt Bergen, og tegne dem
+ Vi skal hente data om tunneler i og rundt Trondheim, og tegne dem
  i kartet. Det er mye likt med oppgave 3.1, med unntak av to ting:
 
  1. URL-en er forskjellig.
  2. Tunnelene er linjer, ikke punkter. Altså er koordinatene en liste med punkter.
 
  Følg framgangsmåten fra oppgave 3.1 for å hente dataene og tegne tunnelene i
- Hordaland på kartet.
+ Sør-Trøndelag på kartet.
 
  http://leafletjs.com/reference-1.0.3.html#polyline
  */
-const tunnelURL = NVDBAPI + '/vegobjekter/67.json?inkluder=geometri&srid=wgs84&fylke=12';
+const tunnelURL = NVDBAPI + '/vegobjekter/67.json?inkluder=geometri&srid=wgs84&fylke=16';
 
 document.querySelector('.js-tunneler').addEventListener('click', () => {
     // din kode her

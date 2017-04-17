@@ -16,15 +16,15 @@ const bakgrunnsLag = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{
 const duration = 0.5;
 
 // Avgrensning av kartet for oppgave 2.1
-const boundarySouthWest = [55.86, -0.26];
-const boundaryNorthEash = [64.89, 18.50];
+const boundarySouthWest = [62.61356, 7.51465];
+const boundaryNorthEash = [65.14611, 14.89746];
 
 /*
  Oppgave 2.1 - Avgrens kartet
 
- Kartets startposisjon er Bergen, og i denne workshopen vil vi kun forholde oss
- til Bergen og omegn. Derfor ønsker vi også å avgrense kartets ytre rammer, så
- det ikke blir mulig å navigere seg vekk fra Vestlandet.
+ Kartets startposisjon er Trondheim, og i denne workshopen vil vi kun forholde oss
+ til Trondheim og omegn. Derfor ønsker vi også å avgrense kartets ytre rammer, så
+ det ikke blir mulig å navigere seg vekk fra Trøndelag.
 
  Vi ønsker ikke at det skal være mulig å zoom/flytte kartet for langt. Over har
  vi gitt dere koordinatene til to punkter, som bestemmer avgrensningen. Bruk
@@ -39,54 +39,53 @@ map.addLayer(bakgrunnsLag);
 map.setView([60.39, 5.33], 12);
 
 /*
- Oppgave 2.2 - polygon rundt akvariet
+ Oppgave 2.2 - Polygon rundt Nidarosdomen
 
- Akkurat nå er det mulig å navigere seg frem til Akvariet, men vil gjerne at
- Akvariets beliggenhet skal bli enda mer synlig.
+ Akkurat nå er det mulig å navigere seg frem til Nidarosdomen, men vil gjerne at
+ området rundt Nidarosdomen og Erkebispegården skal bli enda mer synlig.
 
- Under har vi gitt dere koordinatene til området som avgrenser Akvariet i
- Bergen. Bruk L.polygon til å tegne et polygon på kartet. L.polygon tar også et
+ Under har vi gitt dere koordinatene til området som omkranser Nidarosdomen og Marinen. 
+ Bruk L.polygon til å tegne et polygon på kartet. L.polygon tar også et
  options-objekt som parameter, der man blant annet kan sette fargen. Fargen skal
  være grønn.
 
  Se http://leafletjs.com/reference-1.0.3.html#polygon
  */
-const akvariet = [
-    [60.39973, 5.30204],
-    [60.40063, 5.30399],
-    [60.40011, 5.30590],
-    [60.39863, 5.30412]
+const nidarosdomen = [
+    [63.42739, 10.39341],
+    [63.4278, 10.39983],
+    [63.42555, 10.40006],
+    [63.42459, 10.39742]
+    [63.4246, 10.39416]
 ];
 // din kode her
 
 
 /*
- Oppgave 2.3 - Markør på Bryggen
+ Oppgave 2.3 - Markør på Lerkendal
 
- Konstanten bryggen er koordinatene til Bryggen. Vis en markør på Bryggen med
+ Konstanten lerkendal er koordinatene til Lerkendal. Vis en markør på Lerkendal med
  L.marker. Se http://leafletjs.com/reference-1.0.3.html#marker
  */
-const bryggen = [60.3973, 5.3233];
+const lerkendal = [63.41231, 10.40447];
 // din kode her
 
 /*
- Oppgave 2.4 - Fløibanen
+ Oppgave 2.4 - Sykkelheisen
 
  Det vil være mer praktisk å bruke en linje enn et polygon eller en markør for å
- visualisere Fløibanen.
+ visualisere Trampe sykkelheis på Bakklandet.
 
- Bruk L.polyline for å markere traséen til Fløibanen. Koordinatene er gitt
- under. Linjen til Fløibanen skal være rød.
+ Bruk L.polyline for å markere traséen til Sykkelheisen. Koordinatene er gitt
+ under. Linjen til Sykkelheisen skal være rød.
 
  Se http://leafletjs.com/reference-1.0.3.html#polyline
  */
-const floibanen = [
-    [60.3964173561773, 5.328556895256043],
-    [60.39660550579725, 5.329484939575195],
-    [60.396311355912495, 5.331035256385803],
-    [60.39560644537202, 5.333991050720216],
-    [60.39533878737165, 5.337563753128053],
-    [60.39480346476893, 5.342504382133484]
+const sykkelheisen = [
+    [63.428, 10.40337],
+    [63.42797, 10.40402],
+    [63.42798, 10.40513],
+    [63.42797, 10.40596]
 ];
 // din kode her
 
@@ -95,9 +94,9 @@ const floibanen = [
 
  Når man klikker på de forskjellige markørene i kartet, skal det dukke opp en
  popup som forklarer hva du klikket på. Bruk bindPopup for å legge til en markør
- på Akvariet, Bryggen og Fløibanen.
+ på Nidarosdomen, Lerkendal og Sykkelheisen.
 
- Legg til popups på Akvariet, Bryggen og Fløibanen med navn på severdigheten, og
+ Legg til popups på Nidarosdomen, Lerkendal og Sykkelheisen med navn på severdigheten, og
 eventuell annen relevant informasjon. bindPopup godtar HTML, så det er mulig å
 formatere teksten og legge til bilder.
     
@@ -116,20 +115,20 @@ formatere teksten og legge til bilder.
 
  Se http://leafletjs.com/reference-1.0.3.html#map-flytobounds
  */
-document.querySelector('.js-akvariet').addEventListener('click', () => {
-    map.flyTo([60.399737639725814, 5.304079055786133], 18, {
+document.querySelector('.js-nidarosdomen').addEventListener('click', () => {
+    map.flyTo([63.42683, 10.39693], 18, {
         duration
     });
 });
 
-document.querySelector('.js-bryggen').addEventListener('click', () => {
-    map.flyTo([60.3973, 5.3233], 18, {
+document.querySelector('.js-lerkendal').addEventListener('click', () => {
+    map.flyTo([63.41235, 10.40446], 18, {
         duration
     });
 });
 
-document.querySelector('.js-floien').addEventListener('click', () => {
-    map.flyTo([60.39573099834468, 5.334892272949219], 18, {
+document.querySelector('.js-sykkelheisen').addEventListener('click', () => {
+    map.flyTo([63.428, 10.40339], 18, {
         duration
     });
 });
@@ -137,7 +136,7 @@ document.querySelector('.js-floien').addEventListener('click', () => {
 
 // Denne snutten skal ikke refaktoriseres
 document.querySelector('.js-helebergen').addEventListener('click', () => {
-    map.flyTo([60.39, 5.33], 12, {
+    map.flyTo([63.430, 10.395], 12, {
         duration
     });
 });

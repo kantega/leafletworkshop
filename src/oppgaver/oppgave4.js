@@ -18,7 +18,7 @@ const bakgrunnsLag = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{
 
 
 const map = L.map('mapid', {
-    maxBounds: [[55.86, -0.26], [64.89, 18.50]],
+    maxBounds: [[62.61356, 7.51465], [65.14611, 14.89746]],
     minZoom: 6,
 });
 
@@ -102,11 +102,22 @@ function addVegobjekter (result) {
 /*
      4.2 Legg til markercluster
 
-     API-kallet i forrige oppgave resulterte i et uhåndterlig antall markører. Nettleseren ble delvis uresponsiv, og visningen på kart ga heller ikke stor mening.
+     API-kallet i forrige oppgave resulterte i et uhåndterlig antall markører. 
+     Nettleseren ble delvis uresponsiv, og visningen på kart ga heller ikke stor mening.
 
-     Når vi opererer med så mange markører, gir det ikke mening å vise hver enkelt markør. Vi ønsker heller å gruppere markører som er nære hverandre, og fortelle med tall hvor mange markører som befinner seg innenfor hver gruppering. For å få til dette, kan vi bruke pluginen Leaflet.markercluster.
+     Når vi opererer med så mange markører, gir det ikke mening å vise hver enkelt markør. 
+     Vi ønsker heller å gruppere markører som er nære hverandre, og fortelle med tall hvor 
+     mange markører som befinner seg innenfor hver gruppering. 
+     For å få til dette, kan vi bruke pluginen Leaflet.markercluster (https://github.com/Leaflet/Leaflet.markercluster).
 
      Legg til trafikkulykkene i L.markerClusterGroup, i stedet for L.layerGroup.
+
+
+     Tips: 
+     Du kan velge hvordan markerclustren skal se ut og oppføre seg.
+     Det er spesielt nyttig å endre verdien for maxClusterRadius, 
+     for å få kartet til å se mer tiltalende ut. Standardverdi er 80. Prøv å reduser den.
+
 */
 
 
@@ -138,7 +149,8 @@ function highlightFeature (e) {
 /*
  4.3 Oppdater data ved panorering
 
- Nå hentes data første gang kartet lastes, men det skjer ingenting når dere zoomer inn/ut eller panorerer kartet. Det kan vi gjøre noe med!
+ Nå hentes data første gang kartet lastes, men det skjer ingenting når dere zoomer inn/ut eller panorerer kartet. 
+ Det kan vi gjøre noe med!
 
  Bruk metoden map.on til å lytte til eventen moveend, og referer til funksjonen som henter data.
  Se http://leafletjs.com/reference-1.0.3.html#evented
@@ -148,7 +160,7 @@ function highlightFeature (e) {
 // map.on må settes før map.setView
 
 
-map.setView([60.39, 5.33], 15);
+map.setView([63.430, 10.395], 15);
 
 
 fetchVegobjekter();
@@ -158,13 +170,17 @@ fetchVegobjekter();
 /*
  4.4 Vis egenskapsdata
 
- Punkter på kart er bare halve moroa! Trafikkulykker har også mange spennende egenskapsdata, med detaljert informasjon om hver eneste trafikkulykke.
+ Punkter på kart er bare halve moroa! Trafikkulykker har også mange spennende egenskapsdata, 
+ med detaljert informasjon om hver eneste trafikkulykke.
  For eksempel ulykkesdato, vær og føreforhold, og antall involverte personer.
 
- Vi ønsker at det skal komme opp informasjon om trafikkulykken i feltet til høyre, når dere klikker på en markør i kartet.
+ Vi ønsker at det skal komme opp informasjon om trafikkulykken i feltet til høyre, 
+ når dere klikker på en markør i kartet.
 
- I NVDB har Hver trafikkulykke har en unik id. Vi lagrer denne iden på hver markør, ved å sende inn et options-objekt med title når vi oppretter markøren.
- Når dere klikker på markøren, bruker vi denne iden til å gjøre et nytt API-kall hvor vi henter detaljert informasjon om akkurat denne trafikkulykken.
+ I NVDB har Hver trafikkulykke har en unik id. Vi lagrer denne iden på hver markør, 
+ ved å sende inn et options-objekt med title når vi oppretter markøren.
+ Når dere klikker på markøren, bruker vi denne iden til å gjøre et nytt API-kall 
+ hvor vi henter detaljert informasjon om akkurat denne trafikkulykken.
 
  */
 

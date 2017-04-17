@@ -16,43 +16,42 @@ const grayscale   = L.tileLayer(mbUrl, {id: 'mapbox.light', attribution: mbAttr}
 const streets  = L.tileLayer(mbUrl, {id: 'mapbox.streets',   attribution: mbAttr});
 
 const map = L.map('mapid', {
-    center: [60.39, 5.33],
-    maxBounds: [[55.86, -0.26], [64.89, 18.50]],
+    center: [63.430, 10.395],
+    maxBounds: [[62.61356, 7.51465], [65.14611, 14.89746]],
     minZoom: 6,
     zoom: 12
 });
 map.addLayer(streets);
 
-const akvariet = L.polygon([
-    [60.39973, 5.30204],
-    [60.40063, 5.30399],
-    [60.40011, 5.30590],
-    [60.39863, 5.30412]
+const nidarosdomen = L.polygon([
+    [63.42739, 10.39341],
+    [63.4278, 10.39983],
+    [63.42555, 10.40006],
+    [63.42459, 10.39742]
+    [63.4246, 10.39416]
 ], {
   color: '#0f0'
 });
-akvariet.bindPopup('Akvariet');
+nidarosdomen.bindPopup('Nidarosdomen');
 
 
-const bryggen = L.marker([60.3973, 5.3233]);
-bryggen.bindPopup('Bryggen');
+const lerkendal = L.marker([63.41231, 10.40447]);
+lerkendal.bindPopup('Lerkendal');
 
-const floibanen = L.polyline([
-    [60.3964173561773, 5.328556895256043],
-    [60.39660550579725, 5.329484939575195],
-    [60.396311355912495, 5.331035256385803],
-    [60.39560644537202, 5.333991050720216],
-    [60.39533878737165, 5.337563753128053],
-    [60.39480346476893, 5.342504382133484]
+const sykkelheisen = L.polyline([
+    [63.428, 10.40337],
+    [63.42797, 10.40402],
+    [63.42798, 10.40513],
+    [63.42797, 10.40596]
 ], {
   color: '#f00'
 });
-floibanen.bindPopup('Fløibanen');
+sykkelheisen.bindPopup('Sykkelheisen');
 
 /*
  Oppgave 6.1 - layerGroup
 
- I forrige oppgave lagde vi tre kartlag (Akvariet, Bryggen og Fløibanen) og
+ I forrige oppgave lagde vi tre kartlag (Nidarosdomen, Lerkendal og Sykkelheisen) og
  viste dem på kartet. Vi kan samle disse lagene i en gruppe med L.layerGroup,
  slik at vi kan behandle dem som ett lag i stedet. Bruk L.layerGroup til å lage
  en gruppe, og legg den til i kartet. Se
@@ -83,26 +82,26 @@ const overlays = {
 
 
 const duration = 0.5;
-document.querySelector('.js-akvariet').addEventListener('click', () => {
-    map.flyToBounds(akvariet.getBounds(), {
+document.querySelector('.js-nidarosdomen').addEventListener('click', () => {
+    map.flyToBounds(nidarosdomen.getBounds(), {
         duration
     });
 });
 
-document.querySelector('.js-bryggen').addEventListener('click', () => {
-    map.flyTo(bryggen.getLatLng(), 18, {
+document.querySelector('.js-lerkendal').addEventListener('click', () => {
+    map.flyTo(lerkendal.getLatLng(), 18, {
         duration
     });
 });
 
-document.querySelector('.js-floien').addEventListener('click', () => {
-    map.flyToBounds(floibanen.getBounds(), {
+document.querySelector('.js-sykkelheisen').addEventListener('click', () => {
+    map.flyToBounds(sykkelheisen.getBounds(), {
         duration
     });
 });
 
-document.querySelector('.js-helebergen').addEventListener('click', () => {
-    map.flyTo([60.39, 5.33], 12, {
+document.querySelector('.js-heletrondheim').addEventListener('click', () => {
+    map.flyTo([63.430, 10.395], 12, {
         duration
     });
 });

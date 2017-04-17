@@ -50,11 +50,11 @@ map.on('click', onMapClick);
 /*
  Oppgave 1.2
 
- Endre startposisjonen til å vise et oversiktsbilde over Bergen. Vi har gitt
- dere koordinatene til Bergen sentrum.
+ Endre startposisjonen til å vise et oversiktsbilde over Trondheim. Vi har gitt
+ dere koordinatene til Olav Tryggvason-statuen på Torget.
  */
-const bergenSentrum = [60.39, 5.33];
-// Endre den neste linjen slik at kartet viser Bergen. Bruk zoomnivå 12. Se
+const olavTryggvason = [63.430, 10.395];
+// Endre den neste linjen slik at kartet viser Trondheim. Bruk zoomnivå 12. Se
 // Se http://leafletjs.com/reference-1.0.3.html#map-methods-for-modifying-map-state
 map.setView([0,0], 4);
 
@@ -63,17 +63,30 @@ map.setView([0,0], 4);
  Oppgave 1.3
 
  Få navigasjonen til å fungere. Over kartet er det fire knapper, som ikke gjør
- noe (enda). Når man klikker på dem, skal kartet vise enten Akvariet, Bryggen,
- Fløibanen eller hele Bergen. Under har vi lagt til en event listener på
- Akvariet-knappen, men den gjør ingenting enda. Fyll inn funksjonen slik at
- kartet endrer visning til Akvariet, og zoomer inn. Legg også til event
- listeners for de andre knappene. Koordinatene for akvariet og bryggen har vi
- definert. Koordinatene for Fløibanen kan du finne ved å klikke i kartet.
+ noe (enda). Når man klikker på dem, skal kartet vise enten Nidarosdomen, Lerkendal,
+ Sykkelheisen eller hele Trondheim. Under har vi lagt til en event listener på
+ Nidarosdomen-knappen, men den gjør ingenting enda. Fyll inn funksjonen slik at
+ kartet endrer visning til Nidarosdomen, og zoomer inn. Legg også til event
+ listeners for de andre knappene. Koordinatene for Nidarosdomen og Lerkendal har vi
+ definert. Koordinatene for Sykkelheisen på Bakklandet kan du finne ved å klikke i kartet.
+ Gjerne zoom inn til zoomnivå 18.
 
  Metoden flyTo kan brukes til dette: http://leafletjs.com/reference-1.0.3.html#map-flyto
 
  Se ellers http://leafletjs.com/reference-1.0.3.html#map-methods-for-modifying-map-state
 
+
+*/
+
+
+const nidarosdomen = [63.42683, 10.39693];
+const lerkendal = [63.41235, 10.40446];
+document.querySelector('.js-nidarosdomen').addEventListener('click', () => {
+    // din kode her
+});
+
+
+/*
  Oppgave 1.4
 
  Når navigasjonen fungerer: juster duration i options-objektet, til en verdi du synes passer. For eksempel 0.5 sekunder. 
@@ -82,11 +95,9 @@ map.setView([0,0], 4);
  "Zoom/pan options". Se http://leafletjs.com/reference-1.0.3.html#pan-options
  for flere detaljer.
  */
-const akvariet = [60.3995309599726, 5.303993225097656];
-const bryggen = [60.39696060211701, 5.323219299316407];
-document.querySelector('.js-akvariet').addEventListener('click', () => {
-    // din kode her
-});
+
+// Endre koden ovenfor oppgaveteksten til oppgave 1.4
+
 
 
 /*
@@ -96,7 +107,7 @@ document.querySelector('.js-akvariet').addEventListener('click', () => {
  dere kan legge til en hel mengde ulike markører og lag på toppen av
  bakgrunnskartet.
 
- Finn koordinatene til ditt favorittsted i Bergen, eller et annet sted, om du
+ Finn koordinatene til ditt favorittsted i Trondheim, eller et annet sted, om du
  vil. Legg til en markør med L.marker på det stedet.
 
  Se http://leafletjs.com/reference-1.0.3.html#marker

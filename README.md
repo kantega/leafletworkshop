@@ -28,6 +28,9 @@ I koden bruker vi en del syntaks fra 2015-standarden av javascript, kalt ES2015.
 
 De viktigste nye versjonene vi bruker i denne workshop-en er _arrow functions_, og _const_ og _let_ i stedet for _var_. 
 
+Vær oppmerksom på at Leaflet-dokumentasjonen ikke bruker ES2015-syntaks.
+
+
 ### Arrow functions
 
 _Arrow functions_ er ny syntaks for anonyme funksjoner, og ser slik ut:

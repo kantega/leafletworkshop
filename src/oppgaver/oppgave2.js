@@ -36,7 +36,7 @@ const map = L.map('mapid', {
     // din kode her
 });
 map.addLayer(bakgrunnsLag);
-map.setView([60.39, 5.33], 12);
+map.setView([63.430, 10.395], 12);
 
 /*
  Oppgave 2.2 - Polygon rundt Nidarosdomen
@@ -135,7 +135,7 @@ document.querySelector('.js-sykkelheisen').addEventListener('click', () => {
 
 
 // Denne snutten skal ikke refaktoriseres
-document.querySelector('.js-helebergen').addEventListener('click', () => {
+document.querySelector('.js-heletrondheim').addEventListener('click', () => {
     map.flyTo([63.430, 10.395], 12, {
         duration
     });

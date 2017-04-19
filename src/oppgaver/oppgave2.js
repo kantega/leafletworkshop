@@ -17,7 +17,7 @@ const duration = 0.5;
 
 // Avgrensning av kartet for oppgave 2.1
 const boundarySouthWest = [62.61356, 7.51465];
-const boundaryNorthEash = [65.14611, 14.89746];
+const boundaryNorthEast = [65.14611, 14.89746];
 
 /*
  Oppgave 2.1 - Avgrens kartet

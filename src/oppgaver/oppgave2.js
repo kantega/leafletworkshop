@@ -17,7 +17,7 @@ const duration = 0.5;
 
 // Avgrensning av kartet for oppgave 2.1
 const boundarySouthWest = [62.61356, 7.51465];
-const boundaryNorthEash = [65.14611, 14.89746];
+const boundaryNorthEast = [65.14611, 14.89746];
 
 /*
  Oppgave 2.1 - Avgrens kartet
@@ -55,7 +55,7 @@ const nidarosdomen = [
     [63.42739, 10.39341],
     [63.4278, 10.39983],
     [63.42555, 10.40006],
-    [63.42459, 10.39742]
+    [63.42459, 10.39742],
     [63.4246, 10.39416]
 ];
 // din kode her

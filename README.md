@@ -14,9 +14,9 @@ Jordkloden vår kan modelleres som et flatt kart bestående av breddegrader (*la
 
 Breddegrader går fra -90 til +90, der 0-breddegraden er ekvator. Lengdegrader går fra -180 til +180, der 0-lengdegraden går gjennom Greenwich i London.
 
-Et punkt på kartet kan angis ved hjelp av en koordinat, angitt på følgende måte `[breddegrad, lengdegrad]`. Bredde- og lengdegrader kan angis som desimaltall. I denne workshopen vil det flere steder være nødvendig å angi 4 desimaler, for å få en nøyaktig nok posisjon på kart.
+Et punkt på kartet kan angis ved hjelp av koordinater, angitt på følgende måte `[breddegrad, lengdegrad]`. Bredde- og lengdegrader kan angis som desimaltall. I denne workshopen vil det flere steder være nødvendig å angi 4 desimaler, for å få en nøyaktig nok posisjon på kart.
 
-Et punkt i Bergen sentrum kan for eksempel uttrykkes med følgende koordiant: `[60.3912, 5.3305]`
+Et punkt i Bergen sentrum kan for eksempel uttrykkes med følgende koordinater: `[60.3912, 5.3305]`
 
 Det finnes flere ulike projeksjoner og koordinatsystemer for å plassere objekter nøyaktig på kart, men i denne workshopen vil vi utelukkende bruke lengde- og breddegrader, også kalt WGS84. 
 

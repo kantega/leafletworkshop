@@ -120,7 +120,7 @@ document.querySelector('.js-bomstasjoner').addEventListener('click', () => {
  å legge til et områdefilter på API-kallet, som kun henter tunneler i Sør-Trøndelag
  (fylke=16). Vi henter vegobjekttypen tunnelløp, med id lik 67.
 
- https://www.vegvesen.no/nvdb/api/v2/vegobjekter/67.json?inkluder=geometri&srid=wgs84&fylke=16
+ https://www.vegvesen.no/nvdb/api/v2/vegobjekter/67.json?inkluder=geometri&srid=wgs84&fylke=50
 
  Vi skal hente data om tunneler i og rundt Trondheim, og tegne dem
  i kartet. Det er mye likt med oppgave 3.1, med unntak av to ting:
@@ -133,7 +133,7 @@ document.querySelector('.js-bomstasjoner').addEventListener('click', () => {
 
  http://leafletjs.com/reference-1.0.3.html#polyline
  */
-const tunnelURL = NVDBAPI + '/vegobjekter/67.json?inkluder=geometri&srid=wgs84&fylke=16';
+const tunnelURL = NVDBAPI + '/vegobjekter/67.json?inkluder=geometri&srid=wgs84&fylke=50';
 
 document.querySelector('.js-tunneler').addEventListener('click', () => {
     // din kode her

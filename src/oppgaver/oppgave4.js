@@ -44,7 +44,7 @@ function hideLoadingIndicator () {
  Oppgave 4.1 Hent trafikkulykker innenfor kartutsnitt
 
  Datasettet for trafikkulykker er så stort at vi er nødt til å begrense oss til kun å hente data innenfor det
- aktive kartutsnittet. Metoden map.getBounds kan benyttes til å hente det aktive kartutsnittet, og .toBBoxString()
+ aktive kartutsnittet. Metoden map.getBounds() kan benyttes til å hente det aktive kartutsnittet, og .toBBoxString()
  konverterer det returnerte arrayet til en string.
 
  APIet tilbyr parameteren kartutsnitt for begrense søkeområdet.
@@ -152,7 +152,7 @@ function highlightFeature (e) {
  Nå hentes data første gang kartet lastes, men det skjer ingenting når dere zoomer inn/ut eller panorerer kartet. 
  Det kan vi gjøre noe med!
 
- Bruk metoden map.on til å lytte til eventen moveend, og referer til funksjonen som henter data.
+ Bruk metoden map.on() til å lytte til eventen moveend, og referer til funksjonen som henter data.
  Se http://leafletjs.com/reference-1.0.3.html#evented
 
  */

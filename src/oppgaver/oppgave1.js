@@ -32,7 +32,7 @@ map.addLayer(bakgrunnsLag);
  gjør at det skrives en koordinat til utviklerkonsollet, hver gang det trykkes
  på et punkt i kartet.
 
- For å få til dette, må vi bruke metoden map.on.
+ For å få til dette, må vi bruke metoden map.on().
 
  map.on('click', onMapClick) kjører funksjonen onMapClick hver gang
  vi klikker i kartet. Argumentet til onMapClick er en event, som inneholder data
@@ -71,7 +71,7 @@ map.setView([0,0], 4);
  definert. Koordinatene for Sykkelheisen på Bakklandet kan du finne ved å klikke i kartet.
  Gjerne zoom inn til zoomnivå 18.
 
- Metoden flyTo kan brukes til dette: http://leafletjs.com/reference-1.0.3.html#map-flyto
+ Metoden flyTo() kan brukes til dette: http://leafletjs.com/reference-1.0.3.html#map-flyto
 
  Se ellers http://leafletjs.com/reference-1.0.3.html#map-methods-for-modifying-map-state
 

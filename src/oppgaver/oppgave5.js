@@ -195,7 +195,7 @@ const data = {
     datasets: [
         {
             data: [0, 0, 0, 0, 0, 0, 0],
-            label: "Ukedag",
+            label: "Antall ulykker",
             backgroundColor: [
                 "#f00",
                 "#f00",

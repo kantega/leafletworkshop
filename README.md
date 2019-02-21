@@ -20,7 +20,8 @@ Et punkt i Bergen sentrum kan for eksempel uttrykkes med følgende koordinater: 
 
 Det finnes flere ulike projeksjoner og koordinatsystemer for å plassere objekter nøyaktig på kart, men i denne workshopen vil vi utelukkende bruke lengde- og breddegrader, også kalt WGS84. 
 
-![Lengde- og breddegrader](http://www.hicksvillepublicschools.org/cms/lib2/NY01001760/Centricity/Domain/1236/latitude_longitude.gif)
+![Illustrasjon av lengde- og breddegrader, av Djexplo (CC0), via Wikimedia Commons](https://upload.wikimedia.org/wikipedia/commons/6/62/Latitude_and_Longitude_of_the_Earth.svg?sanitize=true)
+
 
 ## ES2015
 

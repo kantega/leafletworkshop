@@ -51,7 +51,7 @@ sykkelheisen.bindPopup('Sykkelheisen');
 /*
  Oppgave 6.1 - layerGroup
 
- I forrige oppgave lagde vi tre kartlag (Nidarosdomen, Lerkendal og Sykkelheisen) og
+ I oppgave 2 lagde vi tre kartlag (Nidarosdomen, Lerkendal og Sykkelheisen) og
  viste dem på kartet. Vi kan samle disse lagene i en gruppe med L.layerGroup,
  slik at vi kan behandle dem som ett lag i stedet. Bruk L.layerGroup til å lage
  en gruppe, og legg den til i kartet. Se

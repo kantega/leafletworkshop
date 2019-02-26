@@ -29,8 +29,8 @@ const boundaryNorthEast = [65.14611, 14.89746];
  Vi ønsker ikke at det skal være mulig å zoom/flytte kartet for langt. Over har
  vi gitt dere koordinatene til to punkter, som bestemmer avgrensningen. Bruk
  options-objektet til L.map for å avgrense kartet. Se
- http://leafletjs.com/reference-1.0.3.html#map-maxbounds og
- http://leafletjs.com/reference-1.0.3.html#map-minzoom.
+ http://leafletjs.com/reference-1.4.0.html#map-maxbounds og
+ http://leafletjs.com/reference-1.4.0.html#map-minzoom.
  */
 const map = L.map('mapid', {
     // din kode her
@@ -49,7 +49,7 @@ map.setView([63.430, 10.395], 12);
  options-objekt som parameter, der man blant annet kan sette fargen. Fargen skal
  være grønn.
 
- Se http://leafletjs.com/reference-1.0.3.html#polygon
+ Se http://leafletjs.com/reference-1.4.0.html#polygon
  */
 const nidarosdomen = [
     [63.42739, 10.39341],
@@ -65,7 +65,7 @@ const nidarosdomen = [
  Oppgave 2.3 - Markør på Lerkendal
 
  Konstanten lerkendal er koordinatene til Lerkendal. Vis en markør på Lerkendal med
- L.marker. Se http://leafletjs.com/reference-1.0.3.html#marker
+ L.marker. Se http://leafletjs.com/reference-1.4.0.html#marker
  */
 const lerkendal = [63.41231, 10.40447];
 // din kode her
@@ -79,7 +79,7 @@ const lerkendal = [63.41231, 10.40447];
  Bruk L.polyline for å markere traséen til Sykkelheisen. Koordinatene er gitt
  under. Linjen til Sykkelheisen skal være rød.
 
- Se http://leafletjs.com/reference-1.0.3.html#polyline
+ Se http://leafletjs.com/reference-1.4.0.html#polyline
  */
 const sykkelheisen = [
     [63.428, 10.40337],
@@ -100,7 +100,7 @@ const sykkelheisen = [
 eventuell annen relevant informasjon. bindPopup godtar HTML, så det er mulig å
 formatere teksten og legge til bilder.
     
- Se http://leafletjs.com/reference-1.0.3.html#popup
+ Se http://leafletjs.com/reference-1.4.0.html#popup
  */
 // din kode her
 
@@ -113,7 +113,7 @@ formatere teksten og legge til bilder.
  skrevet inn ett sted. Endre også flyTo til flyToBounds der det er aktuelt, slik
  at Leaflet regner ut zoom-nivå på egen hånd.
 
- Se http://leafletjs.com/reference-1.0.3.html#map-flytobounds
+ Se http://leafletjs.com/reference-1.4.0.html#map-flytobounds
  */
 document.querySelector('.js-nidarosdomen').addEventListener('click', () => {
     map.flyTo([63.42683, 10.39693], 18, {

@@ -1,6 +1,6 @@
 # Workshop: Visualisering av data på kart
 
-I denne workshopen vil dere få en innføring i å visualisere informasjon på kart i nettleseren, ved hjelp av Javascript-biblioteket Leaflet.
+I denne workshopen vil dere få en innføring i å visualisere informasjon på kart i nettleseren, ved hjelp av Javascript-biblioteket [Leaflet](https://leafletjs.com/).
 
 Workshopen er bygd opp av en rekke praktiske oppgaver. Hver oppgave har en tilhørende HTML- og en javascript-fil, og javascript-filen inneholder flere feil som dere må rette opp i, for å få applikasjonen til å fungere som forventet.
 

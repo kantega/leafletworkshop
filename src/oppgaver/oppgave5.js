@@ -62,8 +62,8 @@ map.addLayer(bakgrunnsLag);
  */
 
 
-// deklarer heat som et heatlayer og legg laget til på map.
-// fjere i tillegg utkommenteringen under funksjonen addVegobjekter.
+// Deklarer heat som et heatlayer og legg laget til på map.
+// Fjern i tillegg utkommenteringen under funksjonen addVegobjekter.
 
 // const heat = ;
 // map.addLayer(heat);

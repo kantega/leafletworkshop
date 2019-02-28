@@ -89,7 +89,7 @@ function addVegobjekter (result) {
                 title: vegobjekt.id
             }).on({
                 click: highlightFeature
-            });;
+            });
 
 
             trafikkulykker.addLayer(vegobjekter[vegobjekt.id]);

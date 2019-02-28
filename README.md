@@ -22,6 +22,26 @@ Det finnes flere ulike projeksjoner og koordinatsystemer for å plassere objekte
 
 ![Illustrasjon av lengde- og breddegrader, av Djexplo (CC0), via Wikimedia Commons](https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Latitude_and_Longitude_of_the_Earth.svg/800px-Latitude_and_Longitude_of_the_Earth.svg.png)
 
+
+## Oppgaver 
+
+Oppgavene står beskrevet i javascript-filene under `src/`. Begynne med å åpne `oppgave1.html` i nettleseren, og `oppgave1.js` i en editor.
+
+## Bonusoppgaver
+
+Gjennom denne workshopen har dere fått en god grunnleggende kunnskap om Leaflet, og er godt rustet til å lage mye spennende. Her er noen forslag til hva dere kan se på videre: 
+
+* Eksperimenter med de metodene og klassene dere har blitt introdusert for. 
+* Hent flere datasett fra NVDB, og kombiner dem sammen
+* Legg til andre typer diagrammer fra Chart.js, for andre typer egenskaper
+* Se gjennom det brede utvalget av [Leaflet-plugins](http://leafletjs.com/plugins.html), og la deg inspirere
+* Bruk [Leaflet.Editable](https://github.com/Leaflet/Leaflet.Editable) til å tegne dine egne geometrier
+* Bruk [Leaflet.photo](https://github.com/turban/Leaflet.Photo) til å lage et bildegalleri
+* Bruk [Leaflet.MiniMap](https://github.com/Norkart/Leaflet-MiniMap) til å legge til et minimap
+* Bruk [Leaflet.fullscreen](https://github.com/Leaflet/Leaflet.fullscreen) til å legge til en fullskjermvisning
+
+
+
 ## ES2015
 
 I koden bruker vi en del syntaks fra 2015-standarden av javascript, kalt ES2015. Det er mange forskjeller fra tidligere versjoner, som du kan lese mer om her: https://babeljs.io/learn-es2015/
@@ -46,25 +66,5 @@ const add = (a, b) => a + b;
 `const` og `let` erstatter `var`. `const` er konstante verdier, og `let` er variabler. Til forskjell fra `var`, er `const` og `let` block scoped, som betyr at de ikke er definert utenfor den blokka de ble deklarert i. 
 
 Bruk alltid `const`/`let` i stedet for `var`. 
-
-## Oppgaver 
-
-Oppgavene står beskrevet i javascript-filene under `src/`. Begynne med å åpne `oppgave1.html` i nettleseren, og `oppgave1.js` i en editor.
-
-## Bonusoppgaver
-
-Gjennom denne workshopen har dere fått en god grunnleggende kunnskap om Leaflet, og er godt rustet til å lage mye spennende. Her er noen forslag til hva dere kan se på videre: 
-
-* Eksperimenter med de metodene og klassene dere har blitt introdusert for. 
-* Hent flere datasett fra NVDB, og kombiner dem sammen
-* Legg til andre typer diagrammer fra Chart.js, for andre typer egenskaper
-* Se gjennom det brede utvalget av [Leaflet-plugins](http://leafletjs.com/plugins.html), og la deg inspirere
-* Bruk [Leaflet.Editable](https://github.com/Leaflet/Leaflet.Editable) til å tegne dine egne geometrier
-* Bruk [Leaflet.photo](https://github.com/turban/Leaflet.Photo) til å lage et bildegalleri
-* Bruk [Leaflet.MiniMap](https://github.com/Norkart/Leaflet-MiniMap) til å legge til et minimap
-* Bruk [Leaflet.fullscreen](https://github.com/Leaflet/Leaflet.fullscreen) til å legge til en fullskjermvisning
-
-
-
 
 

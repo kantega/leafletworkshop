@@ -89,11 +89,12 @@ document.querySelector('.js-nidarosdomen').addEventListener('click', () => {
 /*
  Oppgave 1.4
 
- Når navigasjonen fungerer: juster duration i options-objektet, til en verdi du synes passer. For eksempel 0.5 sekunder. 
-
- Legg merke til at funksjonen du brukte i oppgave 1.3 tar et valgfritt argument
- "Zoom/pan options". Se http://leafletjs.com/reference-1.4.0.html#pan-options
- for flere detaljer.
+ Legg merke til at metoden du brukte i oppgave 1.3 tar et valgfritt argument
+ "Zoom/pan options", som er et rent javascript-objekt. Se http://leafletjs.com/reference-1.4.0.html#pan-options
+ for flere detaljer. Dette er et rent javascript-objekt. 
+ 
+ Juster duration i options-objektet til en verdi du synes passer. For eksempel 0.5 sekunder. 
+ 
  */
 
 // Endre koden ovenfor oppgaveteksten til oppgave 1.4

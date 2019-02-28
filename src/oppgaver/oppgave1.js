@@ -89,11 +89,11 @@ document.querySelector('.js-nidarosdomen').addEventListener('click', () => {
 /*
  Oppgave 1.4
 
- Legg merke til at metoden du brukte i oppgave 1.3 tar et valgfritt argument
+ Legg merke til at metoden du brukte i oppgave 1.3 tar et valgfritt argument,
  "Zoom/pan options", som er et rent javascript-objekt. Se http://leafletjs.com/reference-1.4.0.html#pan-options
- for flere detaljer. Dette er et rent javascript-objekt. 
+ for flere detaljer. 
  
- Juster duration i options-objektet til en verdi du synes passer. For eksempel 0.5 sekunder. 
+ Legg til et options-objekt, og juster duration til en verdi du synes passer. For eksempel 0.5 sekunder. 
  
  */
 

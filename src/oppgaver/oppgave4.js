@@ -153,7 +153,7 @@ function highlightFeature (e) {
  Det kan vi gjøre noe med!
 
  Bruk metoden map.on() til å lytte til eventen moveend, og referer til funksjonen som henter data.
- Se http://leafletjs.com/reference-1.4.0.html#evented
+ Se http://leafletjs.com/reference-1.7.1.html#evented
 
  */
 

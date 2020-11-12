@@ -55,7 +55,7 @@ map.on('click', onMapClick);
  */
 const olavTryggvason = [63.430, 10.395];
 // Endre den neste linjen slik at kartet viser Trondheim. Bruk zoomnivå 12. Se
-// Se http://leafletjs.com/reference-1.4.0.html#map-methods-for-modifying-map-state
+// Se http://leafletjs.com/reference-1.7.1.html#map-methods-for-modifying-map-state
 map.setView([0,0], 4);
 
 
@@ -71,9 +71,9 @@ map.setView([0,0], 4);
  definert. Koordinatene for Sykkelheisen på Bakklandet kan du finne ved å klikke i kartet.
  Gjerne zoom inn til zoomnivå 18.
 
- Metoden flyTo() kan brukes til dette: http://leafletjs.com/reference-1.4.0.html#map-flyto
+ Metoden flyTo() kan brukes til dette: http://leafletjs.com/reference-1.7.1.html#map-flyto
 
- Se ellers http://leafletjs.com/reference-1.4.0.html#map-methods-for-modifying-map-state
+ Se ellers http://leafletjs.com/reference-1.7.1.html#map-methods-for-modifying-map-state
 
 
 */
@@ -90,7 +90,7 @@ document.querySelector('.js-nidarosdomen').addEventListener('click', () => {
  Oppgave 1.4
 
  Legg merke til at metoden du brukte i oppgave 1.3 tar et valgfritt argument,
- "Zoom/pan options", som er et rent javascript-objekt. Se http://leafletjs.com/reference-1.4.0.html#pan-options
+ "Zoom/pan options", som er et rent javascript-objekt. Se http://leafletjs.com/reference-1.7.1.html#pan-options
  for flere detaljer. 
  
  Legg til et options-objekt, og juster duration til en verdi du synes passer. For eksempel 0.5 sekunder. 
@@ -111,7 +111,7 @@ document.querySelector('.js-nidarosdomen').addEventListener('click', () => {
  Finn koordinatene til ditt favorittsted i Trondheim, eller et annet sted, om du
  vil. Legg til en markør med L.marker på det stedet.
 
- Se http://leafletjs.com/reference-1.4.0.html#marker
+ Se http://leafletjs.com/reference-1.7.1.html#marker
  */
 
 // din kode her

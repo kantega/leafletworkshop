@@ -77,7 +77,7 @@ function hideLoadingIndicator () {
  funksjonen drawMarkers kalt. Argumentet geometryList er en liste med punkter
  som skal tegnes i kartet.
 
- http://leafletjs.com/reference-1.4.0.html#marker
+ http://leafletjs.com/reference-1.7.1.html#marker
  https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
  */
 function drawMarkers(geometryList) {
@@ -131,7 +131,7 @@ document.querySelector('.js-bomstasjoner').addEventListener('click', () => {
  Følg framgangsmåten fra oppgave 3.1 for å hente dataene og tegne tunnelene i
  Sør-Trøndelag på kartet.
 
- http://leafletjs.com/reference-1.4.0.html#polyline
+ http://leafletjs.com/reference-1.7.1.html#polyline
  */
 const tunnelURL = NVDBAPI + '/vegobjekter/67.json?inkluder=geometri&srid=wgs84&fylke=50';
 

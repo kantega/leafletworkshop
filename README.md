@@ -39,32 +39,3 @@ Gjennom denne workshopen har dere fått en god grunnleggende kunnskap om Leaflet
 * Bruk [Leaflet.photo](https://github.com/turban/Leaflet.Photo) til å lage et bildegalleri
 * Bruk [Leaflet.MiniMap](https://github.com/Norkart/Leaflet-MiniMap) til å legge til et minimap
 * Bruk [Leaflet.fullscreen](https://github.com/Leaflet/Leaflet.fullscreen) til å legge til en fullskjermvisning
-
-
-
-## ES2015
-
-I koden bruker vi en del syntaks fra 2015-standarden av javascript, kalt ES2015. Det er mange forskjeller fra tidligere versjoner, som du kan lese mer om her: https://babeljs.io/learn-es2015/
-
-De viktigste nye versjonene vi bruker i denne workshop-en er _arrow functions_, og _const_ og _let_ i stedet for _var_. 
-
-Vær oppmerksom på at Leaflet-dokumentasjonen ikke bruker ES2015-syntaks.
-
-
-### Arrow functions
-
-_Arrow functions_ er ny syntaks for anonyme funksjoner, og ser slik ut:
-
-```javascript
-const add = (a, b) => a + b;
-```
-
-`add` er en funksjon som tar to tall, og returnerer summen av dem. _Arrow functions_ setter heller ikke `this`, som er forskjellig fra `function`. 
-
-### `const` og `let`
-
-`const` og `let` erstatter `var`. `const` er konstante verdier, og `let` er variabler. Til forskjell fra `var`, er `const` og `let` block scoped, som betyr at de ikke er definert utenfor den blokka de ble deklarert i. 
-
-Bruk alltid `const`/`let` i stedet for `var`. 
-
-

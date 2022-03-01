@@ -10,10 +10,10 @@ const mbAttr = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap
         '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
         'Imagery © <a href="http://mapbox.com">Mapbox</a>';
 
-const mbUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
+const mbUrl = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
 
-const grayscale   = L.tileLayer(mbUrl, {id: 'mapbox.light', attribution: mbAttr});
-const streets  = L.tileLayer(mbUrl, {id: 'mapbox.streets',   attribution: mbAttr});
+const grayscale   = L.tileLayer(mbUrl, {id: 'mapbox/light-v10', attribution: mbAttr});
+const streets  = L.tileLayer(mbUrl, {id: 'mapbox/streets-v11',   attribution: mbAttr});
 
 const map = L.map('mapid', {
     center: [63.430, 10.395],
